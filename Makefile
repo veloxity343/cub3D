@@ -53,8 +53,7 @@ $(LIBFT):
 	@make -C $(dir $(LIBFT))
 
 $(NAME):	$(OBJ)
-	@echo "\n"
-	@echo "$(BLUE)Building$(RESET)\t$(NAME)"
+	@echo "\n$(BLUE)Building$(RESET)\t$(NAME)"
 	@make -s -C $(dir $(LIBFT))
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX)
 
