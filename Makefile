@@ -31,12 +31,10 @@ CC			=	gcc
 AR			=	ar -rcs
 RM			=	rm -rf
 
-# Sources
+# Sources & objects
 SRC			=	$(shell find $(SRC_DIR) -type f -name "*.c")
-SRCB		=	$(shell find $(SRCB_DIR) -type f -name "*.c")
-
-# Objects
 OBJ			=	$(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
+SRCB		=	$(shell find $(SRCB_DIR) -type f -name "*.c")
 OBJB		=	$(patsubst $(SRCB_DIR)%.c, $(OBJB_DIR)%.o, $(SRCB))
 
 # Colors
@@ -87,28 +85,30 @@ clean:
 	@if [ -d "$(OBJ_DIR)" ]; then \
 	$(RM) -rf $(OBJ_DIR); \
 	echo "$(RED)Deleting$(RESET)\t"$(OBJ_DIR); else \
-	echo "$(BLUE)No objects to remove.$(RESET)"; \
+	echo "$(BLUE)No $(NAME) objects to remove.$(RESET)"; \
+	fi;
+	@if [ -d $(OBJB_DIR) ]; then \
+	$(RM) -rf $(OBJB_DIR); \
+	echo "$(RED)Deleting$(RESET)\t$(OBJB_DIR)"; \
 	fi;
 
 fclean:	clean
 	@if [ -f "$(NAME)" ]; then \
 	$(RM) -f $(NAME); \
 	echo "$(RED)Deleting$(RESET)\t"$(NAME); else \
-	echo "$(BLUE)No executable to remove.$(RESET)"; \
+	echo "$(BLUE)No executable $(NAME) to remove.$(RESET)"; \
 	fi;
+	@make fclean -C $(dir $(LIBFT))
 
 re:		fclean all
 
 # Debugging
-debug:	CFLAGS	+=	$(FSAN)
-debug:	fclean test
-
-test:	$(NAME)
-	@echo "$(BLUE)Testing with debugging on$(RESET)"
-	@echo "$(YELLOW)Running...$(RESET)"
+asan:	CFLAGS	+=	$(FSAN)
+asan:	re
+	@echo "$(YELLOW)Running with AddressSanitizer...$(RESET)"
 	./$(NAME)
 
 norm:
 	norminette
 
-.PHONY:	all bonus clean fclean re debug test norm
+.PHONY:	all bonus clean fclean re asan norm

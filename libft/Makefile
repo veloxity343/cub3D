@@ -13,10 +13,8 @@ CC		=	gcc
 RM		=	rm -rf
 AR		=	ar rcs
 
-# Sources
+# Sources & objects
 SRC		=	$(shell find $(SRC_DIR) -type f -name "*.c")
-
-# Objects
 OBJ		=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 # Colors
@@ -38,16 +36,23 @@ $(NAME):	$(OBJ)
 
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@printf "$(YELLOW)Compiling\t$(RESET)%-33.33s\r" $@
+	@printf "$(YELLOW)Compiling\t$(RESET)libft %-33.33s\r" $@
 	@$(CC) $(WFLAGS) $(IFLAGS) -c $< -o $@
 
+# Scruba dub dub
 clean:
-	@echo "$(RED)Deleting$(RESET)\tlibft $(OBJ_DIR)"
-	@$(RM) -r $(OBJ_DIR)
+	@if [ -d "$(OBJ_DIR)" ]; then \
+	$(RM) -rf $(OBJ_DIR); \
+	echo "$(RED)Deleting$(RESET)\tlibft "$(OBJ_DIR); else \
+	echo "$(BLUE)No libft objects to remove.$(RESET)"; \
+	fi;
 
 fclean:	clean
-	@echo "$(RED)Deleting$(RESET)\t$(NAME)"
-	@$(RM) $(NAME)
+	@if [ -f "$(NAME)" ]; then \
+	$(RM) -f $(NAME); \
+	echo "$(RED)Deleting$(RESET)\t"$(NAME); else \
+	echo "$(BLUE)No $(NAME) to remove.$(RESET)"; \
+	fi;
 
 re:	fclean all
 
