@@ -60,13 +60,13 @@ $(NAME):	$(OBJ)
 	@make -s -C $(dir $(LIBFT))
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX)
 
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)
 	@printf "$(YELLOW)Compiling\t$(RESET)%-33.33s\r" $@
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
 
 bonus:		clean $(OBJ) $(OBJB)
 	@echo "$(BLUE)Linking bonus objects...$(RESET)"
@@ -82,21 +82,24 @@ $(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c | $(OBJB_DIR)
 $(OBJB_DIR):
 	@mkdir -p $(OBJB_DIR)
 
+# Scruba dub dub
 clean:
-	@echo "$(RED)Deleting$(RESET)\t$(OBJ_DIR)"
-	@$(RM) -rf $(OBJ_DIR)
-	@if [ -d $(OBJB_DIR) ]; then \
-		echo "$(RED)Deleting$(RESET)\t$(OBJB_DIR)"; \
-		$(RM) -rf $(OBJB_DIR); \
-	fi
+	@if [ -d "$(OBJ_DIR)" ]; then \
+	$(RM) -rf $(OBJ_DIR); \
+	echo "$(RED)Deleting$(RESET)\t"$(OBJ_DIR); else \
+	echo "$(BLUE)No objects to remove.$(RESET)"; \
+	fi;
 
 fclean:	clean
-	@echo "$(RED)Deleting$(RESET)\t$(NAME)"
-	@$(RM) -f $(NAME)
-	@make fclean -C $(dir $(LIBFT))
+	@if [ -f "$(NAME)" ]; then \
+	$(RM) -f $(NAME); \
+	echo "$(RED)Deleting$(RESET)\t"$(NAME); else \
+	echo "$(BLUE)No executable to remove.$(RESET)"; \
+	fi;
 
 re:		fclean all
 
+# Debugging
 debug:	CFLAGS	+=	$(FSAN)
 debug:	fclean test
 
