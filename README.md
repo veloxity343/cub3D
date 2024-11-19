@@ -1,11 +1,11 @@
 # <p align='center'>cub3D</p>
 *"Right. Nazis dead. Nazi robots dead. Broke all your shit. Helicopters secured."*
 
-You know ``Wolfenstein``? Yeah that ``Wolfenstein``. The aim of the ``cub3d`` project is to create a 3D game using the raycasting technique implemented to bring B.J. Blazkowicz to life.
+You know ``Wolfenstein``? Yeah, that ``Wolfenstein``. The aim of the ``cub3D`` project is to create a 3D game using the raycasting technique to bring B.J. Blazkowicz to life.
 
 ## Map Parsing
 
-The ``cub3D`` executable receives as a single argument the map file we read, which must be of ``.cub`` filetype.
+The ``cub3d`` executable receives the map file to read as a single argument, which must be of ``.cub`` filetype.
 
 The file must follow these rules:
 - There must be header lines before the actual map containing the following:
@@ -121,17 +121,12 @@ Once we have hit a wall and know its position and distance to the player, we mus
 color = my_mlx_pixel_get(i, (int)(i->width * (g->x + g->y)) % i->width, z);
 ```
 
-Note: in some cases the sprite's height is smaller than the height of the sprite we have to draw. We have an algorithm that effectively 'stretches' the sprite to fit the proper height
-
 ### Controls
-
-Here is a summary of the various controls in the game:
 
 - The ``WASD`` keys move the player up, down, left and right relative to the player's viewing angle
 - The ``left`` and ``right`` arrow keys rotate the viewing angle of the player
 - Press the ``ESC`` key or the ``X`` button on the window to exit the game
 
-Note: these are the basic mandatory controls, but we added a few more keys to handle other things. See below for such controls
 <hr>
 <div align="center">
     <img src="https://media.tenor.com/leBT_WccYc0AAAAj/wolfenstein-bj.gif">
