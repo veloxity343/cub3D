@@ -1,5 +1,5 @@
 # <p align='center'>cub3D</p>
-*Right. Nazis dead. Nazi robots dead. Broke all your shit. Helicopters secured.*
+*"Right. Nazis dead. Nazi robots dead. Broke all your shit. Helicopters secured."*
 
 You know ``Wolfenstein``? Yeah that ``Wolfenstein``. The aim of the ``cub3d`` project is to create a 3D game using the raycasting technique implemented to bring B.J. Blazkowicz to life.
 
