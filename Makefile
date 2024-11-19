@@ -71,13 +71,13 @@ bonus:		clean $(OBJ) $(OBJB)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(OBJB) $(LIBFT) $(MLX)
 	@echo "$(GREEN)Successfully compiled bonus!$(RESET)"
 
+$(OBJB_DIR):
+	@mkdir -p $(OBJB_DIR)
+
 $(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c | $(OBJB_DIR)
 	@mkdir -p $(dir $@)
 	@printf "$(YELLOW)Compiling\t$(RESET)%-33.33s\r" $@
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJB_DIR):
-	@mkdir -p $(OBJB_DIR)
 
 # Scruba dub dub
 clean:
