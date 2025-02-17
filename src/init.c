@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:29:28 by rcheong           #+#    #+#             */
-/*   Updated: 2024/11/15 14:39:22 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/02/02 22:19:56 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,43 +67,43 @@ static void	ft_load_map(t_data *data)
 	char	*line;
 
 	ft_init_load_map_var(&row, &i, &coll);
-	line = get_next_line(data->map.fd);
+	line = get_next_line(data->map_det.fd);
 	while (line != NULL)
 	{
-		data->map.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
-		if (!data->map.file[row])
+		data->map_det.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+		if (!data->map_det.file[row])
 		{
 			ft_error_msg(ERR_MALC, 2);
-			return (free_array_str(data->map.file));
+			return (ft_free_strarr(data->map_det.file));
 		}
 		while (line[i] != '\0')
-			data->map.file[row][coll++] = line[i++];
-		data->map.file[row++][coll] = '\0';
+			data->map_det.file[row][coll++] = line[i++];
+		data->map_det.file[row++][coll] = '\0';
 		coll = 0;
 		i = 0;
 		ft_free1(line);
-		line = get_next_line(data->map.fd);
+		line = get_next_line(data->map_det.fd);
 	}
-	data->map.file[row] = NULL;
+	data->map_det.file[row] = NULL;
 }
 
 void	ft_init_map_handler(t_data *data, char *path)
 {
-	data->map.lines_file = ft_lines_file(path);
-	data->map.path = path;
-	data->map.file = ft_calloc(data->map.lines_file + 1,
+	data->map_det.lines_file = ft_lines_file(path);
+	data->map_det.path = path;
+	data->map_det.file = ft_calloc(data->map_det.lines_file + 1,
 			sizeof(char *));
-	if (!data->map.file)
+	if (!data->map_det.file)
 	{
 		ft_error_msg(ERR_MALC, 2);
 		return ;
 	}
-	data->map.fd = open(path, O_RDONLY);
-	if (data->map.fd < 0)
+	data->map_det.fd = open(path, O_RDONLY);
+	if (data->map_det.fd < 0)
 		ft_exit_cube(data, ft_error_msg(strerror(errno), 3));
 	else
 	{
 		ft_load_map(data);
-		close(data->map.fd);
+		close(data->map_det.fd);
 	}
 }

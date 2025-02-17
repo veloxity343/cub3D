@@ -6,12 +6,19 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:16:06 by rcheong           #+#    #+#             */
-/*   Updated: 2024/11/15 14:18:26 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/02/16 13:01:14 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENUM_H
 # define ENUM_H
+
+typedef enum e_map_tile
+{
+	C_WALL = '1',
+	C_BACK_G = '0',
+	C_WHITE_S = ' '
+} t_map_tile;
 
 typedef enum e_err
 {

@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 11:53:48 by ryan99            #+#    #+#             */
-/*   Updated: 2024/11/18 18:07:22 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/02/02 22:11:08 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void				*ft_memset(void *b, int c, size_t len);
 
 /* ---------- STR ---------- */
 
+void				ft_free_strarr(char **arr_str);
 void				ft_skipspace(const char *str, int *i);
 char				*ft_strchr(const char *s, int c);
 int					ft_strcmp(const char *s1, const char *s2);

@@ -6,14 +6,14 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:14:33 by rcheong           #+#    #+#             */
-/*   Updated: 2024/11/15 14:42:01 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/02/05 20:54:00 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct s_texture
+typedef struct s_texture_det
 {
 	char			*north;
 	char			*south;
@@ -29,9 +29,9 @@ typedef struct s_texture
 	double			pos;
 	int				x;
 	int				y;
-}					t_texture;
+}					t_texture_det;
 
-typedef struct s_map
+typedef struct s_map_det
 {
 	int				fd;
 	int				lines_file;
@@ -41,7 +41,7 @@ typedef struct s_map
 	int				width;
 	int				start_i_map;
 	int				end_i_map;
-}					t_map;
+}					t_map_det;
 
 typedef struct s_player
 {
@@ -105,8 +105,8 @@ typedef struct s_data
 	char			**map;
 	t_window		window;
 	t_ray			ray;
-	t_map			map;
-	t_texture		texture;
+	t_map_det		map_det;
+	t_texture_det	texture_det;
 	t_player		player;
 	int				**texture_pix;
 	int				**textures;

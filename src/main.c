@@ -1,5 +1,10 @@
 #include "cub3d.h"
 
+/**
+ * @brief Will return the error message based on the error code
+ * @param error Error code
+ * @return const char* Error message
+ */
 int	error_msg(t_err error, int status_code)
 {
 	const char *msg = get_err_msg(error);
@@ -24,7 +29,7 @@ static int	ft_args_handler(t_data *data, char **argv)
 		return (ft_free_data(data));
 	if (ft_valid_map(data) != 0)
 		return (ft_free_data(data));
-	if (ft_valid_texture(&data->texture) != 0)
+	if (ft_valid_texture(&data->texture_det) != 0)
 		return (ft_free_data(data));
 	return (0);
 }
@@ -37,21 +42,21 @@ static int	ft_args_handler(t_data *data, char **argv)
  */
 static void	ft_init_window(t_data *data)
 {
-	data->view.mlx = mlx_init();
-	if (data->view.mlx == NULL)
+	data->window.mlx = mlx_init();
+	if (data->window.mlx == NULL)
 	{
 		ft_error_msg(ERR_MLX_INIT, 5);
 		exit(EXIT_FAILURE);
 	}
 	ft_setup_textures(data);
 	ft_set_player_dir(&data->player);
-	data->view.win = mlx_new_window(data->view.mlx, WIDTH, HEIGHT, TITLE);
-	if (data->view.win == NULL)
+	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
+	if (data->window.win == NULL)
 	{
 		ft_error_msg(ERR_MLX_WIN, 5);
 		exit(EXIT_FAILURE);
 	}
-	ft_init_img(data, &data->view.screen, WIDTH, HEIGHT);
+	ft_init_img(data, &data->window.screen, WIDTH, HEIGHT);
 }
 
 int	main(int argc, char **argv)
@@ -65,6 +70,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	ft_init_window(&data);
 	ft_start_game(&data);
-	mlx_loop(data.view.mlx);
+	mlx_loop(data.window.mlx);
 	return (EXIT_SUCCESS);
 }
