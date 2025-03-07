@@ -29,7 +29,7 @@
 // # include "../minilibx-linux/mlx.h"
 # include "enum.h"
 # include "struct.h"
-# include "prototypes.h"
+# include "prototype.h"
 
 # define TITLE "cub3D"
 
