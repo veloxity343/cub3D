@@ -5,9 +5,9 @@
  * @param error Error code
  * @return const char* Error message
  */
-int	error_msg(t_err error, int status_code)
+int	ft_error_msg(t_err error, int status_code)
 {
-	const char *msg = get_err_msg(error);
+	const char *msg = ft_get_err_msg(error);
 	ft_putstr_fd("error: ", STDERR_FILENO);
 	ft_putendl_fd(msg, STDERR_FILENO);
 	return (status_code);
@@ -25,8 +25,7 @@ static int	ft_args_handler(t_data *data, char **argv)
 	if (ft_valid_cub_file(argv[1]) == false)
 		return (ft_error_msg(ERR_CUB, 4));
 	ft_init_map_handler(data, argv[1]);
-	if (ft_file_to_var(data) != 0)
-		return (ft_free_data(data));
+	// file parser (color, textures, white space, etc.) -> then return to free data if invalid (??)
 	if (ft_valid_map(data) != 0)
 		return (ft_free_data(data));
 	if (ft_valid_texture(&data->texture_det) != 0)
@@ -36,7 +35,7 @@ static int	ft_args_handler(t_data *data, char **argv)
 
 /**
  * @brief Will initialize the mlx and window
- * structures and will call the setup_textures function
+ * structures and will call function
  * to load all textures.
  * @param data Data structure
  */
@@ -48,7 +47,7 @@ static void	ft_init_window(t_data *data)
 		ft_error_msg(ERR_MLX_INIT, 5);
 		exit(EXIT_FAILURE);
 	}
-	ft_setup_textures(data);
+	// parser for textures
 	ft_set_player_dir(&data->player);
 	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
 	if (data->window.win == NULL)
@@ -56,7 +55,7 @@ static void	ft_init_window(t_data *data)
 		ft_error_msg(ERR_MLX_WIN, 5);
 		exit(EXIT_FAILURE);
 	}
-	ft_init_img(data, &data->window.screen, WIDTH, HEIGHT);
+	// init function to set pixels after creation of mlx window (mlx_new_img)
 }
 
 int	main(int argc, char **argv)
@@ -64,7 +63,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
-		return (error_msg(ERR_ARGS, 1));
+		return (ft_error_msg(ERR_ARGS, 1));
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_args_handler(&data, argv) != 0)
 		return (EXIT_FAILURE);

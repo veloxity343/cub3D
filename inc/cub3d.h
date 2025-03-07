@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <errno.h>
 
 # include "../libft/inc/libft.h"
@@ -48,9 +49,5 @@
 
 # define MOVE_SPEED 0.05
 # define ROTSPEED 0.05
-
-# ifndef DEBUG_INFO
-#  define DEBUG_INFO 1
-# endif
 
 #endif

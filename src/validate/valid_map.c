@@ -12,24 +12,24 @@
 
 #include "cub3d.h"
 
-int	valid_map(t_data *data)
+int	ft_valid_map(t_data *data)
 {
 	int	valid_char_map;
 
 	data->player.dir = C_BACK_G;
 	if (!data->map)
-		return (error_msg(ERR_MAP7, 7));
-	if (is_map_sur_walls(data) == false || is_map_sur_walls2(data) == false)
-		return (error_msg(ERR_MAP8, 8));
-	valid_char_map = is_valid_char_in_map(data, data->map);
+		return (ft_error_msg(ERR_MAP7, 7));
+	if (ft_is_map_sur_walls(data) == false || ft_map_is_enclosed(data) == false)
+		return (ft_error_msg(ERR_MAP8, 8));
+	valid_char_map = ft_is_valid_char_in_map(data, data->map);
 	if (valid_char_map != 0)
 		return (valid_char_map);
-	if (is_map_last_element(&data->map_det) == false)
-		return (error_msg(ERR_MAP_LAST, 16));
-	if (check_player_position(data, data->map) == false)
+	if (ft_is_map_last_element(&data->map_det) == false)
+		return (ft_error_msg(ERR_MAP_LAST, 16));
+	if (ft_check_player_pos(data, data->map) == false)
 		return (FAILURE);
 	if (data->player.dir == C_BACK_G)
-		return (error_msg(ERR_MAP_DIR, 17));
+		return (ft_error_msg(ERR_MAP_DIR, 17));
 	return (0);
 }
 
@@ -38,7 +38,7 @@ int	valid_map(t_data *data)
  * @param map_det Map Detail Structure
  * @return boolean
  */
-static bool	is_map_last_element(t_map_det *map_det)
+static bool	ft_is_map_last_element(t_map_det *map_det)
 {
 	int	i;
 	int	j;
@@ -68,7 +68,7 @@ static bool	is_map_last_element(t_map_det *map_det)
  * @param map Matrix representing map
  * @return int 0 OK. other wise: error
  */
-static int	is_valid_char_in_map(t_data *data, char **map)
+static int	ft_is_valid_char_in_map(t_data *data, char **map)
 {
 	int	i;
 	int	j;
@@ -80,14 +80,14 @@ static int	is_valid_char_in_map(t_data *data, char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			while (is_white_space(map[i][j]))
+			while (ft_is_white_space(map[i][j]))
 				j++;
 			if ((ft_strchr(VALID_CHAR_MAP, map[i][j])) == NULL)
-				return (error_msg(ERR_MAP_CHAR, 10));
+				return (ft_error_msg(ERR_MAP_CHAR, 10));
 			if ((ft_strchr(VALID_PLAYER_POS, map[i][j])) != NULL)
 			{
 				if (data->player.dir != C_BACK_G)
-					return (error_msg(ERR_SING_PLAYER, 11));
+					return (ft_error_msg(ERR_SING_PLAYER, 11));
 				else
 					data->player.dir = map[i][j];
 			}
@@ -97,15 +97,13 @@ static int	is_valid_char_in_map(t_data *data, char **map)
 }
 
 /**
- * @brief Validate the Walls surrounded in map.
- * First look to first line.
- * Then, look in the last (bottom) line
- * Then, verify the first and the last column in each line
+ * @brief Validate if map is surrounded by walls
+ * Verify extreme rows then columns
  * @param data
  * @return true
  * @return false
  */
-static bool	is_map_sur_walls(t_data *data)
+static bool	ft_is_map_sur_walls(t_data *data)
 {
 	int	i;
 	int	j;
@@ -118,7 +116,7 @@ static bool	is_map_sur_walls(t_data *data)
 		col_size = ft_strlen(data->map[i]);
 		while (data->map[i][++j])
 		{
-			while (is_white_space(data->map[i][j]))
+			while (ft_is_white_space(data->map[i][j]))
 				data->map[i][j++] = C_WALL;
 			if (i == 0 && data->map[i][j] != C_WALL)
 				return (false);
@@ -142,7 +140,7 @@ static bool	is_map_sur_walls(t_data *data)
  * @param map Map - Array representation
  * @return boolean
  */
-static bool	check_player_position(t_data *data, char **map)
+static bool	ft_check_player_pos(t_data *data, char **map)
 {
 	int	i;
 	int	j;
@@ -163,9 +161,9 @@ static bool	check_player_position(t_data *data, char **map)
 		}
 		i++;
 	}
-	if (data->player.dir == C_BACK_G || pos_is_valid(data, map) == FAILURE)
+	if (data->player.dir == C_BACK_G || ft_pos_is_valid(data, map) == FAILURE)
 	{
-		error_msg(ERR_PLA_POS, 1);
+		ft_error_msg(ERR_PLA_POS, 1);
 		return (false);
 	}
 	return (true);

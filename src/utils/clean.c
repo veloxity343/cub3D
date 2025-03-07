@@ -16,7 +16,7 @@
  * @brief Free the textures structure
  * @param texture Texture Structure
  */
-static void	free_textures(t_texture_det *texture)
+static void	ft_free_textures(t_texture_det *texture)
 {
 	if (texture->north)
 		ft_free1(texture->north);

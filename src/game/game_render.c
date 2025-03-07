@@ -18,16 +18,16 @@
  * @param d data struct
  * @return int
  */
-static int	calc_raycast(t_data *d)
+static int	ft_calc_raycast(t_data *d)
 {
 	d->window.x = 0;
 	while (d->window.x < WIDTH)
 	{
-		setup_raycast_info(d->window.x, &d->ray, &d->player);
-		calc_dda(&d->ray, &d->player);
-		perform_dda(d, &d->ray);
-		calculate_line_height(&d->ray, &d->player);
-		update_text_pixels(d, &d->texture_det, &d->ray, d->window.x);
+		ft_setup_raycast_info(d->window.x, &d->ray, &d->player);
+		ft_calc_dda(&d->ray, &d->player);
+		ft_perform_dda(d, &d->ray);
+		ft_calc_line_height(&d->ray, &d->player);
+		ft_update_text_pixels(d, &d->texture_det, &d->ray, d->window.x);
 		d->window.x++;
 	}
 	return (SUCCESS);
@@ -39,8 +39,9 @@ static int	calc_raycast(t_data *d)
  * @param d data struct
  * @return int
  */
-static int	render_frame(t_data *d)
+static int	ft_render_frame(t_data *d)
 {
+	int pixel;
 	d->window.y = 0;
 	while (d->window.y < HEIGHT)
 	{
@@ -53,8 +54,8 @@ static int	render_frame(t_data *d)
 				d->window.color = d->texture_det.hex_ceiling;
 			else if (d->window.y < HEIGHT - 1)
 				d->window.color = d->texture_det.hex_floor;
-			set_image_pixel(&d->window.screen, d->window.x, \
-			d->window.y, d->window.color);
+			pixel = d->window.y * (d->window.screen.size_line / 4) + d->window.x;
+			d->window.screen.addr[pixel] = d->window.color;
 			d->window.x++;
 		}
 		d->window.y++;
@@ -62,11 +63,11 @@ static int	render_frame(t_data *d)
 	return (SUCCESS);
 }
 
-int	render_images(t_data *data)
+int	ft_render_images(t_data *data)
 {
-	init_texture_pixels(data);
-	calc_raycast(data);
-	render_frame(data);
+	// need function to convert xpm to image. parse loop to render per frame
+	ft_calc_raycast(data);
+	ft_render_frame(data);
 	mlx_put_image_to_window(data->window.mlx, data->window.win, \
 	data->window.screen.img, 0, 0);
 	return (0);

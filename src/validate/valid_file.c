@@ -36,7 +36,7 @@ static bool	ft_valid_file_exit(char *file, char c1, char c2, char c3)
 
 bool	ft_valid_cub_file(char *file)
 {
-	return (ft_valid_file_ext(file, 'c', 'u', 'b'));
+	return (ft_valid_file_exit(file, 'c', 'u', 'b'));
 }
 
 bool	ft_valid_file_path(char *path)

@@ -12,19 +12,19 @@
 
 #include "cub3d.h"
 
-int	valid_texture(t_texture_det *text)
+int	ft_valid_texture(t_texture_det *text)
 {
 	if (!text->north || !text->south || !text->east || !text->west)
-		return (error_msg(ERR_TEXT_MAP, 12));
+		return (ft_error_msg(ERR_TEXT_MAP, 12));
 	if (!text->ceiling || !text->floor)
-		return (error_msg(ERR_TEXT_COL, 13));
-	if (!val_file_path(text->north) || !val_file_path(text->south)
-		|| !val_file_path(text->east) || !val_file_path(text->west))
-		return (error_msg(ERR_TEXT_PATH, 14));
-	if (valid_rgb(text->ceiling) == false || valid_rgb(text->floor) == false)
-		return (error_msg(ERR_RGB_VAL, 15));
-	text->hex_ceiling = rgb_to_hex(text->ceiling);
-	text->hex_floor = rgb_to_hex(text->floor);
+		return (ft_error_msg(ERR_TEXT_COL, 13));
+	if (!ft_val_file_path(text->north) || !ft_val_file_path(text->south)
+		|| !ft_val_file_path(text->east) || !ft_val_file_path(text->west))
+		return (ft_error_msg(ERR_TEXT_PATH, 14));
+	if (ft_valid_rgb(text->ceiling) == false || ft_valid_rgb(text->floor) == false)
+		return (ft_error_msg(ERR_RGB_VAL, 15));
+	text->hex_ceiling = ft_rgb_to_hex(text->ceiling);
+	text->hex_floor = ft_rgb_to_hex(text->floor);
 	return (0);
 }
 
@@ -33,7 +33,7 @@ int	valid_texture(t_texture_det *text)
  * @param rgb_val RGB Value
  * @return Boolean
  */
-static bool	valid_rgb(int *rgb_val)
+static bool	ft_valid_rgb(int *rgb_val)
 {
 	int	i;
 
@@ -49,11 +49,10 @@ static bool	valid_rgb(int *rgb_val)
 
 /**
  * @brief Convert the RGB Color in file to hexadecimal color
- * Stackoverflow: https://stackoverflow.com/questions/14375156/
  * @param rgb Array of int representing RGB Color
  * @return unsigned long
  */
-static unsigned long	rgb_to_hex(int *rgb)
+static unsigned long	ft_rgb_to_hex(int *rgb)
 {
 	int	r;
 	int	g;

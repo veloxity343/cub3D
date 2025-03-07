@@ -26,7 +26,7 @@ static int	ft_lines_file(char *path)
 	line_count = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		ft_exit_cube(NULL, ft_error_msg(strerror(errno), 3));
+		ft_exit_cub(NULL, ft_error_msg(strerror(errno), 3));
 	else
 	{
 		line = get_next_line(fd);
@@ -42,8 +42,7 @@ static int	ft_lines_file(char *path)
 }
 
 /**
- * @brief Initialize variables passed by ref. Just to avoid norminette:
- * functions huge
+ * @brief Initialize variables passed by ref
  * @param row 'row' variable
  * @param i 'i' variable
  * @param coll 'coll' variable
@@ -100,7 +99,7 @@ void	ft_init_map_handler(t_data *data, char *path)
 	}
 	data->map_det.fd = open(path, O_RDONLY);
 	if (data->map_det.fd < 0)
-		ft_exit_cube(data, ft_error_msg(strerror(errno), 3));
+		ft_exit_cub(data, ft_error_msg(strerror(errno), 3));
 	else
 	{
 		ft_load_map(data);

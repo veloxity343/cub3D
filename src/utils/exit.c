@@ -28,7 +28,7 @@ void	ft_exit_and_free(t_data *data, int s_code)
 	exit(s_code);
 }
 
-void	ft_exit_cube(t_data *data, int exit_code)
+void	ft_exit_cub(t_data *data, int exit_code)
 {
 	ft_free_data(data);
 	exit(exit_code);

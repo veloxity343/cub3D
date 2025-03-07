@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	pos_is_valid(t_data *data, char **map)
+int	ft_pos_is_valid(t_data *data, char **map)
 {
 	int	i;
 	int	j;
@@ -24,7 +24,7 @@ int	pos_is_valid(t_data *data, char **map)
 	return (SUCCESS);
 }
 
-bool	is_map_sur_walls2(t_data *data)
+bool	ft_map_is_enclosed(t_data *data)
 {
 	int	i;
 	int	j;
@@ -43,4 +43,11 @@ bool	is_map_sur_walls2(t_data *data)
 		}
 	}
 	return (true);
+}
+
+bool	ft_is_white_space(char c)
+{
+	if (c == C_WHITE_S || c == '\t' || c == '\n')
+		return (true);
+	return (false);
 }

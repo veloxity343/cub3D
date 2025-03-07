@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	calc_dda(t_ray *ray, t_player *p)
+void	ft_calc_dda(t_ray *ray, t_player *p)
 {
 	if (ray->dir_x < 0)
 	{
@@ -36,7 +36,7 @@ void	calc_dda(t_ray *ray, t_player *p)
 	}
 }
 
-void	perform_dda(t_data *data, t_ray *ray)
+void	ft_perform_dda(t_data *data, t_ray *ray)
 {
 	while (true)
 	{
@@ -60,7 +60,7 @@ void	perform_dda(t_data *data, t_ray *ray)
 	}
 }
 
-void	calculate_line_height(t_ray *ray, t_player *player)
+void	ft_calc_line_height(t_ray *ray, t_player *player)
 {
 	if (ray->hit_side == false)
 		ray->perp_dist = (ray->side_dist_x - ray->delta_dist_x);
@@ -80,7 +80,7 @@ void	calculate_line_height(t_ray *ray, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-void	setup_raycast_info(int x, t_ray *ray, t_player *player)
+void	ft_setup_raycast_info(int x, t_ray *ray, t_player *player)
 {
 	ray->multiplier = 2 * x / (double)WIDTH - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->multiplier;

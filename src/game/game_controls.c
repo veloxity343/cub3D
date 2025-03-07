@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	set_player_direction(t_player *p)
+int	ft_set_player_direction(t_player *p)
 {
 	if (p->dir == 'S')
 	{
@@ -37,7 +37,7 @@ int	set_player_direction(t_player *p)
 	return (EXIT_SUCCESS);
 }
 
-int	rotate(double *x, double *y, double angle)
+int	ft_rotate(double *x, double *y, double angle)
 {
 	double	old_x;
 
@@ -47,7 +47,7 @@ int	rotate(double *x, double *y, double angle)
 	return (EXIT_SUCCESS);
 }
 
-int	move(t_data *d, double dx, double dy)
+int	ft_move(t_data *d, double dx, double dy)
 {
 	double	new_pos_x;
 	double	new_pos_y;
