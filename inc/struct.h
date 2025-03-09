@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:14:33 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/09 16:12:55 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/09 19:04:41 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,12 @@ typedef struct s_img
 {
 	char			*path;
 	void			*img;
-	int				*addr;
+	char				*addr;
 	int				pixel_bits;
 	int				size_line;
 	int				endian;
+	int				height;
+	int				width;
 }					t_img;
 
 typedef struct s_window
