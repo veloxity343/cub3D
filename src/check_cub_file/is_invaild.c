@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/09 18:23:28 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:34:27 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int is_invalid(t_data *data, char *path)
     if (!file || init_img(data, file))
         return (1);
     ft_free_strarr(file);
-    // file = ft_arrdup_n(data->cub_file + 4, 2);
-    // if (!file || init_rgb(data, file))
-    //     return (1);
+    file = ft_arrdup_n(data->cub_file + 4, 2);
+    if (!file || init_rgb(data, file))
+        return (1);
     return (0);
 }
