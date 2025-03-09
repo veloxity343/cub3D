@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/09 16:03:13 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:23:28 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,31 @@ int    check(t_img *img, char *dir, int *f)
     return (0);
 }
 
-int check_direction(t_data *data, char *dir)
+int check_direction(t_data *data, char *dir, int *flag_n0_w1_s2_e3)
 {
-    if (!ft_strncmp(dir, "NO ", 3) && !data->flag_n0_w1_s2_e3[0])
-        return (check(&data->n_img, dir, &data->flag_n0_w1_s2_e3[0]));
-    else if (!ft_strncmp(dir, "WE ", 3) && !data->flag_n0_w1_s2_e3[1])
-        return (check(&data->w_img, dir, &data->flag_n0_w1_s2_e3[1]));
-    else if (!ft_strncmp(dir, "SO ", 3) && !data->flag_n0_w1_s2_e3[2])
-        return (check(&data->s_img, dir, &data->flag_n0_w1_s2_e3[2]));
-    else if (!ft_strncmp(dir, "EA ", 3) && !data->flag_n0_w1_s2_e3[3])
-        return (check(&data->e_img, dir, &data->flag_n0_w1_s2_e3[3]));
+    if (!ft_strncmp(dir, "NO ", 3) && !flag_n0_w1_s2_e3[0])
+        return (check(&data->n_img, dir, &flag_n0_w1_s2_e3[0]));
+    else if (!ft_strncmp(dir, "WE ", 3) && !flag_n0_w1_s2_e3[1])
+        return (check(&data->w_img, dir, &flag_n0_w1_s2_e3[1]));
+    else if (!ft_strncmp(dir, "SO ", 3) && !flag_n0_w1_s2_e3[2])
+        return (check(&data->s_img, dir, &flag_n0_w1_s2_e3[2]));
+    else if (!ft_strncmp(dir, "EA ", 3) && !flag_n0_w1_s2_e3[3])
+        return (check(&data->e_img, dir, &flag_n0_w1_s2_e3[3]));
     return (1);
 }
 
 int init_img(t_data *data, char **dir)
 {
     int i;
+    int flag_n0_w1_s2_e3[4];
 
+    flag_n0_w1_s2_e3[0] = 0;
+    flag_n0_w1_s2_e3[1] = 0;
+    flag_n0_w1_s2_e3[2] = 0;
+    flag_n0_w1_s2_e3[3] = 0;
     i = -1;
     while (dir[++i])
-        if (check_direction(data, dir[i]))
+        if (check_direction(data, dir[i], flag_n0_w1_s2_e3))
             return (1);
     return (0);
 }
