@@ -11,6 +11,9 @@ int	ft_error_msg(t_err error, int status_code);
 //is_invalid.c
 int is_invalid(t_data *data, char *path);
 
+//init_rgb.c
+int init_rgb(t_data *data, char **rgb);
+
 //utils.c
 int ft_arrlen(char **arr);
 char    **ft_arrdup_n(char **arr, int n);
