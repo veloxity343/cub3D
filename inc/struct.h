@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:14:33 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/05 20:54:00 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:12:55 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_ray
 
 typedef struct s_img
 {
+	char			*path;
 	void			*img;
 	int				*addr;
 	int				pixel_bits;
@@ -110,6 +111,12 @@ typedef struct s_data
 	t_player		player;
 	int				**texture_pix;
 	int				**textures;
+
+	char			**cub_file;
+	t_img			n_img;
+	t_img			w_img;
+	t_img			s_img;
+	t_img			e_img;
 }					t_data;
 
 #endif
