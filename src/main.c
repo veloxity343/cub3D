@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 /**
  * @brief Will return the error message based on the error code
@@ -24,7 +24,8 @@ static int	ft_args_handler(t_data *data, char **argv)
 {
 	if (ft_valid_cub_file(argv[1]) == false)
 		return (ft_error_msg(ERR_CUB, 4));
-	ft_init_map_handler(data, argv[1]);
+	if (is_invalid(data, argv[1]))
+		return (1); //err
 	// file parser (color, textures, white space, etc.) -> then return to free data if invalid (??)
 	if (ft_valid_map(data) != 0)
 		return (ft_free_data(data));
