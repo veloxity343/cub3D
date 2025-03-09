@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:29:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/02 22:19:56 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/09 11:35:00 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	ft_load_map(t_data *data)
 		i = 0;
 		ft_free1(line);
 		line = get_next_line(data->map_det.fd);
-	}
+	} 
 	data->map_det.file[row] = NULL;
 }
 
