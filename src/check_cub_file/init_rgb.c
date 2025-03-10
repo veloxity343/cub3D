@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/09 20:58:05 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:53:54 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int check_rgb(char *rgb)
 
 int init_rgb(t_data *data, char **rgb)
 {
+    if (!rgb[0] || !rgb[1])
+        return (1);
     if (ft_strncmp(rgb[0], "F ", 2) || ft_strncmp(rgb[1], "C ", 2))
         return (1);
     if (check_rgb(rgb[0] + 2) || check_rgb(rgb[1] + 2))
