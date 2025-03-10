@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:22:17 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/16 13:07:02 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/10 21:17:55 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 int	ft_valid_map(t_data *data)
 {
 	int	valid_char_map;
 
+	data->map = ft_arrdup(data->cub_file + 6);
 	data->player.dir = C_BACK_G;
 	if (!data->map)
 		return (ft_error_msg(ERR_MAP7, 7));

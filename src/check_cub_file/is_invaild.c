@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/09 20:39:13 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:56:45 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,33 +70,27 @@ int init_image(t_data *data, char **dir)
     int i;
     int flag_n0_w1_s2_e3[4];
 
+    if (ft_arrlen(dir) < 4)
+        return (1);
     flag_n0_w1_s2_e3[0] = 0;
     flag_n0_w1_s2_e3[1] = 0;
     flag_n0_w1_s2_e3[2] = 0;
     flag_n0_w1_s2_e3[3] = 0;
-    i = -1;
-    while (dir[++i])
-        if (check_direction(data, dir[i], flag_n0_w1_s2_e3))
+    i = 0;
+    while (dir[++i] && i < 4)
+        if (check_direction(data, dir[i++], flag_n0_w1_s2_e3))
             return (1);
     return (0);
 }
 
 int is_invalid(t_data *data, char *path)
 {
-    char    **file;
-
     data->cub_file = read_map(path);
     if (!data->cub_file)
         return (1);
-    if (ft_arrlen(data->cub_file) < 4)
+    if (init_image(data, data->cub_file))
         return (1);
-    file = ft_arrdup_n(data->cub_file, 4);
-    if (!file || init_image(data, file))
+    if (init_rgb(data, data->cub_file + 4))
         return (1);
-    ft_free_strarr(file);
-    file = ft_arrdup_n(data->cub_file + 4, 2);
-    if (!file || init_rgb(data, file))
-        return (1);
-    ft_free_strarr(file);
     return (0);
 }

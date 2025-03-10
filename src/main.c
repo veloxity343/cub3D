@@ -20,16 +20,13 @@ int	ft_error_msg(t_err error, int status_code)
  * @param argv Argument vector
  * @return int value of validations
  */
-static int	ft_args_handler(t_data *data, char **argv)
+static int	ft_args_handler(t_data *data, char *argv)
 {
-	if (ft_valid_cub_file(argv[1]) == false)
+	if (ft_valid_cub_file(argv) == false)
 		return (ft_error_msg(ERR_CUB, 4));
-	if (is_invalid(data, argv[1]))
+	if (is_invalid(data, argv))
 		return (1); //err
-	// file parser (color, textures, white space, etc.) -> then return to free data if invalid (??)
 	if (ft_valid_map(data) != 0)
-		return (ft_free_data(data));
-	if (ft_valid_texture(&data->texture_det) != 0)
 		return (ft_free_data(data));
 	return (0);
 }
@@ -40,7 +37,7 @@ static int	ft_args_handler(t_data *data, char **argv)
  * to load all textures.
  * @param data Data structure
  */
-static void	ft_init_window(t_data *data)
+static int	ft_init_window(t_data *data, char *argv)
 {
 	data->window.mlx = mlx_init();
 	if (data->window.mlx == NULL)
@@ -48,7 +45,8 @@ static void	ft_init_window(t_data *data)
 		ft_error_msg(ERR_MLX_INIT, 5);
 		exit(EXIT_FAILURE);
 	}
-	// parser for textures
+	if (ft_args_handler(data, argv))
+		return (EXIT_FAILURE);
 	ft_set_player_dir(&data->player);
 	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
 	if (data->window.win == NULL)
@@ -57,6 +55,7 @@ static void	ft_init_window(t_data *data)
 		exit(EXIT_FAILURE);
 	}
 	// init function to set pixels after creation of mlx window (mlx_new_img)
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -66,9 +65,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_error_msg(ERR_ARGS, 1));
 	ft_bzero(&data, sizeof(t_data));
-	if (ft_args_handler(&data, argv) != 0)
+	if (ft_init_window(&data, argv[1]))
 		return (EXIT_FAILURE);
-	ft_init_window(&data);
 	ft_start_game(&data);
 	mlx_loop(data.window.mlx);
 	return (EXIT_SUCCESS);
