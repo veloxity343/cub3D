@@ -6,11 +6,11 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:29:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/09 11:35:00 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/10 21:39:35 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 /**
  * @brief Handle the number of lines of the file.
