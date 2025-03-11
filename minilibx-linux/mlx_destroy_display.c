@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_strarr.c                                   :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 22:10:30 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/11 18:55:51 by yyan-bin         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mlx_int.h"
 
-void	ft_free_strarr(char **arr_str)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	int	i;
-
-	i = 0;
-	if (arr_str)
-	{
-		while (arr_str[i])
-		{
-			if (arr_str[i])
-			{
-				free(arr_str[i]);
-				arr_str[i] = NULL;
-			}
-			i++;
-		}
-		free(arr_str);
-		arr_str = NULL;
-	}
+	XCloseDisplay(xvar->display);
 }
