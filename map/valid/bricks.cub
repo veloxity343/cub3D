@@ -1,7 +1,7 @@
-NO ./img/brick/Brick_128x128-0.xpm
-SO ./img/brick/Brick_128x128-1.xpm
-WE ./img/brick/Brick_128x128-2.xpm
-EA ./img/brick/Brick_128x128-3.xpm
+NO ./img/brick/Bricks_128x128-0.xpm
+SO ./img/brick/Bricks_128x128-1.xpm
+WE ./img/brick/Bricks_128x128-2.xpm
+EA ./img/brick/Bricks_128x128-3.xpm
 
 F 220,100,0
 C 225,30,0
