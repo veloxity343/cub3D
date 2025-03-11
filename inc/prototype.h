@@ -10,6 +10,9 @@ const char	*ft_get_err_msg(t_err error);
 //init.c
 void	ft_init_map_handler(t_data *data, char *path);
 
+//exit.c
+void	ft_exit_cub(t_data *data, int exit_code);
+
 //valid_file.c
 bool	ft_valid_cub_file(char *file);
 
