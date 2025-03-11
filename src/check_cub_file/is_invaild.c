@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/10 20:56:45 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:35:58 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int init_image(t_data *data, char **dir)
     flag_n0_w1_s2_e3[2] = 0;
     flag_n0_w1_s2_e3[3] = 0;
     i = 0;
-    while (dir[++i] && i < 4)
+    while (dir[i] && i < 4)
         if (check_direction(data, dir[i++], flag_n0_w1_s2_e3))
             return (1);
     return (0);
