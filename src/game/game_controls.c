@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_controls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:07:37 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/17 17:07:38 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/11 18:52:18 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 int	ft_set_player_direction(t_player *p)
 {

@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_init_window(&data, argv[1]))
 		return (EXIT_FAILURE);
-	ft_start_game(&data);
+	// ft_start_game(&data);
 	mlx_loop(data.window.mlx);
 	return (EXIT_SUCCESS);
 }
