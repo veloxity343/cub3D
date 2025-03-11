@@ -1,7 +1,7 @@
-NO ../../img/dirction/n.xpm
-SO ../../img/dirction/s.xpm
-WE ../../img/dirction/w.xpm
-EA ../../img/dirction/e.xpm
+NO ./img/dirction/n.xpm
+SO ./img/dirction/s.xpm
+WE ./img/dirction/w.xpm
+EA ./img/dirction/e.xpm
 
 F 220,100,0
 C 225,30,0
