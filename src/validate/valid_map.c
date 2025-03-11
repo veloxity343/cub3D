@@ -135,3 +135,25 @@ int valid_map(t_data *data, char **map)
         return (ft_error_msg(ERR_SING_PLAYER, 1));
     return (0);
 }
+
+int	ft_valid_map(t_data *data)
+{
+	int	valid_char_map;
+
+	data->map = ft_arrdup(data->cub_file + 6);
+	data->player.dir = C_BACK_G;
+	if (!data->map)
+		return (ft_error_msg(ERR_MAP7, 7));
+	if (ft_is_map_sur_walls(data) == false || ft_map_is_enclosed(data) == false)
+		return (ft_error_msg(ERR_MAP8, 8));
+	valid_char_map = ft_is_valid_char_in_map(data, data->map);
+	if (valid_char_map != 0)
+		return (valid_char_map);
+	if (ft_is_map_last_element(&data->map_det) == false)
+		return (ft_error_msg(ERR_MAP_LAST, 16));
+	if (ft_check_player_pos(data, data->map) == false)
+		return (FAILURE);
+	if (data->player.dir == C_BACK_G)
+		return (ft_error_msg(ERR_MAP_DIR, 17));
+	return (0);
+}
