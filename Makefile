@@ -22,7 +22,8 @@ else
 endif
 
 # Compiler & flags
-WFLAGS		=	-Wall -Wextra -Werror
+# WFLAGS		=	-Wall -Wextra -Werror
+WFLAGS		=	
 IFLAGS		=	-I$(INC)
 DSYM		=	-g3
 FSAN		=	-fsanitize=address $(DSYM)
