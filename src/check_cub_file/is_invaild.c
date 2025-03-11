@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/11 18:45:47 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/11 22:12:54 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int    check(t_img *img, char *dir, int *f, void *mlx_ptr)
     img->img = mlx_xpm_file_to_image(mlx_ptr, img->path, \
         &img->width, &img->height);
     if (!img->img)
-        return (1);
+        return (ft_error_msg(ERR_TEXT_PATH, 1));
     img->addr = mlx_get_data_addr(img->img, &img->pixel_bits, \
         &img->size_line, &img->endian);
     if (!img->addr)
-        return (1);
+        return (ft_error_msg(ERR_TEXT, 1));
     return (0);
 }
 
@@ -62,7 +62,7 @@ int check_direction(t_data *data, char *dir, int *flag_n0_w1_s2_e3)
         return (check(&data->s_img, dir, &flag_n0_w1_s2_e3[2], data->window.mlx));
     else if (!ft_strncmp(dir, "EA ", 3) && !flag_n0_w1_s2_e3[3])
         return (check(&data->e_img, dir, &flag_n0_w1_s2_e3[3], data->window.mlx));
-    return (1);
+    return (ft_error_msg(ERR_TEXT, 1));
 }
 
 int init_image(t_data *data, char **dir)
@@ -71,7 +71,7 @@ int init_image(t_data *data, char **dir)
     int flag_n0_w1_s2_e3[4];
 
     if (ft_arrlen(dir) < 4)
-        return (1);
+        return (ft_error_msg(ERR_TEXT_MAP, 1));
     flag_n0_w1_s2_e3[0] = 0;
     flag_n0_w1_s2_e3[1] = 0;
     flag_n0_w1_s2_e3[2] = 0;
@@ -87,7 +87,7 @@ int is_invalid(t_data *data, char *path)
 {
     data->cub_file = read_map(path);
     if (!data->cub_file)
-        return (1);
+        return (ft_error_msg(ERR_TEXT_MAP, 1));
     if (init_image(data, data->cub_file))
         return (1);
     if (init_rgb(data, data->cub_file + 4))

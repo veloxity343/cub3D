@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/10 20:53:54 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/11 22:04:36 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int check_rgb(char *rgb)
     nbr0_cm1[0] = 0;
     nbr0_cm1[1] = 0;
     if (ft_strchr(rgb, ' '))
-        return (1);
+        return (ft_error_msg(ERR_RGB_VAL, 1));
     while (rgb[++i])
     {
         if (ft_isdigit(rgb[i]))
@@ -56,24 +56,24 @@ int check_rgb(char *rgb)
             nbr0_cm1[0] = 0;
         }
         else
-            return (1);
+            return (ft_error_msg(ERR_RGB_VAL, 1));
         if (nbr0_cm1[1] == 3 || nbr0_cm1[0] == 4)
-            return (1);
+            return (ft_error_msg(ERR_RGB_VAL, 1));
     }
     if (nbr0_cm1[1] != 2)
-        return (1);
+        return (ft_error_msg(ERR_RGB, 1));
     return (0);
 }
 
 int init_rgb(t_data *data, char **rgb)
 {
     if (!rgb[0] || !rgb[1])
-        return (1);
+        return (ft_error_msg(ERR_RGB, 1));
     if (ft_strncmp(rgb[0], "F ", 2) || ft_strncmp(rgb[1], "C ", 2))
-        return (1);
+        return (ft_error_msg(ERR_RGB, 1));
     if (check_rgb(rgb[0] + 2) || check_rgb(rgb[1] + 2))
         return (1);
     if (get_rgb(&data->texture_det, rgb[0] + 2, rgb[1] + 2))
-        return (1);
+        return (ft_error_msg(ERR_RGB_VAL, 1));
     return (0);
 }
