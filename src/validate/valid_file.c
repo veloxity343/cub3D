@@ -19,7 +19,7 @@
  * @param c1 char 1 in sentence
  * @param c2 char 2 in sentence
  * @param c3 char 3 in sentence
- * @return boolean. Validate or not
+ * @return boolean. valid or not
  */
 static bool	ft_valid_file_exit(char *file, char c1, char c2, char c3)
 {
