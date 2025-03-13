@@ -6,7 +6,7 @@ int check_x_help(char *map, int x, int f)
     {
         if (map[x + f] == '0')
             return (ft_error_msg(ERR_MAP8, 1));
-        if (!ft_strchr("01NWSE ", map[x + f]))
+        if (!ft_strchr("01 ", map[x + f]))
             return (ft_error_msg(ERR_MAP_CHAR, 1));
     }
     return (0);
@@ -20,7 +20,7 @@ int check_y_help(char **map, int x, int y, int f)
     {
         if (map[y + f][x] == '0')
             return (ft_error_msg(ERR_MAP8, 1));
-        if (!ft_strchr("01NWSE ", map[y + f][x]))
+        if (!ft_strchr("01 ", map[y + f][x]))
             return (ft_error_msg(ERR_MAP_CHAR, 1));
     }
     return (0);
@@ -81,6 +81,8 @@ int check_map(t_data *data, char **map)
     }
     if (player == 0)
         return (ft_error_msg(ERR_MAP_DIR, 1));
+    else if (player < 0)
+        return (ft_error_msg(ERR_PLA_POS, 1));
     else if (player != 1)
         return (ft_error_msg(ERR_SING_PLAYER, 1));
     return (0);
