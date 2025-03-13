@@ -6,11 +6,11 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:29:52 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/11 18:52:07 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:36:28 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 /**
  * @brief Generic method to validate any type of file. Will validate 4 last

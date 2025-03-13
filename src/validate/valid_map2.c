@@ -3,51 +3,122 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 14:33:34 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/10 21:15:19 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/03/11 21:20:42 by rcheong           #+#    #+#             */
+/*   Updated: 2025/03/11 22:04:39 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-int	ft_pos_is_valid(t_data *data, char **map)
+/**
+ * @brief Allocate memory for the visited matrix.
+ * @param width Map width.
+ * @param height Map height.
+ * @return Pointer to the allocated matrix.
+ */
+bool **allocate_visited_matrix(int width, int height)
 {
-	int	i;
-	int	j;
-
-	i = (int)data->player.pos_y;
-	j = (int)data->player.pos_x;
-	if (ft_strlen(map[i - 1]) < (size_t)j || ft_strlen(map[i + 1]) < (size_t)j)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-bool	ft_map_is_enclosed(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (data->map[++i])
+	int i;
+	bool **visited;
+	
+	visited = (bool **)malloc(height * sizeof(bool *));
+	if (!visited)
+		return (NULL);
+	i = 0;
+	while (i < height)
 	{
-		j = -1;
-		while (data->map[i][++j])
+		visited[i] = (bool *)malloc(width * sizeof(bool));
+		if (!visited[i])
 		{
-			if (i > 0 && !data->map[i - 1][j] && data->map[i][j] != C_WALL)
-				return (false);
-			else if (i < data->map_det.height -1 && !data->map[i + 1][j]
-					&& data->map[i][j] != C_WALL)
-				return (false);
+			free_visited_matrix(visited, i);
+			return (NULL);
 		}
+		i++;
 	}
-	return (true);
+	return (visited);
 }
 
-bool	ft_is_white_space(char c)
+/**
+ * @brief Free memory allocated for the visited matrix.
+ * @param visited Pointer to the visited matrix.
+ * @param height Map height.
+ */
+void free_visited_matrix(bool **visited, int height)
 {
-	if (c == C_WHITE_S || c == '\t' || c == '\n')
+	int	i;
+
+	i = 0;
+	while (i < height)
+	{
+		free(visited[i]);
+		i++;
+	}
+	free(visited);
+}
+
+/**
+ * @brief Flood-fill to check if any VALID_CHAR_MAP character can reach outside.
+ * @param map The map matrix
+ * @param visited Matrix tracking visited positions
+ * @param x Current x position
+ * @param y Current y position
+ * @param width Map width
+ * @param height Map height
+ * @return true if a valid character leaks outside, false if enclosed
+ */
+static bool	ft_flood_fill(char **map, bool **visited, int x, int y, int width, int height)
+{
+	if (x < 0 || x >= width || y < 0 || y >= height)
+		return (true);
+	if (visited[y][x] || map[y][x] == C_WALL || map[y][x] == ' ' || !ft_strchr(VALID_CHAR_MAP, map[y][x]))
+		return (false);
+	visited[y][x] = true;
+	if (ft_flood_fill(map, visited, x + 1, y, width, height) ||
+		ft_flood_fill(map, visited, x - 1, y, width, height) ||
+		ft_flood_fill(map, visited, x, y + 1, width, height) ||
+		ft_flood_fill(map, visited, x, y - 1, width, height))
 		return (true);
 	return (false);
+}
+
+/**
+ * @brief Ensures all characters in VALID_CHAR_MAP are enclosed by walls.
+ * @param data Game data structure
+ * @return true if all required characters are enclosed, false otherwise
+ */
+bool	ft_map_is_enclosed(t_data *data)
+{
+	bool	**visited;
+	int		i;
+	int		j;
+	int		width;
+	int		height;
+
+	width = data->map_det.width;
+	height = data->map_det.height;
+	visited = allocate_visited_matrix(width, height);
+	if (!visited)
+		return (false);
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			if (ft_strchr(VALID_CHAR_MAP, data->map[i][j]) && !visited[i][j])
+			{
+				if (ft_flood_fill(data->map, visited, j, i, width, height))
+				{
+					free_visited_matrix(visited, height);
+					return (false);
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	free_visited_matrix(visited, height);
+	return (true);
 }
