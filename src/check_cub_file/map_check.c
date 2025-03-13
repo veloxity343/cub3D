@@ -3,21 +3,26 @@
 int check_x_help(char *map, int x, int f)
 {
     if (map[x + f])
-        if (map[x + f] == '0' || !ft_strchr("01NWSE ", map[x + f]))
-            return (1);
+    {
+        if (map[x + f] == '0')
+            return (ft_error_msg(ERR_MAP8, 1));
+        if (!ft_strchr("01NWSE ", map[x + f]))
+            return (ft_error_msg(ERR_MAP_CHAR, 1));
+    }
     return (0);
 }
 
 int check_y_help(char **map, int x, int y, int f)
 {
-    if (!map[y + f] || (y == 0 && f == -1))
+    if (y + f < 0 || y + f >= ft_arrlen(map) || x >= ft_strlen(map[y + f]))
         return (0);
-    if (map[y + 1])
-        if (ft_strlen(map[y + 1]) < x)
-            return (0);
     if (map[y + f][x])
-        if (map[y + f][x] == '0' || !ft_strchr("01NWSE ", map[y + f][x]))
-            return (1);
+    {
+        if (map[y + f][x] == '0')
+            return (ft_error_msg(ERR_MAP8, 1));
+        if (!ft_strchr("01NWSE ", map[y + f][x]))
+            return (ft_error_msg(ERR_MAP_CHAR, 1));
+    }
     return (0);
 }
 
@@ -31,7 +36,7 @@ int check_x(char *map, int x)
     else if (map[x] == '0')
     {
         if (!map[x + 1] || !map[x - 1])
-            return (1);
+            return (ft_error_msg(ERR_MAP8, 1));
     }
     else if (!ft_strchr(VALID_CHAR_MAP, map[x]))
         return (ft_error_msg(ERR_MAP9, 1));
