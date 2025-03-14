@@ -24,15 +24,13 @@ static int	ft_args_handler(t_data *data, char *argv)
 {
 	if (ft_valid_cub_file(argv) == false)
 		return (ft_error_msg(ERR_CUB, 4));
-	if (is_invalid(data, argv))
+	if (valid_data(data, argv))
 		return (1);
 	if (!data->cub_file[6])
 		return (ft_error_msg(ERR_MAP, 1));
 	else
 		get_map_details(data, data->cub_file + 6);
-	if (check_map(data, data->map))
-	// if (ft_valid_map(data) != 0)
-		// return (ft_free_data(data));
+	if (valid_map(data, data->map))
 		return (1);
 	return (0);
 }
@@ -52,14 +50,14 @@ static int	ft_init_window(t_data *data, char *argv)
 		exit(EXIT_FAILURE);
 	}
 	if (ft_args_handler(data, argv))
-		return (EXIT_FAILURE);
+		bad_exit_game(data);
 	ft_set_player_direction(&data->player);
-	// data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
-	// if (data->window.win == NULL)
-	// {
-	// 	ft_error_msg(ERR_MLX_WIN, 5);
-	// 	exit(EXIT_FAILURE);
-	// }
+	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
+	if (data->window.win == NULL)
+	{
+		ft_error_msg(ERR_MLX_WIN, 5);
+		bad_exit_game(data);
+	}
 	// init function to set pixels after creation of mlx window (mlx_new_img)
 	return (0);
 }
@@ -69,12 +67,12 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
-		// return (ft_error_msg(ERR_ARGS, 1));
-		return 1;
+		return (ft_error_msg(ERR_ARGS, 1));
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_init_window(&data, argv[1]))
 		return (EXIT_FAILURE);
 	// ft_start_game(&data);
 	mlx_loop(data.window.mlx);
+	good_exit_game(&data);
 	return (EXIT_SUCCESS);
 }

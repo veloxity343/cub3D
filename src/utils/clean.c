@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:40:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/05 20:55:59 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:42:37 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 /**
  * @brief Free the textures structure
@@ -44,6 +44,23 @@ static void	ft_free_map(t_data *data)
 		ft_free2((void **)data->map_det.file);
 	if (data->map)
 		ft_free2((void **)data->map);
+	ft_free2((void **)data->cub_file);
+}
+
+void	free_img(t_img *img)
+{
+	if (img->addr)
+		ft_free1(img->addr);
+	if (img->path)
+		ft_free1(img->path);
+}
+
+void	ft_free_img(t_data *data)
+{
+	free_img(&data->e_img);
+	free_img(&data->s_img);
+	free_img(&data->n_img);
+	free_img(&data->w_img);
 }
 
 int	ft_free_data(t_data *data)
@@ -55,6 +72,7 @@ int	ft_free_data(t_data *data)
 		if (data->texture_pix)
 			ft_free2((void **)data->texture_pix);
 		ft_free_textures(&data->texture_det);
+		ft_free_img(data);
 		ft_free_map(data);
 	}
 	return (EXIT_FAILURE);

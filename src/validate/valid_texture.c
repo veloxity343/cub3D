@@ -5,61 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 15:56:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/09 11:43:32 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
+/*   Updated: 2025/03/14 17:08:07 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
-int	ft_valid_texture(t_texture_det *text)
+int    check(t_img *img, char *dir, int *f, void *mlx_ptr)
 {
-	if (!text->north || !text->south || !text->east || !text->west)
-		return (ft_error_msg(ERR_TEXT_MAP, 12));
-	if (!text->ceiling || !text->floor)
-		return (ft_error_msg(ERR_TEXT_COL, 13));
-	if (!ft_val_file_path(text->north) || !ft_val_file_path(text->south)
-		|| !ft_val_file_path(text->east) || !ft_val_file_path(text->west))
-		return (ft_error_msg(ERR_TEXT_PATH, 14));
-	if (ft_valid_rgb(text->ceiling) == false || ft_valid_rgb(text->floor) == false)
-		return (ft_error_msg(ERR_RGB_VAL, 15));
-	text->hex_ceiling = ft_rgb_to_hex(text->ceiling);
-	text->hex_floor = ft_rgb_to_hex(text->floor);
-	return (0);
+    *f = 42;
+    img->path = ft_substr(dir, 3, ft_strlen(dir) - 3);
+    img->img = mlx_xpm_file_to_image(mlx_ptr, img->path, \
+        &img->width, &img->height);
+    if (!img->img)
+        return (ft_error_msg(ERR_TEXT_PATH, 1));
+    img->addr = mlx_get_data_addr(img->img, &img->pixel_bits, \
+        &img->size_line, &img->endian);
+    if (!img->addr)
+        return (ft_error_msg(ERR_TEXT, 1));
+    return (0);
 }
 
-/**
- * @brief Verify if RGB value from file, is between 0 and 255
- * @param rgb_val RGB Value
- * @return Boolean
- */
-static bool	ft_valid_rgb(int *rgb_val)
+int check_direction(t_data *data, char *dir, int *flag_n0_w1_s2_e3)
 {
-	int	i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (rgb_val[i] < 0 || rgb_val[i] > 255)
-			return (false);
-		i++;
-	}
-	return (true);
+    if (!ft_strncmp(dir, "NO ", 3) && !flag_n0_w1_s2_e3[0])
+        return (check(&data->n_img, dir, &flag_n0_w1_s2_e3[0], data->window.mlx));
+    else if (!ft_strncmp(dir, "WE ", 3) && !flag_n0_w1_s2_e3[1])
+        return (check(&data->w_img, dir, &flag_n0_w1_s2_e3[1], data->window.mlx));
+    else if (!ft_strncmp(dir, "SO ", 3) && !flag_n0_w1_s2_e3[2])
+        return (check(&data->s_img, dir, &flag_n0_w1_s2_e3[2], data->window.mlx));
+    else if (!ft_strncmp(dir, "EA ", 3) && !flag_n0_w1_s2_e3[3])
+        return (check(&data->e_img, dir, &flag_n0_w1_s2_e3[3], data->window.mlx));
+    return (ft_error_msg(ERR_TEXT, 1));
 }
 
-/**
- * @brief Convert the RGB Color in file to hexadecimal color
- * @param rgb Array of int representing RGB Color
- * @return unsigned long
- */
-static unsigned long	ft_rgb_to_hex(int *rgb)
+int valid_image(t_data *data, char **dir)
 {
-	int	r;
-	int	g;
-	int	b;
+    int i;
+    int flag_n0_w1_s2_e3[4];
 
-	r = rgb[0];
-	g = rgb[1];
-	b = rgb[2];
-	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
+    if (ft_arrlen(dir) < 4)
+        return (ft_error_msg(ERR_TEXT_MAP, 1));
+    flag_n0_w1_s2_e3[0] = 0;
+    flag_n0_w1_s2_e3[1] = 0;
+    flag_n0_w1_s2_e3[2] = 0;
+    flag_n0_w1_s2_e3[3] = 0;
+    i = 0;
+    while (dir[i] && i < 4)
+        if (check_direction(data, dir[i++], flag_n0_w1_s2_e3))
+            return (1);
+    return (0);
 }
