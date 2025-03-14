@@ -67,13 +67,12 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
-		// return (ft_error_msg(ERR_ARGS, 1));
-		return 1;
+		return (ft_error_msg(ERR_ARGS, 1));
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_init_window(&data, argv[1]))
 		return (EXIT_FAILURE);
 	// ft_start_game(&data);
-	// mlx_loop(data.window.mlx);
+	mlx_loop(data.window.mlx);
 	good_exit_game(&data);
 	return (EXIT_SUCCESS);
 }
