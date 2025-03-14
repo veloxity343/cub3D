@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   valid_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 14:34:19 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/16 14:34:23 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:34:11 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 int	ft_validate_move(t_data *data, double new_x, double new_y)
 {

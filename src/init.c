@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:29:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/10 21:39:35 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:35:56 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_lines_file(char *path)
 	line_count = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		ft_exit_cub(NULL, ft_error_msg(strerror(errno), 3));
+		ft_exit_cub(NULL, ft_error_msg(, 3));
 	else
 	{
 		line = get_next_line(fd);

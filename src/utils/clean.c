@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:40:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/14 16:31:08 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:42:37 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	ft_free_map(t_data *data)
 		ft_free2((void **)data->map_det.file);
 	if (data->map)
 		ft_free2((void **)data->map);
+	ft_free2((void **)data->cub_file);
 }
 
 void	free_img(t_img *img)
@@ -66,8 +67,6 @@ int	ft_free_data(t_data *data)
 {
 	if (data)
 	{
-		ft_free2(data->map);
-		ft_free2(data->cub_file);
 		if (data->textures)
 			ft_free2((void **)data->textures);
 		if (data->texture_pix)

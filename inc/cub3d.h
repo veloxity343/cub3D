@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:05:57 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/17 17:08:37 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:23:40 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// # include <X11/X.h>
-// # include <X11/keysym.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
@@ -26,7 +26,8 @@
 
 # include "../libft/inc/libft.h"
 # include "../libft/inc/get_next_line.h"
-// # include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "enum.h"
 # include "struct.h"
 # include "prototype.h"

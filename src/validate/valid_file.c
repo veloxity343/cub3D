@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:29:52 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/14 00:16:25 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:08:33 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ bool	ft_valid_cub_file(char *file)
 	return (ft_valid_file_exit(file, 'c', 'u', 'b'));
 }
 
-bool	ft_valid_file_path(char *path)
+int valid_data(t_data *data, char *path)
 {
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (false);
-	close(fd);
-	return (true);
+    data->cub_file = read_file(path);
+    if (!data->cub_file)
+        return (ft_error_msg(ERR_TEXT_PATH, 1));
+    if (valid_image(data, data->cub_file))
+        return (1);
+    if (valid_rgb(data, data->cub_file + 4))
+        return (1);
+    return (0);
 }

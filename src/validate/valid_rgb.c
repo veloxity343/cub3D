@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_rgb.c                                         :+:      :+:    :+:   */
+/*   valid_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/11 22:04:36 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:08:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int check_rgb(char *rgb)
     return (0);
 }
 
-int init_rgb(t_data *data, char **rgb)
+int valid_rgb(t_data *data, char **rgb)
 {
     if (!rgb[0] || !rgb[1])
         return (ft_error_msg(ERR_RGB, 1));
