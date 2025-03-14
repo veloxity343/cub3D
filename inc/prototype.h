@@ -4,6 +4,9 @@
 //main.c
 int	ft_error_msg(t_err error, int status_code);
 
+//clean.c
+int	ft_free_data(t_data *data);
+
 //err_getter.c
 const char	*ft_get_err_msg(t_err error);
 
@@ -19,19 +22,6 @@ bool	ft_valid_cub_file(char *file);
 //game_controls.c
 int	ft_set_player_direction(t_player *p);
 
-//valid_map.c
-int	ft_valid_map(t_data *data);
-static bool	ft_is_map_last_element(t_map_det *map_det);
-static int	ft_is_valid_char_in_map(t_data *data, char **map);
-static bool	ft_is_map_sur_walls(t_data *data);
-static bool	ft_check_player_pos(t_data *data, char **map);
-
-//valid_map2.c
-int	ft_pos_is_valid(t_data *data, char **map);
-bool	ft_map_is_enclosed(t_data *data);
- 
-//valid_map_utils.c
-bool	ft_is_white_space(char c);
 
 //get_map_details.c
 void    get_map_details(t_data *data, char **map);

@@ -52,7 +52,7 @@ static int	ft_init_window(t_data *data, char *argv)
 		exit(EXIT_FAILURE);
 	}
 	if (ft_args_handler(data, argv))
-		return (EXIT_FAILURE);
+		return (ft_free_data(data));
 	ft_set_player_direction(&data->player);
 	// data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
 	// if (data->window.win == NULL)
