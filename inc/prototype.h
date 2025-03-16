@@ -22,6 +22,23 @@ bool	ft_valid_cub_file(char *file);
 
 //game_controls.c
 int	ft_set_player_direction(t_player *p);
+int	ft_rotate(double *x, double *y, double angle);
+int	ft_move(t_data *d, double dx, double dy);
+
+//game_engine.c
+void	ft_calc_dda(t_ray *ray, t_player *p);
+void	ft_perform_dda(t_data *data, t_ray *ray);
+void	ft_calc_line_height(t_ray *ray, t_player *player);
+void	ft_setup_raycast_info(int x, t_ray *ray, t_player *player);
+
+
+//game_loop.c
+int	ft_close_hook(t_data *d);
+int	ft_key_hook(int key, t_data *d);
+int	ft_starting_game(t_data *d);
+
+//game_render.c
+int	ft_render_images(t_data *data);
 
 //valid_map.c
 int	ft_valid_map(t_data *data);

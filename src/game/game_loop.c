@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/16 11:31:11 by rcheong           #+#    #+#             */
+/*   Updated: 2025/03/16 11:49:03 by rcheong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /**
@@ -24,7 +36,7 @@ int	ft_close_hook(t_data *d)
 int	ft_key_hook(int key, t_data *d)
 {
 	if (key == XK_Escape)
-		close_hook(d);
+		ft_close_hook(d);
 	if (key == XK_w)
 		ft_move(d, d->player.dir_x, d->player.dir_y);
 	if (key == XK_s)
@@ -48,8 +60,8 @@ int	ft_key_hook(int key, t_data *d)
 
 int	ft_starting_game(t_data *d)
 {
-	mlx_hook(d->window.win, DestroyNotify, StructureNotifyMask, close_hook, d);
-	mlx_hook(d->window.win, KeyPress, KeyPressMask, key_hook, d);
-	mlx_loop_hook(d->window.mlx, render_images, d);
+	mlx_hook(d->window.win, DestroyNotify, StructureNotifyMask, ft_close_hook, d);
+	mlx_hook(d->window.win, KeyPress, KeyPressMask, ft_key_hook, d);
+	mlx_loop_hook(d->window.mlx, ft_render_images, d);
 	return (SUCCESS);
 }

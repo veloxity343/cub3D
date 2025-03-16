@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:26:03 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/17 17:26:28 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/16 12:06:10 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	ft_calc_raycast(t_data *d)
 		ft_calc_dda(&d->ray, &d->player);
 		ft_perform_dda(d, &d->ray);
 		ft_calc_line_height(&d->ray, &d->player);
-		ft_update_text_pixels(d, &d->texture_det, &d->ray, d->window.x);
 		d->window.x++;
 	}
 	return (SUCCESS);

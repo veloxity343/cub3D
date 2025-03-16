@@ -28,7 +28,7 @@ IFLAGS		=	-I$(INC)
 DSYM		=	-g3
 FSAN		=	-fsanitize=address $(DSYM)
 CFLAGS		=	$(WFLAGS) $(IFLAGS)
-CC			=	gcc
+CC			=	cc
 AR			=	ar -rcs
 RM			=	rm -rf
 

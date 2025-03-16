@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_getter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:06:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/14 16:33:48 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:23:41 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ const char	*ft_get_err_msg_general(t_err error)
 		return ("failed to allocate memory.");
 	else if (error == ERR_CUB)
 		return ("expected .cub file.");
+	else if (error == ERR_FILE_OPEN)
+		return ("no such file or directory.");
+	else if (error == ERR_FILE_READ)
+		return ("unable to read contents.");
 	return (NULL);
 }
 

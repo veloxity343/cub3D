@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:16:06 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/16 13:01:14 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/16 13:21:41 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef enum e_err
 	ERR_ARGS,
 	ERR_MALC,
 	ERR_CUB,
+	ERR_FILE_OPEN,
+	ERR_FILE_READ,
 	ERR_MAP,
 	ERR_MAP7,
 	ERR_MAP8,
