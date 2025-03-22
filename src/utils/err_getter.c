@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:06:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/16 13:23:41 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/16 14:29:45 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ const char	*ft_get_err_msg_general(t_err error)
 	else if (error == ERR_FILE_OPEN)
 		return ("no such file or directory.");
 	else if (error == ERR_FILE_READ)
-		return ("unable to read contents.");
+		return ("failed to read file.");
 	return (NULL);
 }
 
