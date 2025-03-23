@@ -35,7 +35,7 @@ bool **allocate_visited_matrix(int width, int height)
 			free_visited_matrix(visited, i);
 			return (NULL);
 		}
-		i++;
+		i++; 
 	}
 	return (visited);
 }
