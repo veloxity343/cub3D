@@ -51,7 +51,6 @@ static int	ft_init_window(t_data *data, char *argv)
 	}
 	if (ft_args_handler(data, argv))
 		bad_exit_game(data);
-	ft_set_player_direction(&data->player);
 	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
 	if (data->window.win == NULL)
 	{
@@ -71,7 +70,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_init_window(&data, argv[1]))
 		return (EXIT_FAILURE);
-	// ft_start_game(&data);
+	ft_starting_game(&data);
 	mlx_loop(data.window.mlx);
 	good_exit_game(&data);
 	return (EXIT_SUCCESS);

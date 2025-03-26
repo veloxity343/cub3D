@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:26:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/02/17 17:26:55 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/26 16:43:01 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	ft_calc_dda(t_ray *ray, t_player *p)
 {
