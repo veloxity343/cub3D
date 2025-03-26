@@ -11,7 +11,7 @@ OBJB_DIR	=	objb
 
 # MLX
 UNAME_S		:= $(shell uname -s)
-MLX_LINUX	= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_LINUX	= -Lmlx_linux -lmlx_Linux -L./minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 MLX_MACOS	= -lmlx -framework OpenGL -framework AppKit
 
 ifeq ($(UNAME_S), Darwin)
