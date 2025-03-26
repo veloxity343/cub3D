@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   valid_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 14:34:19 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/14 18:07:03 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:26:25 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-
-int	ft_validate_move(t_data *data, double new_x, double new_y)
-{
-	int	moved;
-
-	moved = 0;
-	if (ft_is_valid_pos_in_map(data, new_x, data->player.pos_y))
-	{
-		data->player.pos_x = new_x;
-		moved = 1;
-	}
-	if (ft_is_valid_pos_in_map(data, data->player.pos_x, new_y))
-	{
-		data->player.pos_y = new_y;
-		moved = 1;
-	}
-	return (moved);
-}
 
 /**
  * @brief This method will calculate if the axis X and Y keep inside the
@@ -48,4 +30,22 @@ static bool	ft_is_valid_pos_in_map(t_data *data, double x, double y)
 	if (y < 0.25 || y >= data->map_det.height - 0.25)
 		return (false);
 	return (true);
+}
+
+int	ft_validate_move(t_data *data, double new_x, double new_y)
+{
+	int	moved;
+
+	moved = 0;
+	if (ft_is_valid_pos_in_map(data, new_x, data->player.pos_y))
+	{
+		data->player.pos_x = new_x;
+		moved = 1;
+	}
+	if (ft_is_valid_pos_in_map(data, data->player.pos_x, new_y))
+	{
+		data->player.pos_y = new_y;
+		moved = 1;
+	}
+	return (moved);
 }
