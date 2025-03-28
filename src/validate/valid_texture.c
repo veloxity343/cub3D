@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   valid_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/16 11:29:11 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/28 23:56:08 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+/**
+ * @brief Add texture dat to @param t_img
+ * @param img Texture data structer
+ * @param dir Texture path 2D array
+ * @param f Flag
+ * @param mlx_ptr Minilib pointer
+ * @return 1=error, 0=ok
+ */
 int    check(t_img *img, char *dir, int *f, void *mlx_ptr)
 {
     *f = 42;
@@ -27,6 +35,16 @@ int    check(t_img *img, char *dir, int *f, void *mlx_ptr)
     return (0);
 }
 
+
+/**
+ * @brief Check texture syntax.
+ * @param data Main data structure
+ * @param dir Texture path 2D array
+ * @param flag_n0_w1_s2_e3 Direction flag
+ * index: 0=North, 1=West, 2=South, 3=East
+ * will open flag if found
+ * @return 1=error, 0=ok
+ */
 int check_direction(t_data *data, char *dir, int *flag_n0_w1_s2_e3)
 {
     if (!ft_strncmp(dir, "NO ", 3) && !flag_n0_w1_s2_e3[0])
@@ -40,6 +58,13 @@ int check_direction(t_data *data, char *dir, int *flag_n0_w1_s2_e3)
     return (ft_error_msg(ERR_TEXT, 1));
 }
 
+/**
+ * @brief Check is valid texture.
+ * Will store texture data.
+ * @param data Main data structure
+ * @param dir Texture 2D array path
+ * @return 1=error, 0=ok
+ */
 int valid_image(t_data *data, char **dir)
 {
     int i;

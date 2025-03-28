@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:56:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/16 11:28:54 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/03/29 00:24:24 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+/**
+ * @brief Check is invalid character near with space (X-axis)
+ * @param map Map string
+ * @param x Current checking position
+ * @param f Flag: 1=check x + 1, -1=check x - 1
+ * @return 1=error, 0=ok
+ */
 int check_x_help(char *map, int x, int f)
 {
     if (x + f < 0 || x + f > ft_strlen(map))
@@ -26,6 +33,14 @@ int check_x_help(char *map, int x, int f)
     return (0);
 }
 
+/**
+ * @brief Check is invalid character near with space (Y-axis)
+ * @param map Map 2D array 
+ * @param x Current checking position
+ * @param y Current checking position
+ * @param f Flag: 1=check y + 1, -1=check y - 1
+ * @return 1=error, 0=ok
+ */
 int check_y_help(char **map, int x, int y, int f)
 {
     if (y + f < 0 || y + f >= ft_arrlen(map) || x >= ft_strlen(map[y + f]))
@@ -40,6 +55,12 @@ int check_y_help(char **map, int x, int y, int f)
     return (0);
 }
 
+/**
+ * @brief Check X-axis wall leak or 
+ * @param map Map 2D array 
+ * @param x Current checking position
+ * @return 1=error, 0=ok
+ */
 int check_x(char *map, int x)
 {
     if (map[x] == ' ')
@@ -57,6 +78,13 @@ int check_x(char *map, int x)
     return (0);
 }
 
+/**
+ * @brief Check Y-axis wall leak
+ * @param map Map 2D array 
+ * @param x Current checking position
+ * @param y Current checking position
+ * @return 1=error, 0=ok
+ */
 int check_y(char **map, int x, int y)
 {
     if (map[y][x] == ' ')
@@ -74,6 +102,12 @@ int check_y(char **map, int x, int y)
     return (0);
 }
 
+/**
+ * @brief Check is valid map
+ * @param data Main data structure
+ * @param map Map 2D array
+ * @return 1=error, 0=ok
+ */
 int valid_map(t_data *data, char **map)
 {
     int x;
