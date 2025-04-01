@@ -32,46 +32,43 @@ int	ft_error_msg(t_err error, int status_code)
  * @param argv Argument vector
  * @return int value of validations
  */
-static int	ft_args_handler(t_data *data, char *argv)
+static int	ft_args_handler(t_data *data, char **argv)
 {
-	if (ft_valid_cub_file(argv) == false)
+	if (ft_valid_cub_file(argv[1]) == false)
 		return (ft_error_msg(ERR_CUB, 4));
-	if (valid_data(data, argv))
-		return (1);
-	if (!data->cub_file[6])
-		return (ft_error_msg(ERR_MAP, 1));
-	else
-		get_map_details(data, data->cub_file + 6);
-	if (valid_map(data, data->map))
-		return (1);
+	ft_init_map_handler(data, argv[1]);
+	if (ft_file_to_variable(data) != 0)
+		return (ft_free_data(data));
+	if (ft_valid_map(data) != 0)
+		return (ft_free_data(data));
+	if (ft_valid_texture(&data->texture_det) != 0)
+		return (ft_free_data(data));
 	return (0);
 }
 
 /**
  * @brief Will initialize the mlx and window
- * structures and will call function
+ * structures and will call the setup_textures function
  * to load all textures.
  * @param data Data structure
  */
-static int	ft_init_window(t_data *data, char *argv)
+static void	ft_init_window(t_data *data)
 {
-	data->window.mlx = mlx_init();
-	if (data->window.mlx == NULL)
+	data->view.mlx = mlx_init();
+	if (data->view.mlx == NULL)
 	{
 		ft_error_msg(ERR_MLX_INIT, 5);
 		exit(EXIT_FAILURE);
 	}
-	if (ft_args_handler(data, argv))
-		bad_exit_game(data);
+	ft_setup_textures(data);
 	ft_set_player_direction(&data->player);
-	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
-	if (data->window.win == NULL)
+	data->view.win = mlx_new_window(data->view.mlx, WIDTH, HEIGHT, TITLE);
+	if (data->view.win == NULL)
 	{
 		ft_error_msg(ERR_MLX_WIN, 5);
-		bad_exit_game(data);
+		exit(EXIT_FAILURE);
 	}
-	// init function to set pixels after creation of mlx window (mlx_new_img)
-	return (0);
+	ft_init_img(data, &data->view.screen, WIDTH, HEIGHT);
 }
 
 int	main(int argc, char **argv)
@@ -81,10 +78,10 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_error_msg(ERR_ARGS, 1));
 	ft_bzero(&data, sizeof(t_data));
-	if (ft_init_window(&data, argv[1]))
+	if (ft_args_handler(&data, argv) != 0)
 		return (EXIT_FAILURE);
-	// ft_start_game(&data);
-	mlx_loop(data.window.mlx);
-	good_exit_game(&data);
+	ft_init_window(&data);
+	ft_starting_game(&data);
+	mlx_loop(data.view.mlx);
 	return (EXIT_SUCCESS);
 }
