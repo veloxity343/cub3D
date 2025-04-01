@@ -41,13 +41,12 @@ static void	ft_free_map(t_data *data)
 	if (data->map_det.fd > 0)
 		close(data->map_det.fd);
 	if (data->map_det.file)
-		ft_free2((void **)data->map_det.file);
+		ft_free_strarr((void **)data->map_det.file);
 	if (data->map)
-		ft_free2((void **)data->map);
-	ft_free2((void **)data->cub_file);
+		ft_free_strarr((void **)data->map);
 }
 
-void	free_img(t_img *img)
+void	ft_free_img(t_img *img)
 {
 	if (img->addr)
 		ft_free1(img->addr);
@@ -57,10 +56,10 @@ void	free_img(t_img *img)
 
 void	ft_free_img(t_data *data)
 {
-	free_img(&data->e_img);
-	free_img(&data->s_img);
-	free_img(&data->n_img);
-	free_img(&data->w_img);
+	ft_free_img(&data->e_img);
+	ft_free_img(&data->s_img);
+	ft_free_img(&data->n_img);
+	ft_free_img(&data->w_img);
 }
 
 int	ft_free_data(t_data *data)
@@ -68,9 +67,9 @@ int	ft_free_data(t_data *data)
 	if (data)
 	{
 		if (data->textures)
-			ft_free2((void **)data->textures);
+			ft_free_strarr((void **)data->textures);
 		if (data->texture_pix)
-			ft_free2((void **)data->texture_pix);
+			ft_free_strarr((void **)data->texture_pix);
 		ft_free_textures(&data->texture_det);
 		ft_free_img(data);
 		ft_free_map(data);

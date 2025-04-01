@@ -83,7 +83,7 @@ typedef struct s_img
 {
 	char			*path;
 	void			*img;
-	char				*addr;
+	char			*addr;
 	int				pixel_bits;
 	int				size_line;
 	int				endian;

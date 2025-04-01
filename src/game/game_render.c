@@ -27,6 +27,7 @@ static int	ft_calc_raycast(t_data *d)
 		ft_calc_dda(&d->ray, &d->player);
 		ft_perform_dda(d, &d->ray);
 		ft_calc_line_height(&d->ray, &d->player);
+		ft_update_texture_pix(d, &d->texture_det, &d->ray, d->view.x);
 		d->window.x++;
 	}
 	return (SUCCESS);

@@ -23,7 +23,7 @@ void	ft_free_strarr(char **arr_str)
 		{
 			if (arr_str[i])
 			{
-				free(arr_str[i]);
+				ft_free1(arr_str[i]);
 				arr_str[i] = NULL;
 			}
 			i++;

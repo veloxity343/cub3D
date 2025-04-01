@@ -40,6 +40,7 @@ int					ft_toupper(int c);
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t count, size_t size);
+void				ft_free_strarr(char **arr_str);
 void				ft_free2(void **tofree);
 void				ft_free3(void ***tofree);
 void				ft_free1(void *ptr);
@@ -53,7 +54,6 @@ void				*ft_memset(void *b, int c, size_t len);
 
 /* ---------- STR ---------- */
 
-void				ft_free_strarr(char **arr_str);
 void				ft_skipspace(const char *str, int *i);
 char				*ft_strchr(const char *s, int c);
 int					ft_strcmp(const char *s1, const char *s2);
