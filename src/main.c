@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/29 00:35:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:54:28 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ static int	ft_init_window(t_data *data, char *argv)
 	}
 	if (ft_args_handler(data, argv))
 		bad_exit_game(data);
+	ft_set_player_direction(&data->player);
 	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
 	if (data->window.win == NULL)
 	{
 		ft_error_msg(ERR_MLX_WIN, 5);
 		bad_exit_game(data);
 	}
-	// init function to set pixels after creation of mlx window (mlx_new_img)
+	init_img(data, &data->window.screen, WIDTH, HEIGHT);
 	return (0);
 }
 

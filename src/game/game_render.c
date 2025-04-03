@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:26:03 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/26 17:07:47 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:07:38 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	ft_calc_raycast(t_data *d)
 static int	ft_render_frame(t_data *d)
 {
 	int pixel;
+	
 	d->window.y = 0;
 	while (d->window.y < HEIGHT)
 	{
@@ -64,7 +65,7 @@ static int	ft_render_frame(t_data *d)
 
 int	ft_render_images(t_data *data)
 {
-	// need function to convert xpm to image. parse loop to render per frame
+	init_texture_pix(data);
 	ft_calc_raycast(data);
 	ft_render_frame(data);
 	mlx_put_image_to_window(data->window.mlx, data->window.win, \
