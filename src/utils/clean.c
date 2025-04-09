@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:40:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/16 11:30:40 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/03 21:49:50 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_free_map(t_data *data)
 		ft_free_strarr((void **)data->map);
 }
 
-void	ft_free_img(t_img *img)
+void	free_img(t_img *img)
 {
 	if (img->addr)
 		ft_free1(img->addr);
@@ -56,10 +56,10 @@ void	ft_free_img(t_img *img)
 
 void	ft_free_img(t_data *data)
 {
-	ft_free_img(&data->e_img);
-	ft_free_img(&data->s_img);
-	ft_free_img(&data->n_img);
-	ft_free_img(&data->w_img);
+	free_img(&data->e_img);
+	free_img(&data->s_img);
+	free_img(&data->n_img);
+	free_img(&data->w_img);
 }
 
 int	ft_free_data(t_data *data)
