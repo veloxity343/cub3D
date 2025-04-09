@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:51:56 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/03 17:58:24 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/09 17:33:55 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,27 @@ char    **read_file(char *path)
         return (NULL);
     ft_free1(readd);
     return (cub_file);
+}
+
+void	ft_free_intarr(int **arr_int)
+{
+	int	i;
+
+	i = 0;
+	if (arr_int)
+	{
+		while (arr_int[i])
+		{
+			if (arr_int[i])
+			{
+				ft_free1(arr_int[i]);
+				arr_int[i] = NULL;
+			}
+			i++;
+		}
+		free(arr_int);
+		arr_int = NULL;
+	}
 }
 
 void    free_arr(char **arr)

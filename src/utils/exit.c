@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:34:51 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/16 11:30:46 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/09 17:28:05 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	ft_exit_and_free(t_data *data, int s_code)
 {
 	if (!data)
 		exit(s_code);
-	if (data->window.win && data->window.mlx)
-		mlx_destroy_window(data->window.mlx, data->window.win);
-	if (data->window.mlx)
+	if (data->view.win && data->view.mlx)
+		mlx_destroy_view(data->view.mlx, data->view.win);
+	if (data->view.mlx)
 	{
-		mlx_destroy_display(data->window.mlx);
-		mlx_loop_end(data->window.mlx);
-		free(data->window.mlx);
+		mlx_destroy_display(data->view.mlx);
+		mlx_loop_end(data->view.mlx);
+		free(data->view.mlx);
 	}
 	ft_free_data(data);
 	exit(s_code);

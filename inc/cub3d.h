@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:05:57 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/11 17:23:40 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:38:22 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@
 
 # define MOVE_SPEED 0.05
 # define ROTSPEED 0.05
+
+# define TEX_SIZE 64
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:14:33 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/09 19:04:41 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:27:45 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,12 @@ typedef struct s_window
 typedef struct s_data
 {
 	char			**map;
-	t_window		window;
+	t_window		view;
 	t_ray			ray;
 	t_map_det		map_det;
 	t_texture_det	texture_det;
 	t_player		player;
-	int				**texture_pix;
+	int				**texture_pixels;
 	int				**textures;
 
 	char			**cub_file;

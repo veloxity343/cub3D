@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:56:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/29 00:24:24 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:41:40 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,26 +134,4 @@ int valid_map(t_data *data, char **map)
     else if (player != 1)
         return (ft_error_msg(ERR_SING_PLAYER, 1));
     return (0);
-}
-
-int	ft_valid_map(t_data *data)
-{
-	int	valid_char_map;
-
-	data->map = ft_arrdup(data->cub_file + 6);
-	data->player.dir = C_BACK_G;
-	if (!data->map)
-		return (ft_error_msg(ERR_MAP7, 7));
-	if (ft_is_map_sur_walls(data) == false || ft_map_is_enclosed(data) == false)
-		return (ft_error_msg(ERR_MAP8, 8));
-	valid_char_map = ft_is_valid_char_in_map(data, data->map);
-	if (valid_char_map != 0)
-		return (valid_char_map);
-	if (ft_is_map_last_element(&data->map_det) == false)
-		return (ft_error_msg(ERR_MAP_LAST, 16));
-	if (ft_check_player_pos(data, data->map) == false)
-		return (FAILURE);
-	if (data->player.dir == C_BACK_G)
-		return (ft_error_msg(ERR_MAP_DIR, 17));
-	return (0);
 }

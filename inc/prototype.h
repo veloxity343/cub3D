@@ -9,6 +9,11 @@ int	ft_error_msg(t_err error, int status_code);
 void    good_exit_game(t_data *data);
 void    bad_exit_game(t_data *data);
 
+//init_window.c
+void	init_img(t_data *data, t_img *i, int width, int height);
+void	init_texture_img(t_data *data, t_img *image, char *path);
+void	init_texture_pix(t_data *data);
+
 /*-------------utils-------------*/
 //clean.c
 int	ft_free_data(t_data *data);
@@ -18,6 +23,7 @@ const char	*ft_get_err_msg(t_err error);
 
 //exit.c
 void	ft_exit_cub(t_data *data, int exit_code);
+void	ft_exit_and_free(t_data *data, int s_code);
 
 //get_map_details.c
 void    get_map_details(t_data *data, char **map);
@@ -28,6 +34,7 @@ char    **read_file(char *path);
 int ft_arrlen(char **arr);
 char    **ft_arrdup(char **arr);
 char    *ft_strjoin_free(char *s1, char *s2);
+void	ft_free_intarr(int **arr_int);
 
 /*------------validate--------------*/
 //valid_file.c

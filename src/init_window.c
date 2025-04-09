@@ -5,7 +5,7 @@ void	init_img(t_data *data, t_img *i, int width, int height)
 	i->img = mlx_new_image(data->view.mlx, width, height);
 	if (i->img == NULL)
 		ft_exit_and_free(data, ft_error_msg(ERR_MLX_IMG, 20));
-	i->addr = (int *)mlx_get_data_addr(i->img, &i->pixel_bits,
+	i->addr = mlx_get_data_addr(i->img, &i->pixel_bits,
 			&i->size_line, &i->endian);
 	return ;
 }
@@ -15,8 +15,8 @@ void	init_texture_img(t_data *data, t_img *image, char *path)
 	image->img = mlx_xpm_file_to_image(data->view.mlx, path,
 			&data->texture_det.size, &data->texture_det.size);
 	if (image->img == NULL)
-		exit_and_free(data, error_msg(ERR_MLX_IMG, 21));
-	image->addr = (int *)mlx_get_data_addr(image->img, &image->pixel_bits,
+		ft_exit_and_free(data, ft_error_msg(ERR_MLX_IMG, 21));
+	image->addr = mlx_get_data_addr(image->img, &image->pixel_bits,
 			&image->size_line, &image->endian);
 	return ;
 }
@@ -26,7 +26,7 @@ void	init_texture_pix(t_data *data)
 	int	i;
 
 	if (data->texture_pixels)
-		ft_free_strarr((void **)data->texture_pixels);
+		ft_free_intarr(data->texture_pixels);
 	data->texture_pixels = ft_calloc(HEIGHT + 1, sizeof * data->texture_pixels);
 	if (!data->texture_pixels)
 		ft_exit_and_free(data, ft_error_msg(ERR_MALC, 23));
@@ -98,7 +98,7 @@ static int	*xpm_to_img(t_data *data, char *path)
 	int		x;
 	int		y;
 
-	ft_init_texture_img(data, &tmp, path);
+	init_texture_img(data, &tmp, path);
 	buffer = ft_calloc(1,
 			sizeof * buffer * data->texture_det.size * data->texture_det.size);
 	if (!buffer)
