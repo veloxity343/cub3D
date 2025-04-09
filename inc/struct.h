@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:14:33 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/09 17:27:45 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/09 18:32:55 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,10 @@ typedef struct s_data
 	int				**textures;
 
 	char			**cub_file;
-	t_img			n_img;
-	t_img			w_img;
-	t_img			s_img;
-	t_img			e_img;
+	// t_img			n_img;
+	// t_img			w_img;
+	// t_img			s_img;
+	// t_img			e_img;
 }					t_data;
 
 #endif

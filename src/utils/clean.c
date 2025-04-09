@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:40:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/03 21:49:50 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/09 20:49:25 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	ft_free_map(t_data *data)
 	if (data->map_det.fd > 0)
 		close(data->map_det.fd);
 	if (data->map_det.file)
-		ft_free_strarr((void **)data->map_det.file);
+		ft_free_strarr(data->map_det.file);
 	if (data->map)
-		ft_free_strarr((void **)data->map);
+		ft_free_strarr(data->map);
 }
 
 void	free_img(t_img *img)
@@ -54,25 +54,17 @@ void	free_img(t_img *img)
 		ft_free1(img->path);
 }
 
-void	ft_free_img(t_data *data)
-{
-	free_img(&data->e_img);
-	free_img(&data->s_img);
-	free_img(&data->n_img);
-	free_img(&data->w_img);
-}
-
 int	ft_free_data(t_data *data)
 {
 	if (data)
 	{
 		if (data->textures)
-			ft_free_strarr((void **)data->textures);
-		if (data->texture_pix)
-			ft_free_strarr((void **)data->texture_pix);
+			ft_free_intarr(data->textures);
+		if (data->texture_pixels)
+			ft_free_intarr(data->texture_pixels);
 		ft_free_textures(&data->texture_det);
-		ft_free_img(data);
 		ft_free_map(data);
+		debug(100000000);
 	}
 	return (EXIT_FAILURE);
 }

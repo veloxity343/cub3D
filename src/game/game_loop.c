@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:31:11 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/26 17:07:35 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:26:30 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
  */
 int	ft_close_hook(t_data *d)
 {
-	mlx_destroy_image(d->window.mlx, d->window.screen.img);
-	mlx_destroy_window(d->window.mlx, d->window.win);
-	mlx_destroy_display(d->window.mlx);
+	mlx_destroy_image(d->view.mlx, d->view.screen.img);
+	mlx_destroy_window(d->view.mlx, d->view.win);
+	mlx_destroy_display(d->view.mlx);
 	ft_free_data(d);
-	free(d->window.mlx);
+	free(d->view.mlx);
 	exit(SUCCESS);
 }
 
@@ -60,8 +60,8 @@ int	ft_key_hook(int key, t_data *d)
 
 int	ft_starting_game(t_data *d)
 {
-	mlx_hook(d->window.win, DestroyNotify, StructureNotifyMask, ft_close_hook, d);
-	mlx_hook(d->window.win, KeyPress, KeyPressMask, ft_key_hook, d);
-	mlx_loop_hook(d->window.mlx, ft_render_images, d);
+	mlx_hook(d->view.win, DestroyNotify, StructureNotifyMask, ft_close_hook, d);
+	mlx_hook(d->view.win, KeyPress, KeyPressMask, ft_key_hook, d);
+	mlx_loop_hook(d->view.mlx, ft_render_images, d);
 	return (SUCCESS);
 }

@@ -22,7 +22,7 @@ else
 endif
 
 # Compiler & flags
-# WFLAGS		=	-Wall -Wextra -Werror
+WFLAGS		=	-Wall -Wextra -Werror
 WFLAGS		=	
 IFLAGS		=	-I$(INC)
 DSYM		=	-g3
@@ -104,9 +104,9 @@ re:		fclean all
 
 # Debugging
 asan:	CFLAGS	+=	$(FSAN)
-asan:	re
+asan:	
 	@echo "$(YELLOW)Running with AddressSanitizer...$(RESET)"
-	./$(NAME)
+	./$(NAME) map/valid/amongus.cub
 
 norm:
 	norminette
@@ -161,11 +161,11 @@ norm:
 # cft:
 # 	@make fclean -C ./libft --no-print-directory 
 
-# mlx:
-# 	@make -C ./minilibx-linux/ --no-print-directory
+mlx:
+	@make -C ./minilibx-linux/ --no-print-directory
 
-# cmlx:
-# 	@make clean -C ./minilibx-linux/ --no-print-directory
+cmlx:
+	@make clean -C ./minilibx-linux/ --no-print-directory
 
-# r: $(NAME)
-# 	valgrind --leak-check=full --track-origins=yes ./cub3D ./map/ok.cub
+r: $(NAME)
+	valgrind --leak-check=full --track-origins=yes ./cub3D map/valid/amongus.cub

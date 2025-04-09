@@ -1,6 +1,10 @@
 #ifndef PROTOTYPE_H
 # define PROTOTYPE_H
 
+# include "cub3d.h"
+# include "struct.h"
+# include "enum.h"
+
 /*-------------src-------------*/
 //main.c
 int	ft_error_msg(t_err error, int status_code);
@@ -13,6 +17,7 @@ void    bad_exit_game(t_data *data);
 void	init_img(t_data *data, t_img *i, int width, int height);
 void	init_texture_img(t_data *data, t_img *image, char *path);
 void	init_texture_pix(t_data *data);
+void	setup_textures(t_data *data);
 
 /*-------------utils-------------*/
 //clean.c

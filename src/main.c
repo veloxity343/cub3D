@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/29 00:35:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:00:41 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,22 @@ static int	ft_args_handler(t_data *data, char *argv)
  */
 static int	ft_init_window(t_data *data, char *argv)
 {
-	data->window.mlx = mlx_init();
-	if (data->window.mlx == NULL)
+	data->view.mlx = mlx_init();
+	if (data->view.mlx == NULL)
 	{
 		ft_error_msg(ERR_MLX_INIT, 5);
 		exit(EXIT_FAILURE);
 	}
 	if (ft_args_handler(data, argv))
 		bad_exit_game(data);
-	data->window.win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, TITLE);
-	if (data->window.win == NULL)
+	data->view.win = mlx_new_window(data->view.mlx, WIDTH, HEIGHT, TITLE);
+	if (data->view.win == NULL)
 	{
 		ft_error_msg(ERR_MLX_WIN, 5);
 		bad_exit_game(data);
 	}
-	// init function to set pixels after creation of mlx window (mlx_new_img)
+	setup_textures(data);
+	init_img(data, &data->view.screen, WIDTH, HEIGHT);
 	return (0);
 }
 
@@ -83,7 +84,7 @@ int	main(int argc, char **argv)
 	if (ft_init_window(&data, argv[1]))
 		return (EXIT_FAILURE);
 	ft_starting_game(&data);
-	mlx_loop(data.window.mlx);
+	mlx_loop(data.view.mlx);
 	good_exit_game(&data);
 	return (EXIT_SUCCESS);
 }

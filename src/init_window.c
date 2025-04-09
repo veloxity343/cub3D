@@ -12,8 +12,12 @@ void	init_img(t_data *data, t_img *i, int width, int height)
 
 void	init_texture_img(t_data *data, t_img *image, char *path)
 {
-	image->img = mlx_xpm_file_to_image(data->view.mlx, path,
+	char *temp;
+
+	temp = ft_substr(path, 3, ft_strlen(path) - 3);
+	image->img = mlx_xpm_file_to_image(data->view.mlx, temp,
 			&data->texture_det.size, &data->texture_det.size);
+	ft_free1(temp);
 	if (image->img == NULL)
 		ft_exit_and_free(data, ft_error_msg(ERR_MLX_IMG, 21));
 	image->addr = mlx_get_data_addr(image->img, &image->pixel_bits,
@@ -34,7 +38,7 @@ void	init_texture_pix(t_data *data)
 	while (i < HEIGHT)
 	{
 		data->texture_pixels[i] = ft_calloc(WIDTH + 1,
-				sizeof * data->texture_pixels);
+			sizeof * data->texture_pixels);
 		if (!data->texture_pixels[i])
 			ft_exit_and_free(data, ft_error_msg(ERR_MALC, 24));
 		i++;
