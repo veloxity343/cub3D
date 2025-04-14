@@ -12,12 +12,8 @@ void	init_img(t_data *data, t_img *i, int width, int height)
 
 void	init_texture_img(t_data *data, t_img *image, char *path)
 {
-	char *temp;
-
-	temp = ft_substr(path, 3, ft_strlen(path) - 3);
-	image->img = mlx_xpm_file_to_image(data->view.mlx, temp,
+	image->img = mlx_xpm_file_to_image(data->view.mlx, path + 3,
 			&data->texture_det.size, &data->texture_det.size);
-	ft_free1(temp);
 	if (image->img == NULL)
 		ft_exit_and_free(data, ft_error_msg(ERR_MLX_IMG, 21));
 	image->addr = mlx_get_data_addr(image->img, &image->pixel_bits,
@@ -27,22 +23,22 @@ void	init_texture_img(t_data *data, t_img *image, char *path)
 
 void	init_texture_pix(t_data *data)
 {
-	int	i;
+	int i;
+	int x;
+	int y;
 
-	if (data->texture_pixels)
-		ft_free_intarr(data->texture_pixels);
-	data->texture_pixels = ft_calloc(HEIGHT + 1, sizeof * data->texture_pixels);
-	if (!data->texture_pixels)
-		ft_exit_and_free(data, ft_error_msg(ERR_MALC, 23));
-	i = 0;
-	while (i < HEIGHT)
+	i = -1;
+	x = -1;
+	y = -1;
+	if (!data->texture_pixels) 
 	{
-		data->texture_pixels[i] = ft_calloc(WIDTH + 1,
-			sizeof * data->texture_pixels);
-		if (!data->texture_pixels[i])
-			ft_exit_and_free(data, ft_error_msg(ERR_MALC, 24));
-		i++;
+		data->texture_pixels = ft_calloc(HEIGHT + 1, sizeof(int *));
+		while (++i < HEIGHT)
+			data->texture_pixels[i] = ft_calloc(WIDTH + 1, sizeof(int));
 	}
+	while (++y < HEIGHT)
+        while (++x < WIDTH) 
+            data->texture_pixels[y][x] = 0;
 }
 
 /**
@@ -55,6 +51,7 @@ static void	get_texture_index(t_data *data, t_ray *ray)
 {
 	if (ray->hit_side == false)
 	{
+		// printf("false x: %f y: %f\n", ray->dir_x, ray->dir_y);
 		if (ray->dir_x < 0)
 			data->texture_det.index = WEST;
 		else
@@ -62,12 +59,36 @@ static void	get_texture_index(t_data *data, t_ray *ray)
 	}
 	else
 	{
+		// printf("true x: %f y: %f\n", ray->dir_x, ray->dir_y);
 		if (ray->dir_y > 0)
 			data->texture_det.index = SOUTH;
 		else
 			data->texture_det.index = NORTH;
 	}
 }
+
+// #include <stdint.h>
+
+// void update_text_pixels(t_data *data, t_texture_det *tex, t_ray *r, int x) {
+//     uint32_t *pixels = (uint32_t *)data->view.screen.addr;
+    
+//     get_texture_index(data, r);
+//     tex->x = (int)(r->wall_x * tex->size) % tex->size;
+//     if ((!r->hit_side && r->dir_x < 0) || (r->hit_side && r->dir_y > 0))
+//         tex->x = tex->size - tex->x - 1;
+
+//     tex->step = (double)tex->size / r->line_height;
+//     tex->pos = (r->draw_start - HEIGHT / 2 + r->line_height / 2) * tex->step;
+
+//     for (int y = r->draw_start; y < r->draw_end; y++) {
+//         tex->y = (int)tex->pos % tex->size;
+//         tex->pos += tex->step;
+
+//         int color = data->textures[tex->index][tex->y * tex->size + tex->x];
+//         int pixel_pos = y * (data->view.screen.size_line / 4) + x;
+//         pixels[pixel_pos] = color;
+//     }
+// }
 
 void	update_text_pixels(t_data *data, t_texture_det *tex, t_ray *r, int x)
 {
@@ -91,6 +112,7 @@ void	update_text_pixels(t_data *data, t_texture_det *tex, t_ray *r, int x)
 			color = (color >> 1) & 8355711;
 		if (color > 0)
 			data->texture_pixels[y][x] = color;
+		// printf("color: %d, data->texture_p: %d\n", color, data->texture_pixels[y][x]);
 		y++;
 	}
 }
@@ -119,6 +141,8 @@ static int	*xpm_to_img(t_data *data, char *path)
 		}
 		y++;
 	}
+	if (!buffer[0])
+		printf("xpm_to_img: %s buffer\n", path);
 	mlx_destroy_image(data->view.mlx, tmp.img);
 	return (buffer);
 }

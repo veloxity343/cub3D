@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:51:56 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/09 18:55:03 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/13 18:34:42 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_free_intarr(int **arr_int)
 {
 	int	i;
 
-	i = 0;
+    i = 0;
 	if (arr_int)
 	{
 		while (arr_int[i])
@@ -49,7 +49,7 @@ void	ft_free_intarr(int **arr_int)
 			if (arr_int[i])
 			{
 				free(arr_int[i]);
-				arr_int[i] = 0;
+				arr_int[i] = NULL;
 			}
 			i++;
 		}

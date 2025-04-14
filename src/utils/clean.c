@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:40:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/09 20:49:25 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/13 18:34:51 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	ft_free_data(t_data *data)
 			ft_free_intarr(data->texture_pixels);
 		ft_free_textures(&data->texture_det);
 		ft_free_map(data);
-		debug(100000000);
 	}
 	return (EXIT_FAILURE);
 }

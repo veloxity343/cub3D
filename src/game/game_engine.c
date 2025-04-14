@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:26:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/26 16:43:01 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:46:12 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,39 @@ void	ft_calc_line_height(t_ray *ray, t_player *player)
 	else
 		ray->wall_x = player->pos_x + ray->perp_dist * ray->dir_x;
 	ray->wall_x -= floor(ray->wall_x);
+
+	// printf("perp_dist=%.2f, wall_x=%.2f, draw_start=%d, draw_end=%d\n",
+    //     ray->perp_dist, ray->wall_x, ray->draw_start, ray->draw_end);
 }
+
+//test ai code
+// void ft_calc_line_height(t_ray *ray, t_player *player)
+// {
+//     if (ray->hit_side == false)
+//         ray->perp_dist = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
+//     else
+//         ray->perp_dist = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
+
+//     if (isnan(ray->perp_dist) || ray->perp_dist <= 0) {
+//         ray->perp_dist = 1e-6;
+//     }
+
+//     ray->line_height = (int)(HEIGHT / ray->perp_dist);
+//     ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
+//     ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
+
+//     ray->draw_start = fmax(0, ray->draw_start);
+//     ray->draw_end = fmin(HEIGHT - 1, ray->draw_end);
+
+//     if (ray->hit_side == false)
+//         ray->wall_x = player->pos_y + ray->perp_dist * ray->dir_y;
+// 	else
+//         ray->wall_x = player->pos_x + ray->perp_dist * ray->dir_x;
+//     ray->wall_x -= floor(ray->wall_x);
+
+//     // printf("perp_dist=%.2f, wall_x=%.2f, draw_start=%d, draw_end=%d\n",
+//     //     ray->perp_dist, ray->wall_x, ray->draw_start, ray->draw_end);
+// }
 
 void	ft_setup_raycast_info(int x, t_ray *ray, t_player *player)
 {

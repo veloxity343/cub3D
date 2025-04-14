@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:07:37 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/11 18:52:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/13 19:22:45 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ int	ft_move(t_data *d, double dx, double dy)
 	double	new_pos_x;
 	double	new_pos_y;
 
+	// printf("%f %f\n", d->player.pos_x, d->player.pos_y);
 	new_pos_x = d->player.pos_x + dx * MOVE_SPEED;
 	new_pos_y = d->player.pos_y + dy * MOVE_SPEED;
+	// printf("%f %f\n", new_pos_x, new_pos_y);
 	if (new_pos_x < 0 || new_pos_x >= d->map_det.width || \
 		new_pos_y < 0 || new_pos_y >= d->map_det.height || \
 		d->map[(int)new_pos_y][(int)new_pos_x] == C_WALL)

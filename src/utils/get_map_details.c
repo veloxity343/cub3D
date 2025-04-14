@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:40:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/03/29 00:33:37 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/13 19:11:16 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ int get_player_data(t_data *data, int x, int y)
 {
     if (valid_player_pos(data->map, x, y))
         return (INT_MIN);
+    data->player.dir = data->map[y][x];
+    ft_set_player_direction(&data->player);
     data->player.pos_x = (double)x + 0.5;
     data->player.pos_y = (double)y + 0.5;
-    data->map[y][x] = '1';
+    data->map[y][x] = '0';
     return (1);
 }

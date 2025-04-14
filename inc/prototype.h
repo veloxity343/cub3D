@@ -18,6 +18,7 @@ void	init_img(t_data *data, t_img *i, int width, int height);
 void	init_texture_img(t_data *data, t_img *image, char *path);
 void	init_texture_pix(t_data *data);
 void	setup_textures(t_data *data);
+void	update_text_pixels(t_data *data, t_texture_det *tex, t_ray *r, int x);
 
 /*-------------utils-------------*/
 //clean.c

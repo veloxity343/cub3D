@@ -3,6 +3,23 @@
         "cstdlib": "c",
         "array": "c",
         "string": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "atomic": "c",
+        "bit": "c",
+        "*.tcc": "c",
+        "deque": "c",
+        "vector": "c",
+        "algorithm": "c",
+        "memory_resource": "c",
+        "memory": "c",
+        "random": "c",
+        "initializer_list": "c",
+        "stdexcept": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "new": "c",
+        "fcntl.h": "c",
+        "mlx_int.h": "c"
     }
 }
