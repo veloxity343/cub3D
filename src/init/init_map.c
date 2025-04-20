@@ -17,7 +17,7 @@ static int	count_lines(t_game *game, char **file, int i)
 	int	start;
 
 	start = i;
-	while (file[i] && file[i][strspn(file[i], " \t\r\v\f")] == '1')
+	while (file[i] && file[i][ft_strspn(file[i], " \t\r\v\f")] == '1')
 		i++;
 	game->map_info.eom = i;
 	return (i - start);
