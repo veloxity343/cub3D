@@ -19,7 +19,7 @@ static void	print_error2(int error)
 	else if (error == FILE_NOT_XPM)
 		ft_putstr_fd("\e[31mFile error: Format is not .xpm\n\e[0m", 2);
 	else if (error == FILE_IS_DIR)
-		ft_putstr_fd("\e[31mFile error: Give file is directory\n\e[0m", 2);
+		ft_putstr_fd("\e[31mFile error: Given file is a directory\n\e[0m", 2);
 	else if (error == COLOR_FLOOR_CEILING)
 		ft_putstr_fd("\e[31mColour error: Invalid for floor/ceiling\n\e[0m", 2);
 	else if (error == COLOR_FLOOR)
@@ -49,15 +49,15 @@ static void	print_error1(int error)
 	else if (error == MLX_IMG)
 		ft_putstr_fd("\e[31mMLX error: Cannot create image\n\e[0m", 2);
 	else if (error == USER_NUM)
-		ft_putstr_fd("\e[31mUser error: More than one player on map\n\e[0m", 2);
+		ft_putstr_fd("\e[31mPlayer error: More than one player on map\n\e[0m", 2);
 	else if (error == USER_POS)
-		ft_putstr_fd("\e[31mUser error: Invalid position\n\e[0m", 2);
+		ft_putstr_fd("\e[31mPlayer error: Invalid position\n\e[0m", 2);
 	else if (error == USER_DIR)
-		ft_putstr_fd("\e[31mUser error: No position (need N/S/E/W)\n\e[0m", 2);
+		ft_putstr_fd("\e[31mPlayer error: No position (need N/S/E/W)\n\e[0m", 2);
 	else if (error == MALLOC)
-		ft_putstr_fd("\e[31mMem error: Cannot allocate memory\n\e[0m", 2);
+		ft_putstr_fd("\e[31mMemory error: Cannot allocate memory\n\e[0m", 2);
 	else if (error == USAGE)
-		ft_putstr_fd("\e[31mUsage error: ./cub3d <path/map.cub>\n\e[0m", 2);
+		ft_putstr_fd("\e[31mUsage: ./cub3d <path/map.cub>\n\e[0m", 2);
 	else if (error == TEX_RGB_VAL)
 		ft_putstr_fd("\e[31mTexture error: Need min=0, max=255\n\e[0m", 2);
 	else if (error == TEX_MISSING)
