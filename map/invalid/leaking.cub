@@ -1,7 +1,7 @@
-NO ../../img/brick/Brick_128x128.xpm
-SO ../../img/brick/Brick_128x128.xpm
-WE ../../img/brick/Brick_128x128.xpm
-EA ../../img/brick/Brick_128x128.xpm
+NO tex/blue_stone.xpm
+SO tex/blue_stone.xpm
+WE tex/blue_stone.xpm
+EA tex/blue_stone.xpm
 
 F 220,100,0
 C 225,30,0

@@ -1,5 +1,5 @@
 # Standard
-NAME		=	cub3D
+NAME		=	cub3d
 
 # Directories
 LIBFT		=	./libft/libft.a
@@ -11,19 +11,19 @@ OBJB_DIR	=	objb
 
 # MLX
 UNAME_S		:= $(shell uname -s)
-MLX_LINUX	= -Lmlx_linux -lmlx_Linux -L./minilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
-MLX_MACOS	= -lmlx -framework OpenGL -framework AppKit
+MLX_LINUX	= -Lminilibx-linux -lmlx -lXext -lX11 -lm
+MLX_MACOS	= -Lminilibx-macos -lmlx -framework OpenGL -framework AppKit
 
-ifeq ($(UNAME_S), Darwin)
-	MLX		= $(MLX_MACOS)
+ifeq ($(UNAME_S), Linux)
+	MLX			=	$(MLX_LINUX)
+	MLX_DIR		=	./minilibx-linux
 else
-	MLX		= $(MLX_LINUX)
-	MLX_CO	= $(MLX_LINUX)
+	MLX			=	$(MLX_MACOS)
+	MLX_DIR		=	./minilibx-macos
 endif
 
 # Compiler & flags
 WFLAGS		=	-Wall -Wextra -Werror
-WFLAGS		=	
 IFLAGS		=	-I$(INC)
 DSYM		=	-g3
 FSAN		=	-fsanitize=address $(DSYM)
@@ -55,7 +55,8 @@ $(LIBFT):
 
 $(NAME):	$(OBJ)
 	@echo "\n$(BLUE)Building$(RESET)\t$(NAME)"
-	@make -s -C $(dir $(LIBFT))
+	@make -sC $(MLX_DIR)
+	@make -sC $(dir $(LIBFT))
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX)
 
 $(OBJ_DIR):
@@ -91,6 +92,7 @@ clean:
 	$(RM) -rf $(OBJB_DIR); \
 	echo "$(RED)Deleting$(RESET)\t$(OBJB_DIR)"; \
 	fi;
+	@make -C $(MLX_DIR) clean
 
 fclean:	clean
 	@if [ -f "$(NAME)" ]; then \
@@ -108,64 +110,8 @@ asan:
 	@echo "$(YELLOW)Running with AddressSanitizer...$(RESET)"
 	./$(NAME) map/valid/amongus.cub
 
-norm:
-	norminette
+test:	re
+	@echo "$(YELLOW)Running tests...$(RESET)"
+	@./$(NAME) map/valid/maze.cub
 
-.PHONY:	all bonus clean fclean re asan norm
-
-# CFLAG = -Wall -Wextra -Werror
-# NAME = cub3D
-
-# LIBS = ./libft/libft.a -L./libft -lft -L./minilibx-linux/ -lmlx -lmlx_Linux -lX11 -lXext -lm
-
-# SRCS_PATH = ./src/
-
-# SRCS = $(SRCS_PATH)main.c \
-# 	$(SRCS_PATH)check_cub_file/is_invaild.c \
-# 	$(SRCS_PATH)check_cub_file/utils.c \
-# 	$(SRCS_PATH)validate/valid_file.c \
-# 	$(SRCS_PATH)check_cub_file/init_rgb.c \
-# 	$(SRCS_PATH)game/game_controls.c \
-# 	$(SRCS_PATH)validate/valid_map.c \
-# 	$(SRCS_PATH)validate/valid_map2.c \
-# 	$(SRCS_PATH)init.c \
-# 	$(SRCS_PATH)utils/exit.c \
-# 	$(SRCS_PATH)utils/err_getter.c 
-
-
-# OBJS = $(SRCS:.c=.o)
-
-# all:$(NAME)
-
-# %.o: %.c
-# 	@gcc -c $< -o $@
-
-# $(NAME): $(OBJS)
-# 	@echo compling cub3D...
-# 	@gcc -o $(NAME) $(OBJS) $(LIBS)
-# 	@echo Hi cub3D
-
-# clean:
-# 	@rm -rf $(OBJS)
-# 	@echo clean *.o
-
-# fclean: clean
-# 	@rm -rf $(NAME)
-# 	@echo bye $(NAME)
-
-# re: fclean all
-
-# ft:
-# 	@make -C ./libft --no-print-directory
-
-# cft:
-# 	@make fclean -C ./libft --no-print-directory 
-
-mlx:
-	@make -C ./minilibx-linux/ --no-print-directory
-
-cmlx:
-	@make clean -C ./minilibx-linux/ --no-print-directory
-
-r: $(NAME)
-	valgrind --leak-check=full --track-origins=yes ./cub3D map/valid/amongus.cub
+.PHONY:	all bonus clean fclean re asan

@@ -3,135 +3,119 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 16:56:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/09 17:41:40 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/04/20 18:16:43 by rcheong           #+#    #+#             */
+/*   Updated: 2025/04/20 18:16:48 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
-/**
- * @brief Check is invalid character near with space (X-axis)
- * @param map Map string
- * @param x Current checking position
- * @param f Flag: 1=check x + 1, -1=check x - 1
- * @return 1=error, 0=ok
- */
-int check_x_help(char *map, int x, int f)
+static int	validate_elements(t_game *game, char **map_tab)
 {
-    if (x + f < 0 || x + f > ft_strlen(map))
-        return (0);
-    if (map[x + f])
-    {
-        if (map[x + f] == '0')
-            return (ft_error_msg(ERR_MAP8, 1));
-        if (!ft_strchr("01 ", map[x + f]))
-            return (ft_error_msg(ERR_MAP_CHAR, 1));
-    }
-    return (0);
+	int	i;
+	int	j;
+
+	i = 0;
+	game->player.dir = '0';
+	while (map_tab[i])
+	{
+		j = 0;
+		while (map_tab[i][j])
+		{
+			while (ft_strchr(" \t\r\v\f", game->map[i][j]))
+				j++;
+			if (!ft_strchr("10NSEW", map_tab[i][j]))
+				return (error_msg(
+						game->map_info.path, FILE_INVALID_CHAR, FAILURE, 0));
+			if (ft_strchr("NSEW", map_tab[i][j]) && game->player.dir != '0')
+				return (error_msg(game->map_info.path, USER_NUM, FAILURE, 0));
+			if (ft_strchr("NSEW", map_tab[i][j]))
+				game->player.dir = map_tab[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (SUCCESS);
 }
 
-/**
- * @brief Check is invalid character near with space (Y-axis)
- * @param map Map 2D array 
- * @param x Current checking position
- * @param y Current checking position
- * @param f Flag: 1=check y + 1, -1=check y - 1
- * @return 1=error, 0=ok
- */
-int check_y_help(char **map, int x, int y, int f)
+static int	validate_position(t_game *game, char **map_tab)
 {
-    if (y + f < 0 || y + f >= ft_arrlen(map) || x >= ft_strlen(map[y + f]))
-        return (0);
-    if (map[y + f][x])
-    {
-        if (map[y + f][x] == '0')
-            return (ft_error_msg(ERR_MAP8, 1));
-        if (!ft_strchr("01 ", map[y + f][x]))
-            return (ft_error_msg(ERR_MAP_CHAR, 1));
-    }
-    return (0);
+	int	i;
+	int	j;
+
+	i = (int)game->player.pos.y;
+	j = (int)game->player.pos.x;
+	if (ft_strlen(map_tab[i - 1]) < (size_t)j
+		|| ft_strlen(map_tab[i + 1]) < (size_t)j
+		|| is_whitespace(map_tab[i][j - 1])
+		|| is_whitespace(map_tab[i][j + 1])
+		|| is_whitespace(map_tab[i - 1][j])
+		|| is_whitespace(map_tab[i + 1][j]))
+		return (FAILURE);
+	return (SUCCESS);
 }
 
-/**
- * @brief Check X-axis wall leak or 
- * @param map Map 2D array 
- * @param x Current checking position
- * @return 1=error, 0=ok
- */
-int check_x(char *map, int x)
+static int	validate_player_pos(t_game *game, char **map_tab)
 {
-    if (map[x] == ' ')
-    {
-        if (check_x_help(map, x, 1) || check_x_help(map, x, -1))
-            return (1);
-    }
-    else if (map[x] == '0')
-    {
-        if (!map[x + 1] || !map[x - 1])
-            return (ft_error_msg(ERR_MAP8, 1));
-    }
-    else if (!ft_strchr(VALID_CHAR_MAP, map[x]))
-        return (ft_error_msg(ERR_MAP9, 1));
-    return (0);
+	int	i;
+	int	j;
+
+	i = 0;
+	if (game->player.dir == '0')
+		return (error_msg(game->map_info.path, USER_DIR, FAILURE, 0));
+	while (map_tab[i])
+	{
+		j = 0;
+		while (map_tab[i][j])
+		{
+			if (ft_strchr("NSEW", map_tab[i][j]))
+			{
+				game->player.pos.x = (double)j + 0.5;
+				game->player.pos.y = (double)i + 0.5;
+				map_tab[i][j] = '0';
+			}
+			j++;
+		}
+		i++;
+	}
+	if (validate_position(game, map_tab) == FAILURE)
+		return (error_msg(game->map_info.path, USER_POS, FAILURE, 0));
+	return (SUCCESS);
 }
 
-/**
- * @brief Check Y-axis wall leak
- * @param map Map 2D array 
- * @param x Current checking position
- * @param y Current checking position
- * @return 1=error, 0=ok
- */
-int check_y(char **map, int x, int y)
+static int	validate_end_file(t_map *map)
 {
-    if (map[y][x] == ' ')
-    {
-        if (check_y_help(map, x, y, 1) || check_y_help(map, x, y, -1))
-            return (1);
-    }
-    else if (map[y][x] == '0')
-    {
-        if (y == 0 || !map[y + 1] || !map[y + 1][x] || !map[y - 1][x])
-            return (ft_error_msg(ERR_MAP8, 1));
-    }
-    else if (!ft_strchr(VALID_CHAR_MAP, map[y][x]))
-        return (ft_error_msg(ERR_MAP9, 1));
-    return (0);
+	int	i;
+	int	j;
+
+	i = map->eom;
+	while (map->file[i])
+	{
+		j = 0;
+		while (map->file[i][j])
+		{
+			if (!ft_strchr(" \t\r\n\v\f", map->file[i][j]))
+				return (FAILURE);
+			j++;
+		}
+		i++;
+	}
+	return (SUCCESS);
 }
 
-/**
- * @brief Check is valid map
- * @param data Main data structure
- * @param map Map 2D array
- * @return 1=error, 0=ok
- */
-int valid_map(t_data *data, char **map)
+int	validate_map(t_game *game, char **map_tab)
 {
-    int x;
-    int y;
-    int player;
-
-    y = -1;
-    player = 0;
-    while (map[++y])
-    {
-        x = -1;
-        while (map[y][++x])
-        {
-            if (ft_strchr(VALID_PLAYER_POS, map[y][x]))
-                player += get_player_data(data, x, y);
-            if (check_x(map[y], x) || check_y(map, x, y))
-                return (1);
-        }
-    }
-    if (player == 0)
-        return (ft_error_msg(ERR_MAP_DIR, 1));
-    else if (player < 0)
-        return (ft_error_msg(ERR_PLA_POS, 1));
-    else if (player != 1)
-        return (ft_error_msg(ERR_SING_PLAYER, 1));
-    return (0);
+	if (!game->map)
+		return (error_msg(game->map_info.path, MAP_MISSING, FAILURE, 0));
+	if (validate_sides(&game->map_info, map_tab) == FAILURE)
+		return (error_msg(game->map_info.path, MAP_NO_WALLS, FAILURE, 0));
+	if (game->map_info.h < 3)
+		return (error_msg(game->map_info.path, MAP_TOO_SMALL, FAILURE, 0));
+	if (validate_elements(game, map_tab) == FAILURE
+		|| validate_player_pos(game, map_tab) == FAILURE
+		|| validate_end_file(&game->map_info) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
 }

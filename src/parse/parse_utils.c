@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 18:17:20 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:17:23 by rcheong          ###   ########.fr       */
+/*   Created: 2025/04/20 18:18:08 by rcheong           #+#    #+#             */
+/*   Updated: 2025/04/20 18:18:10 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	clean(t_game *game, int code)
+int	is_whitespace(char c)
 {
-	if (game)
-	{
-		if (game->win && game->mlx)
-			mlx_destroy_window(game->mlx, game->win);
-		if (game->mlx)
-		{
-			mlx_destroy_display(game->mlx);
-			mlx_loop_end(game->mlx);
-			free(game->mlx);
-		}
-		free_game(game);
-	}
-	exit(code);
+	if (ft_strchr(" \t\r\n\v\f", c))
+		return (FAILURE);
+	else
+		return (SUCCESS);
 }
 
-int	quit(t_game *game)
+size_t	max_len(t_map *map, int i)
 {
-	clean(game, 0);
-	return (0);
+	size_t	len;
+	size_t	max_len;
+
+	max_len = ft_strlen(map->file[i]);
+	while (map->file[++i])
+	{
+		len = ft_strlen(map->file[i]);
+		if (len > max_len)
+			max_len = len;
+	}
+	return (max_len);
 }

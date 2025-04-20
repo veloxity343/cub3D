@@ -1,1 +1,0 @@
-Xlib:  extension "MIT-SHM" missing on display ":0".

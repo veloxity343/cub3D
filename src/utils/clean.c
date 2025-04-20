@@ -3,67 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 14:40:54 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/13 18:34:51 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/04/20 18:17:12 by rcheong           #+#    #+#             */
+/*   Updated: 2025/04/20 18:17:16 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
-/**
- * @brief Free the textures structure
- * @param texture Texture Structure
- */
-static void	ft_free_textures(t_texture_det *texture)
+static void	free_tex_info(t_tex *tex)
 {
-	if (texture->north)
-		ft_free1(texture->north);
-	if (texture->south)
-		ft_free1(texture->south);
-	if (texture->west)
-		ft_free1(texture->west);
-	if (texture->east)
-		ft_free1(texture->east);
-	if (texture->floor)
-		ft_free1(texture->floor);
-	if (texture->ceiling)
-		ft_free1(texture->ceiling);
+	free(tex->north);
+	free(tex->south);
+	free(tex->west);
+	free(tex->east);
+	free(tex->floor);
+	free(tex->ceiling);
 }
 
-/**
- * @brief Garbage collector to handle map detail variables
- * @param data Data structure (passed by ref)
- */
-static void	ft_free_map(t_data *data)
+static void	free_map(t_game *game)
 {
-	if (data->map_det.fd > 0)
-		close(data->map_det.fd);
-	if (data->map_det.file)
-		ft_free_strarr(data->map_det.file);
-	if (data->map)
-		ft_free_strarr(data->map);
+	if (game->map_info.fd > 0)
+		close(game->map_info.fd);
+	free_tab((void **)game->map_info.file);
+	free_tab((void **)game->map);
 }
 
-void	free_img(t_img *img)
+char	*ft_free(char **str)
 {
-	if (img->addr)
-		ft_free1(img->addr);
-	if (img->path)
-		ft_free1(img->path);
+	free(*str);
+	*str = NULL;
+	return (NULL);
 }
 
-int	ft_free_data(t_data *data)
+void	free_tab(void **tab)
 {
-	if (data)
+	size_t	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
 	{
-		if (data->textures)
-			ft_free_intarr(data->textures);
-		if (data->texture_pixels)
-			ft_free_intarr(data->texture_pixels);
-		ft_free_textures(&data->texture_det);
-		ft_free_map(data);
+		free(tab[i]);
+		i++;
 	}
-	return (EXIT_FAILURE);
+	free(tab);
+}
+
+int	free_game(t_game *game)
+{
+	free_tab((void **)game->tex);
+	free_tab((void **)game->tex_px);
+	free_tex_info(&game->tex_info);
+	free_map(game);
+	return (FAILURE);
 }

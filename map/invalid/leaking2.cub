@@ -1,7 +1,7 @@
-NO ../../img/brick/Brick_128x128.xpm
-SO ../../img/brick/Brick_128x128.xpm
-WE ../../img/brick/Brick_128x128.xpm
-EA ../../img/brick/Brick_128x128.xpm
+NO tex/blue_stone.xpm
+SO tex/blue_stone.xpm
+WE tex/blue_stone.xpm
+EA tex/blue_stone.xpm
 
 F 220,100,0
 C 225,30,0
@@ -11,7 +11,7 @@ C 225,30,0
 1000N00011111111111
 10000000000000001
 11111111011111111
-101    001
+101    000
 101    101
 101    101
 101    101

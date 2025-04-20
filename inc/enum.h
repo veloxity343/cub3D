@@ -5,62 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 14:16:06 by rcheong           #+#    #+#             */
-/*   Updated: 2025/03/16 13:21:41 by rcheong          ###   ########.fr       */
+/*   Created: 2024/11/15 14:16:30 by rcheong           #+#    #+#             */
+/*   Updated: 2025/04/20 17:32:02 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENUM_H
 # define ENUM_H
 
-typedef enum e_map_tile
-{
-	C_WALL = '1',
-	C_BACK_G = '0',
-	C_WHITE_S = ' '
-} t_map_tile;
-
-typedef enum e_err
-{
-	ERR_ARGS,
-	ERR_MALC,
-	ERR_CUB,
-	ERR_FILE_OPEN,
-	ERR_FILE_READ,
-	ERR_MAP,
-	ERR_MAP7,
-	ERR_MAP8,
-	ERR_MAP_LAST,
-	ERR_MAP_DIR,
-	ERR_MAP9,
-	ERR_MAP_CHAR,
-	ERR_SING_PLAYER,
-	ERR_PLA_POS,
-	ERR_TEXT,
-	ERR_TEXT_MAP,
-	ERR_TEXT_COL,
-	ERR_TEXT_PATH,
-	ERR_RGB,
-	ERR_RGB_VAL,
-	ERR_MLX_IMG,
-	ERR_MLX_WIN,
-	ERR_MLX_INIT
-}	t_err;
-
-typedef enum e_output
+enum e_out
 {
 	SUCCESS,
 	FAILURE,
-	BREAK = 3,
+	ERROR,
+	BREAK,
 	CONTINUE
-}	t_output;
+};
 
-typedef enum e_dir
+enum e_err
+{
+	MLX_START,
+	MLX_WIN,
+	MLX_IMG,
+	USER_NUM,
+	USER_POS,
+	USER_DIR,
+	MAP_MISSING,
+	MAP_TOO_SMALL,
+	MAP_NO_WALLS,
+	MAP_LAST,
+	MAP_INVALID,
+	FILE_NOT_CUB,
+	FILE_NOT_XPM,
+	FILE_IS_DIR,
+	FILE_INVALID_CHAR,
+	COLOR_FLOOR_CEILING,
+	COLOR_FLOOR,
+	COLOR_CEILING,
+	COLOR_MISSING,
+	MALLOC,
+	USAGE,
+	TEX_RGB_VAL,
+	TEX_MISSING,
+	TEX_INVALID
+};
+
+enum e_tex
 {
 	NORTH,
 	SOUTH,
 	EAST,
 	WEST
-}	t_dir;
+};
 
 #endif

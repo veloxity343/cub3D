@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 11:53:48 by ryan99            #+#    #+#             */
-/*   Updated: 2025/02/02 22:11:08 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/20 17:55:55 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoinf(char *s1, char *s2);
 char				*ft_strjoin_char(char const *s1, char const *s2, char c);
 char				*ft_strjoin_charf(char *s1, char *s2, char c);
+size_t 				ft_strspn(const char *s, const char *accept);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *str, char c);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));

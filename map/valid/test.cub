@@ -3,11 +3,9 @@ SO tex/blue_stone.xpm
 WE tex/blue_stone.xpm
 EA tex/blue_stone.xpm
 
-F 220,100,0
-C 225,30,0
+F 97,97,97
+C 10,20,50
 
-111111111
-100000001
-100000001
-100000001
-111111111
+11111
+1S001
+11111
