@@ -35,8 +35,8 @@
 # define COL_FLOOR		0xE6E6E6
 # define COL_SPACE		0x404040
 
-# ifndef O_DIR
-#  define O_DIR	00200000
+# ifndef O_DIRECTORY
+#  define O_DIRECTORY	00200000
 # endif
 
 #endif
