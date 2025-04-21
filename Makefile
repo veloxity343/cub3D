@@ -12,14 +12,14 @@ OBJB_DIR	=	objb
 # MLX
 UNAME_S		:= $(shell uname -s)
 MLX_LINUX	= -Lminilibx-linux -lmlx -lXext -lX11 -lm
-MLX_MACOS	= -Lminilibx-macos -lmlx -framework OpenGL -framework AppKit
+MLX_MACOS	= -Lminilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
 
 ifeq ($(UNAME_S), Linux)
 	MLX			=	$(MLX_LINUX)
 	MLX_DIR		=	./minilibx-linux
 else
 	MLX			=	$(MLX_MACOS)
-	MLX_DIR		=	./minilibx-macos
+	MLX_DIR		=	./minilibx_opengl_20191021
 endif
 
 # Compiler & flags

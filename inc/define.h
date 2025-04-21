@@ -17,13 +17,25 @@
 # define WIN_W      	1280
 # define WIN_H			720
 # define SIZE_TEX		64
-# define UP				XK_w
-# define DOWN			XK_s
-# define LEFT			XK_a
-# define RIGHT			XK_d
-# define L_LEFT			XK_Left
-# define L_RIGHT		XK_Right
-# define ESC			XK_Escape
+
+# ifdef __linux__
+#  define UP			XK_w
+#  define DOWN			XK_s
+#  define LEFT			XK_a
+#  define RIGHT			XK_d
+#  define L_LEFT		XK_Left
+#  define L_RIGHT		XK_Right
+#  define ESC			XK_Escape
+# else
+#  define UP            13
+#  define DOWN          1
+#  define LEFT          0
+#  define RIGHT         2
+#  define L_LEFT        123
+#  define L_RIGHT       124
+#  define ESC           53
+# endif
+
 # define MOUSE_WRAP		15
 # define S_MOVE			0.12
 # define S_ROTATE		0.12

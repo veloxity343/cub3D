@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:05 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:17:08 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/21 10:02:04 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	is_dir(char *arg)
 {
 	int	fd;
 
-	fd = open(arg, O_DIR);
+	fd = open(arg, O_DIRECTORY);
 	if (fd >= 0)
 		return (close(fd), 1);
 	return (0);
