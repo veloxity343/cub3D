@@ -103,20 +103,20 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	t_map	map_info;
-	t_tex	tex_info;
-	t_img	framebuffer;
-	t_player	player;
-	t_ray	ray;
-	double	time;
-	int		win_h;
-	int		win_w;
-	char	**map;
-	char	**cub_file;
-	void	*mlx;
-	void	*win;
-	int		**tex_px;
-	int		**tex;
+	t_map			map_info;
+	t_tex			tex_info;
+	t_img			framebuffer;
+	t_player		player;
+	t_ray			ray;
+	double			time;
+	int				win_h;
+	int				win_w;
+	char			**map;
+	char			**cub_file;
+	void			*mlx;
+	void			*win;
+	int				**tex_px;
+	int				**tex;
 }	t_game;
 
 #endif

@@ -23,16 +23,16 @@ static void	print_controls(void)
 	ft_putendl_fd("\t\e[35m→:\e[0m Rotate right", 1);
 }
 
-int valid_data(t_game *data, char *path)
+int	valid_data(t_game *data, char *path)
 {
-    data->cub_file = read_file(path);
-    if (!data->cub_file)
-        return (error_msg(0, FILE_INVALID, 1, 0));
-    if (valid_image(data, data->cub_file))
-        return (1);
-    if (valid_rgb(data, data->cub_file + 4))
-        return (1);
-    return (0);
+	data->cub_file = read_file(path);
+	if (!data->cub_file)
+		return (error_msg(0, FILE_INVALID, 1, 0));
+	if (valid_image(data, data->cub_file))
+		return (1);
+	if (valid_rgb(data, data->cub_file + 4))
+		return (1);
+	return (0);
 }
 
 static int	parse_args(t_game *game, char **av)

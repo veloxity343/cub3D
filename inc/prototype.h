@@ -80,24 +80,24 @@ void	update_tex_px(t_game *game, t_tex *tex, t_ray *ray, int x);
 int		validate_file(char *arg, int cub);
 
 //valid_map.c
-int     valid_map(t_game *data, char **map);
+int		valid_map(t_game *data, char **map);
 
 //valid_texture.c
-int     valid_image(t_game *data, char **dir);
+int		valid_image(t_game *data, char **dir);
 
 //valid_rgb.c
-int     valid_rgb(t_game *data, char **rgb);
+int		valid_rgb(t_game *data, char **rgb);
 
 //utils.c
-char    **read_file(char *path);
-void    free_arr(char **arr);
-int     ft_arrlen(char **arr);
-char    **ft_arrdup(char **arr);
-char    *ft_strjoin_free(char *s1, char *s2);
+char	**read_file(char *path);
+void	free_arr(char **arr);
+int		ft_arrlen(char **arr);
+char	**ft_arrdup(char **arr);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 //utils2.c
-void    get_map_details(t_game *data, char **map);
-int     valid_player_pos(char **map, int x, int y);
-int     get_player_data(t_game *data, int x, int y);
+void	get_map_details(t_game *data, char **map);
+int		valid_player_pos(char **map, int x, int y);
+int		get_player_data(t_game *data, int x, int y);
 
 #endif

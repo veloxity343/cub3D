@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 20:52:45 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/21 21:22:36 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,6 @@ void	free_tab(void **tab)
 		i++;
 	}
 	free(tab);
-}
-
-void debug(int i)
-{
-	ft_putstr_fd("debug:", 2);
-	ft_putnbr_fd(i, 2);
-	ft_putchar_fd('\n', 2);
 }
 
 int	free_game(t_game *game)

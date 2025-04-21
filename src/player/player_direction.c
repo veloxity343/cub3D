@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   player_direction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:59 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:18:01 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/21 21:21:48 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	set_player_dir(t_player *player, char dir, t_dir_d dir_t, t_dir_d plane)
+static void	set_player_dir(t_player *player, char dir, \
+	t_dir_d dir_t, t_dir_d plane)
 {
 	if (player->dir == dir)
 	{
