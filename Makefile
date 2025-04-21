@@ -110,9 +110,9 @@ asan:
 	@echo "$(YELLOW)Running with AddressSanitizer...$(RESET)"
 	./$(NAME) map/valid/maze.cub
 
-valgrind:	re
+valgrind:	$(NAME)
 	@echo "$(YELLOW)Running with Valgrind...$(RESET)"
-	$(LEAK) ./$(NAME) map/valid/maze.cub
+	valgrind --leak-check=full --track-origins=yes ./$(NAME) map/valid/maze.cub
 
 test:		re
 	@echo "$(YELLOW)Running tests...$(RESET)"

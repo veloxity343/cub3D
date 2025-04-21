@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:49 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:18:52 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/21 20:53:04 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	init_game(t_game *game)
 	game->win = NULL;
 	game->mlx = NULL;
 	game->map = NULL;
+	game->cub_file = NULL;
 	game->tex_px = NULL;
 	game->tex = NULL;
 	init_player(&game->player);

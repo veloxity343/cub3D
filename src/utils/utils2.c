@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_details.c                                  :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:40:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/21 18:10:53 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:05:16 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-/**
- * @brief Get map width and height data
- * @param data Main data structer
- * @param map Map 2D array
- */
+size_t	max_len(t_map *map, int i)
+{
+	size_t	len;
+	size_t	max_len;
+
+	max_len = ft_strlen(map->file[i]);
+	while (map->file[++i])
+	{
+		len = ft_strlen(map->file[i]);
+		if (len > max_len)
+			max_len = len;
+	}
+	return (max_len);
+}
+
 void    get_map_details(t_game *data, char **map)
 {
     int i;
@@ -29,13 +39,6 @@ void    get_map_details(t_game *data, char **map)
     data->map_info.h = i;
 }
 
-/**
- * @brief Check is valid player position 
- * @param map Map 2D array
- * @param x Player X-axis
- * @param y Player Y-axis
- * @return 1=error 0=ok
- */
 int valid_player_pos(char **map, int x, int y)
 {
     if (x == 0 || y == ft_arrlen(map) || \
@@ -45,13 +48,6 @@ int valid_player_pos(char **map, int x, int y)
     return (0);
 }
 
-/**
- * @brief Get player data
- * @param data Main data structure
- * @param x Player X-axis
- * @param y Player Y-axis
- * @return INT_MAX if player position invalid
- */
 int get_player_data(t_game *data, int x, int y)
 {
     if (valid_player_pos(data->map, x, y))

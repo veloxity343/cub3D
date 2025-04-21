@@ -13,79 +13,91 @@
 #ifndef PROTOTYPE_H
 # define PROTOTYPE_H
 
+//init_game.c
 void	init_game(t_game *game);
 void	init_img_clean(t_img *img);
 void	init_ray(t_ray *ray);
 
+//init_img.c
 void	init_pattern(t_game *game);
 void	init_tex(t_tex *tex);
 
+//init_mlx.c
 void	init_mlx_img(t_game *game, t_img *img, int w, int h);
 void	init_mlx_img_tex(t_game *game, t_img *img, char *path);
 void	init_mlx(t_game *game);
 
+//init_map.c
 int		create_map(t_game *game, char **file, int i);
 
-int		parse_file(t_game *game, char **map);
-
-void	parse_game(char *path, t_game *game);
-
-int		parse_tex(t_game *game, t_tex *tex, char *line, int j);
-
-int		is_whitespace(char c);
+//utils2.c
 size_t	max_len(t_map *map, int i);
 
+//player_direction.c
 void	init_player_dir(t_game *game);
 
+//player_input.c
 void	get_input(t_game *game);
 
+//player_movement.c
 int		move_player(t_game *game);
 
+//player_position.c
 int		validate_move(t_game *game, double new_x, double new_y);
 
+//player_rotate.c
 int		rotate_player(t_game *game, double rotate_dir);
 
+//error.c
 int		error_msg(char *info, int error, int code, int custom);
 int		print_error_val(int info, int rerror, int code, int custom);
 
+//exit.c
 void	clean(t_game *game, int code);
 int		quit(t_game *game);
 
+//clean.c
 char	*ft_free(char **str);
 void	free_tab(void **tab);
 int		free_game(t_game *game);
 
+//game_raycasy.c
 int		raycast(t_player *player, t_game *game);
 
-
+//game_render.c
 void	set_img_px(t_img *img, int x, int y, int colour);
 void	render_raycast(t_game *game);
 int		render_img(t_game *game);
 
+//game_texture.c
 void	init_tex_px(t_game *game);
 
+//game_tiles.c
 void	render_tiles(t_game *game, t_framebuffer *m);
 void	update_tex_px(t_game *game, t_tex *tex, t_ray *ray, int x);
 
+//valid_args.c
 int		validate_file(char *arg, int cub);
 
-int		validate_sides(t_map *map, char **map_tab);
-
-int		validate_map(t_game *game, char **map_tab);
+//valid_map.c
 int     valid_map(t_game *data, char **map);
+
+//valid_texture.c
 int     valid_image(t_game *data, char **dir);
+
+//valid_rgb.c
 int     valid_rgb(t_game *data, char **rgb);
-void    get_map_details(t_game *data, char **map);
-int valid_player_pos(char **map, int x, int y);
-int get_player_data(t_game *data, int x, int y);
+
+//utils.c
 char    **read_file(char *path);
 void    free_arr(char **arr);
-int ft_arrlen(char **arr);
+int     ft_arrlen(char **arr);
 char    **ft_arrdup(char **arr);
 char    *ft_strjoin_free(char *s1, char *s2);
-void    debug(int n);
-void    print_arr(char **arr);
 
-int		validate_tex(t_tex *tex, t_game *game);
+//utils2.c
+void    get_map_details(t_game *data, char **map);
+int     valid_player_pos(char **map, int x, int y);
+int     get_player_data(t_game *data, int x, int y);
 
 #endif

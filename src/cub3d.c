@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 18:51:31 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/21 20:49:05 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int valid_data(t_game *data, char *path)
 static int	parse_args(t_game *game, char **av)
 {
 	if (validate_file(av[1], 1) == FAILURE)
-		clean(game, FAILURE);
+		return (1);
 	if (valid_data(game, av[1]))
 		return (1);
 	if (!game->cub_file[6])
@@ -59,7 +59,7 @@ int	main(int ac, char **av)
 		return (error_msg(NULL, USAGE, 1, 0));
 	init_game(&game);
 	if (parse_args(&game, av) != 0)
-		return (1);
+		clean(&game, FAILURE);
 	init_mlx(&game);
 	init_pattern(&game);
 	print_controls();

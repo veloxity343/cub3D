@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:17:16 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/21 20:52:45 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,16 @@ void	free_tab(void **tab)
 	free(tab);
 }
 
+void debug(int i)
+{
+	ft_putstr_fd("debug:", 2);
+	ft_putnbr_fd(i, 2);
+	ft_putchar_fd('\n', 2);
+}
+
 int	free_game(t_game *game)
 {
+	free_tab((void **)game->cub_file);
 	free_tab((void **)game->tex);
 	free_tab((void **)game->tex_px);
 	free_tex_info(&game->tex_info);
