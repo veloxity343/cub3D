@@ -112,6 +112,7 @@ typedef struct s_game
 	int		win_h;
 	int		win_w;
 	char	**map;
+	char	**cub_file;
 	void	*mlx;
 	void	*win;
 	int		**tex_px;

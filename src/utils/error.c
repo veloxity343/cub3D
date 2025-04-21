@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:17:30 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/21 18:50:22 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ int	error_msg(char *info, int error, int code, int custom)
 		ft_putendl_fd(strerror(error), 2);
 		ft_putstr_fd("\e[0m", 2);
 	}
+	else if (error == FILE_INVALID)
+		ft_putstr_fd("\e[31mFile error: Can't open file\n\e[0m", 2);
 	else if (error == FILE_INVALID_CHAR)
-		ft_putstr_fd("\e[31mFile error: Invalid character in map\n\e[0m", 2);
+		ft_putstr_fd("\e[31mMap error: Invalid character in map\n\e[0m", 2);
 	else
 		print_error1(error);
 	if (info)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:38 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:18:41 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/21 17:50:49 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	fill_tab(t_map *map_info, char **map_tab, int index)
 			map_tab[i][j] = map_info->file[index][j];
 			j++;
 		}
-		memset(&map_tab[i][j], '\0', map_info->w - j);
+		ft_memset(&map_tab[i][j], '\0', map_info->w - j);
 		i++;
 		index++;
 	}

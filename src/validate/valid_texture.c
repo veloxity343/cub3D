@@ -3,45 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   valid_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 18:16:38 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:16:41 by rcheong          ###   ########.fr       */
+/*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
+/*   Updated: 2025/04/21 18:25:39 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
-static int	validate_rgb(int *rgb)
+int check_direction(t_game *data, char *dir, int *flag_n0_w1_s2_e3)
 {
-	if (rgb[0] < 0 || rgb[0] > 255
-		|| rgb[1] < 0 || rgb[1] > 255
-		|| rgb[2] < 0 || rgb[2] > 255)
-		return (print_error_val(*rgb, TEX_RGB_VAL, FAILURE, 0));
-	return (SUCCESS);
+    if (!ft_strncmp(dir, "NO ", 3) && !flag_n0_w1_s2_e3[0])
+    {
+        data->tex_info.north = ft_strdup(dir + 3);
+        flag_n0_w1_s2_e3[0] = 42;
+        return (0);
+    }
+    else if (!ft_strncmp(dir, "WE ", 3) && !flag_n0_w1_s2_e3[1])
+    {
+        data->tex_info.west = ft_strdup(dir + 3);
+        flag_n0_w1_s2_e3[1] = 42;
+        return (0);
+    }
+    else if (!ft_strncmp(dir, "SO ", 3) && !flag_n0_w1_s2_e3[2])
+    {
+        data->tex_info.south = ft_strdup(dir + 3);
+        flag_n0_w1_s2_e3[2] = 42;
+        return (0);
+    }
+    else if (!ft_strncmp(dir, "EA ", 3) && !flag_n0_w1_s2_e3[3])
+    {
+        data->tex_info.east = ft_strdup(dir + 3);
+        flag_n0_w1_s2_e3[3] = 42;
+        return (0);
+    }
+    return (error_msg(NULL, TEX_INVALID, 1, 0));
 }
 
-static unsigned long	rgb_hex(int *rgb_tab)
+int valid_image(t_game *data, char **dir)
 {
-	return (((rgb_tab[0] & 0xff) << 16)
-		| ((rgb_tab[1] & 0xff) << 8)
-		| (rgb_tab[2] & 0xff));
-}
+    int i;
+    int flag_n0_w1_s2_e3[4];
 
-int	validate_tex(t_tex *tex, t_game *game)
-{
-	if (!tex->north || !tex->south || !tex->west || !tex->east)
-		return (error_msg(game->map_info.path, TEX_MISSING, FAILURE, 0));
-	if (!tex->floor || !tex->ceiling)
-		return (error_msg(game->map_info.path, COLOR_MISSING, FAILURE, 0));
-	if (validate_file(tex->north, 0) == FAILURE
-		|| validate_file(tex->south, 0) == FAILURE
-		|| validate_file(tex->west, 0) == FAILURE
-		|| validate_file(tex->east, 0) == FAILURE
-		|| validate_rgb(tex->floor) == FAILURE
-		|| validate_rgb(tex->ceiling) == FAILURE)
-		return (FAILURE);
-	tex->hex_f = rgb_hex(tex->floor);
-	tex->hex_c = rgb_hex(tex->ceiling);
-	return (SUCCESS);
+    if (ft_arrlen(dir) < 4)
+        return (error_msg(NULL, TEX_MISSING, 1, 0));
+    flag_n0_w1_s2_e3[0] = 0;
+    flag_n0_w1_s2_e3[1] = 0;
+    flag_n0_w1_s2_e3[2] = 0;
+    flag_n0_w1_s2_e3[3] = 0;
+    i = 0;
+    while (dir[i] && i < 4)
+        if (check_direction(data, dir[i++], flag_n0_w1_s2_e3))
+            return (1);
+    return (0);
 }

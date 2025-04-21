@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 17:34:52 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/21 18:51:31 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,30 @@ static void	print_controls(void)
 	ft_putendl_fd("\t\e[35m→:\e[0m Rotate right", 1);
 }
 
+int valid_data(t_game *data, char *path)
+{
+    data->cub_file = read_file(path);
+    if (!data->cub_file)
+        return (error_msg(0, FILE_INVALID, 1, 0));
+    if (valid_image(data, data->cub_file))
+        return (1);
+    if (valid_rgb(data, data->cub_file + 4))
+        return (1);
+    return (0);
+}
+
 static int	parse_args(t_game *game, char **av)
 {
 	if (validate_file(av[1], 1) == FAILURE)
 		clean(game, FAILURE);
-	parse_game(av[1], game);
-	if (parse_file(game, game->map_info.file) == FAILURE)
-		return (free_game(game));
-	if (validate_map(game, game->map) == FAILURE)
-		return (free_game(game));
-	if (validate_tex(&game->tex_info, game) == FAILURE)
-		return (free_game(game));
+	if (valid_data(game, av[1]))
+		return (1);
+	if (!game->cub_file[6])
+		return (error_msg(NULL, MAP_MISSING, 1, 0));
+	else
+		get_map_details(game, game->cub_file + 6);
+	if (valid_map(game, game->map))
+		return (1);
 	init_player_dir(game);
 	return (0);
 }
@@ -43,7 +56,7 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2)
-		return (error_msg("Usage", USAGE, 1, 0));
+		return (error_msg(NULL, USAGE, 1, 0));
 	init_game(&game);
 	if (parse_args(&game, av) != 0)
 		return (1);
