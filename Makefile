@@ -105,13 +105,22 @@ fclean:	clean
 re:		fclean all
 
 # Debugging
-asan:	CFLAGS	+=	$(FSAN)
+asan:		CFLAGS	+=	$(FSAN)
 asan:	
 	@echo "$(YELLOW)Running with AddressSanitizer...$(RESET)"
-	./$(NAME) map/valid/amongus.cub
+	./$(NAME) map/valid/maze.cub
 
-test:	re
+valgrind:	re
+	@echo "$(YELLOW)Running with Valgrind...$(RESET)"
+	$(LEAK) ./$(NAME) map/valid/maze.cub
+
+test:		re
 	@echo "$(YELLOW)Running tests...$(RESET)"
 	@./$(NAME) map/valid/maze.cub
 
-.PHONY:	all bonus clean fclean re asan
+norm:
+	@norminette $(SRC_DIR) $(INC) --color
+	@norminette $(SRC_DIR) $(INC) --color | grep -iE 'error|warning'
+	@echo  "$(GREEN)Norminette check complete!$(RESET)"
+
+.PHONY:	all bonus clean fclean re asan valgrind test norm
