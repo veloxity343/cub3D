@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:49 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 21:21:15 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:26:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ int	move_player(t_game *game)
 
 	moved = 0;
 	if (game->player.move.y == 1)
-		moved += move_player_dir(game, game->player.dir_t.x, \
-			game->player.dir_t.y);
+		moved += move_player_dir(game, game->player.dir_t.x,
+				game->player.dir_t.y);
 	if (game->player.move.y == -1)
-		moved += move_player_dir(game, -game->player.dir_t.x, \
-			-game->player.dir_t.y);
+		moved += move_player_dir(game, -game->player.dir_t.x,
+				-game->player.dir_t.y);
 	if (game->player.move.x == -1)
-		moved += move_player_dir(game, game->player.dir_t.y, \
-			-game->player.dir_t.x);
+		moved += move_player_dir(game, game->player.dir_t.y,
+				-game->player.dir_t.x);
 	if (game->player.move.x == 1)
-		moved += move_player_dir(game, -game->player.dir_t.y, \
-			game->player.dir_t.x);
+		moved += move_player_dir(game, -game->player.dir_t.y,
+				game->player.dir_t.x);
 	if (game->player.rotate)
 		moved += rotate_player(game, game->player.rotate);
 	return (moved);

@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:40:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/21 22:00:44 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:26:30 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	get_map_details(t_game *data, char **map)
 
 int	valid_player_pos(char **map, int x, int y)
 {
-	if (x == 0 || y == ft_arrlen(map) || \
-		!map[y][x + 1] || map[y][x + 1] == ' ' || \
-		!map[y - 1][x] || map[y - 1][x] == ' ')
+	if (x == 0 || y == ft_arrlen(map)
+		|| !map[y][x + 1] || map[y][x + 1] == ' '
+		|| !map[y - 1][x] || map[y - 1][x] == ' ')
 		return (1);
 	return (0);
 }

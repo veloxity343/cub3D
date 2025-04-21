@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 21:28:41 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:26:43 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static void	print_error1(int error)
 	else if (error == MLX_IMG)
 		ft_putstr_fd("\e[31mMLX error: Cannot create image\n\e[0m", 2);
 	else if (error == USER_NUM)
-		ft_putstr_fd("\e[31mPlayer error: More than one player on map\n\e[0m", \
+		ft_putstr_fd("\e[31mPlayer error: More than one player on map\n\e[0m",
 			2);
 	else if (error == USER_POS)
 		ft_putstr_fd("\e[31mPlayer error: Invalid position\n\e[0m", 2);
 	else if (error == USER_DIR)
-		ft_putstr_fd("\e[31mPlayer error: No position (need N/S/E/W)\n\e[0m", \
+		ft_putstr_fd("\e[31mPlayer error: No position (need N/S/E/W)\n\e[0m",
 			2);
 	else if (error == MALLOC)
 		ft_putstr_fd("\e[31mMemory error: Cannot allocate memory\n\e[0m", 2);
