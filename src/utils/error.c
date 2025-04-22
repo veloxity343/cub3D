@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/22 23:15:50 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/22 23:22:36 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,23 +85,5 @@ int	error_msg(char *info, int error, int code, int custom)
 		print_error1(error);
 	if (info)
 		ft_putendl_fd(info, 2);
-	return (code);
-}
-
-int	print_error_val(int info, int error, int code, int custom)
-{
-	ft_putendl_fd("\e[31mError", 2);
-	if (custom)
-	{
-		ft_putstr_fd("\e[31m", 2);
-		ft_putendl_fd(strerror(error), 2);
-		ft_putstr_fd("\e[0m", 2);
-	}
-	else if (error == FILE_INVALID_CHAR)
-		ft_putstr_fd("\e[31mFile error: Invalid character in map\n\e[0m", 2);
-	else
-		print_error1(error);
-	if (info)
-		ft_putnbr_fd(info, 2);
 	return (code);
 }

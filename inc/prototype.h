@@ -50,7 +50,6 @@ int		rotate_player(t_game *game, double rotate_dir);
 
 //error.c
 int		error_msg(char *info, int error, int code, int custom);
-int		print_error_val(int info, int rerror, int code, int custom);
 
 //exit.c
 void	clean(t_game *game, int code);
