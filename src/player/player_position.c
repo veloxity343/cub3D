@@ -6,23 +6,17 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:43 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:17:46 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/22 23:13:52 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	wall_collision(t_game *game, double x, double y)
-{
-	if (game->map[(int)y][(int)x] == '0'
-		|| game->map[(int)y][(int)x] == 'D')
-		return (1);
-	return (0);
-}
-
 static int	valid_position(t_game *game, double x, double y)
 {
-	return (wall_collision(game, x, y));
+	if (game->map[(int)y][(int)x] == '0')
+		return (1);
+	return (0);
 }
 
 int	validate_move(t_game *game, double new_x, double new_y)

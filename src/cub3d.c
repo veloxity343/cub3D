@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 20:49:05 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/22 23:14:47 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	valid_data(t_game *data, char *path)
 	return (0);
 }
 
-static int	parse_args(t_game *game, char **av)
+static int	parse_args(t_game *game, char **argv)
 {
-	if (validate_file(av[1], 1) == FAILURE)
+	if (validate_file(argv[1], 1) == FAILURE)
 		return (1);
-	if (valid_data(game, av[1]))
+	if (valid_data(game, argv[1]))
 		return (1);
 	if (!game->cub_file[6])
 		return (error_msg(NULL, MAP_MISSING, 1, 0));
@@ -51,14 +51,14 @@ static int	parse_args(t_game *game, char **av)
 	return (0);
 }
 
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (ac != 2)
+	if (argc != 2)
 		return (error_msg(NULL, USAGE, 1, 0));
 	init_game(&game);
-	if (parse_args(&game, av) != 0)
+	if (parse_args(&game, argv) != 0)
 		clean(&game, FAILURE);
 	init_mlx(&game);
 	init_pattern(&game);
