@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:20 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 20:52:13 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/22 20:35:17 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ void	clean(t_game *game, int code)
 	{
 		if (game->win && game->mlx)
 			mlx_destroy_window(game->mlx, game->win);
+#ifdef __linux__
 		if (game->mlx)
 		{
 			mlx_destroy_display(game->mlx);
 			mlx_loop_end(game->mlx);
 			free(game->mlx);
 		}
+#endif
 		free_game(game);
 	}
 	exit(code);
