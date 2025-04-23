@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/21 18:31:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:37:49 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ int	get_rgb(t_tex *ttx, char *floor, char *ceiling)
 	return (0);
 }
 
+/**
+ * @brief Checks if the RGB values are in the correct format.
+ * @param rgb The RGB values to check.
+ * @return 0 if valid, 1 if invalid.
+ * @details This function checks if the RGB values are in the format
+ * "R,G,B" and ensures that there are exactly 3 values separated by commas.
+ */
 int	check_rgb(char *rgb)
 {
 	int	i;
@@ -65,6 +72,15 @@ int	check_rgb(char *rgb)
 	return (0);
 }
 
+/**
+ * @brief Validates the RGB values for floor and ceiling.
+ * @param data The game data structure.
+ * @param rgb The RGB values to validate.
+ * @return 0 if valid, 1 if invalid.
+ * @details This function checks if the RGB values are in the correct format
+ * and within the valid range. It also checks if the floor and ceiling
+ * colors are set correctly, then retrieves the RGB values.
+ */
 int	valid_rgb(t_game *data, char **rgb)
 {
 	if (!rgb[0] || !rgb[1])

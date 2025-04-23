@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:05 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 10:02:04 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/23 11:27:37 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ static int	has_ext(char *arg, char *ext)
 	return (ft_strncmp(arg + len - ext_len, ext, ext_len) == 0);
 }
 
+/**
+ * @brief Validates the file permissions, path and extension.
+ * @param arg The file path to validate.
+ * @param cub Flag to check for .cub or .xpm extension.
+ * @return SUCCESS if valid, FAILURE otherwise.
+ * @details Checks if the file is a directory, if it can be opened,
+ * and if it has the correct extension.
+ */
 int	validate_file(char *arg, int cub)
 {
 	int	fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:56:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/21 18:39:13 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:36:25 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ int	check_y_help(char **map, int x, int y, int f)
 	return (0);
 }
 
+/**
+ * @brief Checks if the x-coordinate (horizontal plane)
+ * of the map is valid.
+ * @param map The map to check.
+ * @param x The x-coordinate to check.
+ * @return 1 if valid, 0 otherwise.
+ * @details This function checks if the x-coordinate is a
+ * wall or empty space. If it is empty, it checks the surrounding
+ * coordinates to ensure they are walls. If it is a wall,
+ * it checks if the bordering coordinates are valid.
+ */
 int	check_x(char *map, int x)
 {
 	if (map[x] == ' ')
@@ -57,6 +68,18 @@ int	check_x(char *map, int x)
 	return (0);
 }
 
+/**
+ * @brief Checks if the y-coordinate (vertical plane)
+ * of the map is valid.
+ * @param map The map to check.
+ * @param x The x-coordinate to check.
+ * @param y The y-coordinate to check.
+ * @return 1 if valid, 0 otherwise.
+ * @details This function checks if the y-coordinate is a
+ * wall or empty space. If it is empty, it checks the surrounding
+ * coordinates to ensure they are walls. If it is a wall,
+ * it checks if the bordering coordinates are valid.
+ */
 int	check_y(char **map, int x, int y)
 {
 	if (map[y][x] == ' ')
@@ -74,6 +97,15 @@ int	check_y(char **map, int x, int y)
 	return (0);
 }
 
+/**
+ * @brief Validates the map for player position and wall structure.
+ * @param data Pointer to the game structure.
+ * @param map The map to validate.
+ * @return 0 if valid, 1 if invalid.
+ * @details This function checks if the map is surrounded by walls,
+ * if the player is positioned correctly, and if there are any invalid characters.
+ * It also ensures that there is exactly one player on the map.
+ */
 int	valid_map(t_game *data, char **map)
 {
 	int	x;
