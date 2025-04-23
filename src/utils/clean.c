@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 21:22:36 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:18:28 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ void	free_tab(void **tab)
 	free(tab);
 }
 
+/**
+ * @brief Frees the game resources and exits the program.
+ * @param game The game structure to clean up.
+ * @return FAILURE if an error occurs, SUCCESS otherwise.
+ * @details This function frees the game resources such as textures,
+ * map, and other dynamically allocated memory. It also closes the
+ * file descriptor if it is open.
+ */
 int	free_game(t_game *game)
 {
 	free_tab((void **)game->cub_file);

@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/22 23:22:36 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/23 11:00:59 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,16 @@ static void	print_error1(int error)
 		print_error2(error);
 }
 
+/**
+ * @brief Prints error message and returns the error code.
+ * @param info Additional information to print.
+ * @param error Error code.
+ * @param code Error code to return.
+ * @param custom Flag to indicate unspecified error.
+ * @return Error code.
+ * @details This function prints an error message to the standard error output
+ * and returns the specified error code using a getter function.
+ */
 int	error_msg(char *info, int error, int code, int custom)
 {
 	ft_putendl_fd("\e[31mError", 2);

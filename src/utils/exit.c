@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:20 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/22 20:35:17 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/23 11:47:14 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	clean(t_game *game, int code)
 	exit(code);
 }
 
+/**
+ * @brief Cleans up the game resources and exits the program.
+ * @param game The game structure to clean up.
+ * @return 0 on success.
+ * @details This function cleans up the game MLX resources and exits the program
+ * with a success code.
+ */
 int	quit(t_game *game)
 {
 	clean(game, 0);
