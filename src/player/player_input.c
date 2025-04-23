@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:53 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:17:56 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:27:53 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ static int	key_release(int key, t_game *game)
 	return (0);
 }
 
+/**
+ * @brief Sets up the input handling for the game.
+ * @param game The game structure.
+ * @details This function sets up the input handling for the game
+ * using the MLX library. It registers the key press and release
+ * events, as well as the quit event.
+ */
 void	get_input(t_game *game)
 {
 	mlx_hook(game->win, ClientMessage, NoEventMask, quit, game);

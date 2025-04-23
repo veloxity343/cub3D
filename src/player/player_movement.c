@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:49 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 23:26:53 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:27:07 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief This function calculates the new position of the player
+ * based on the direction vector and checks if the move is valid.
+ */
 static int	move_player_dir(t_game *game, double dir_x, double dir_y)
 {
 	double	new_x;
@@ -22,6 +26,14 @@ static int	move_player_dir(t_game *game, double dir_x, double dir_y)
 	return (validate_move(game, new_x, new_y));
 }
 
+/**
+ * @brief Moves the player based on the input direction.
+ * @param game The game structure.
+ * @return The number of moves made.
+ * @details This function checks the player's movement direction
+ * and updates the player's position accordingly, also handling
+ * rotation.
+ */
 int	move_player(t_game *game)
 {
 	int	moved;
