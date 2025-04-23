@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:55 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/20 18:18:58 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:21:51 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ static void	set_tile_px(t_framebuffer *m, int x, int y, int colour)
 	}
 }
 
+/**
+ * @brief Generates a tile in the framebuffer based on the map.
+ * @param m Pointer to the framebuffer structure.
+ * @param x The x-coordinate of the tile.
+ * @param y The y-coordinate of the tile.
+ * @details This function sets the pixel colour for a specific tile in the
+ * framebuffer based on its type using predefined colours.
+ */
 static void	gen_tile(t_framebuffer *m, int x, int y)
 {
 	int					tile;
@@ -40,6 +48,13 @@ static void	gen_tile(t_framebuffer *m, int x, int y)
 		set_tile_px(m, x * m->tile_size, y * m->tile_size, colours[tile]);
 }
 
+/**
+ * @brief Sets the border pixels of the image.
+ * @param m Pointer to the framebuffer structure.
+ * @param colour The colour value for the border.
+ * @details This function sets the border pixels of the image to a specified
+ * colour.
+ */
 static void	set_border_img_px(t_framebuffer *m, int colour)
 {
 	int	x;
@@ -61,6 +76,12 @@ static void	set_border_img_px(t_framebuffer *m, int colour)
 	}
 }
 
+/**
+ * @brief Generates the framebuffer image based on the map.
+ * @param m Pointer to the framebuffer structure.
+ * @details This function iterates through the map and generates the tile graphics
+ * for each tile in the framebuffer.
+ */
 static void	gen_framebuffer(t_framebuffer *m)
 {
 	int	x;
@@ -82,6 +103,14 @@ static void	gen_framebuffer(t_framebuffer *m)
 	set_border_img_px(m, 0x404040);
 }
 
+/**
+ * @brief Renders the tiles on the screen.
+ * @param game Pointer to the game structure.
+ * @param m Pointer to the framebuffer structure.
+ * @details Initialises the framebuffer image, generates the tile graphics,
+ * and then displays it in the window. The framebuffer is destroyed after
+ * rendering to free up resources.
+ */
 void	render_tiles(t_game *game, t_framebuffer *m)
 {
 	int	img_size;

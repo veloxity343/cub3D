@@ -3,15 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   game_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:19:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 16:54:16 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:35:35 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief Initialises raycasting parameters for a given pixel.
+ * @param x The x-coordinate of the pixel.
+ * @param ray Pointer to the ray structure to initialise.
+ * @param player Pointer to the player structure.
+ * @details Sets up the camera position, direction, and other raycasting parameters
+ * for the specified pixel on the screen.
+ * - ray->cam_x: Camera x-coordinate in normalised device coordinates
+ * - ray->dir: Direction vector based on player direction and camera x-coordinate (FOV)
+ * - ray->map: Map coordinates of the ray's starting position
+ * - ray->delta_dist: Pythagorean distance to the next grid line
+ */
 static void	init_raycast_info(int x, t_ray *ray, t_player *player)
 {
 	init_ray(ray);
@@ -24,6 +36,17 @@ static void	init_raycast_info(int x, t_ray *ray, t_player *player)
 	ray->delta_dist.y = fabs(1 / ray->dir.y);
 }
 
+/**
+ * @brief Sets up the DDA parameters for raycasting.
+ * @param ray Pointer to the ray structure.
+ * @param player Pointer to the player structure.
+ * @details Determines the step direction and initial side distance based on the ray's direction
+ * and the player's position. This is crucial for determining which grid cell the ray will hit first.
+ * Both axes follow the same logic:
+ * left: distance = current pos - current tile
+ * right: distance = next tile - current pos
+ * all multiplied by the delta (pythagorean) distance to get travel distance
+ */
 static void	set_dda(t_ray *ray, t_player *player)
 {
 	if (ray->dir.x < 0)
@@ -52,6 +75,14 @@ static void	set_dda(t_ray *ray, t_player *player)
 	}
 }
 
+/**
+ * @brief Performs the DDA algorithm to find the wall hit by the ray.
+ * @param game Pointer to the game structure.
+ * @param ray Pointer to the ray structure.
+ * @details Iteratively checks which side of the grid the ray hits first,
+ * updating the map coordinates and side distances accordingly.
+ * Stops when a wall is hit or when the ray goes out of bounds.
+ */
 static void	start_dda(t_game *game, t_ray *ray)
 {
 	while (1)
@@ -76,6 +107,15 @@ static void	start_dda(t_game *game, t_ray *ray)
 	}
 }
 
+/**
+ * @brief Calculates the height of the line to be drawn based on the ray's distance.
+ * @param ray Pointer to the ray structure.
+ * @param game Pointer to the game structure.
+ * @param player Pointer to the player structure.
+ * @details Computes the height of the line to be drawn on the screen based on
+ * the distance to the wall hit by the ray. Also calculates the start and end
+ * points for drawing the line, and determines the wall's x-coordinate for texture mapping.
+ */
 static void	calc_line_h(t_ray *ray, t_game *game, t_player *player)
 {
 	if (ray->side == 0)
@@ -92,6 +132,14 @@ static void	calc_line_h(t_ray *ray, t_game *game, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
+/**
+ * @brief Performs raycasting for the entire screen.
+ * @param player Pointer to the player structure.
+ * @param game Pointer to the game structure.
+ * @return SUCCESS on success, otherwise an error code.
+ * @details Iterates through each pixel on the screen, initialises raycasting
+ * parameters, performs DDA, calculates line height, and updates texture pixels.
+ */
 int	raycast(t_player *player, t_game *game)
 {
 	t_ray	ray;

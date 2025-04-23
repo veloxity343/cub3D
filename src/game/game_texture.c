@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   game_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:19:00 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 16:49:11 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/23 22:18:25 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief Determines the texture based on the ray's side and direction.
+ * @param game Pointer to the game structure.
+ * @param ray Pointer to the ray structure.
+ * @details This function sets the texture index in the game structure based
+ * on which side of the wall was hit by the ray.
+ */
 static void	get_tex_index(t_game *game, t_ray *ray)
 {
 	if (ray->side != 0)
@@ -48,6 +55,23 @@ void	init_tex_px(t_game *game)
 	}
 }
 
+/**
+ * @brief   Updates the texture pixels for a vertical wall slice.
+ * @param   game Pointer to the game state structure.
+ * @param   tex  Pointer to the texture information structure.
+ * @param   ray  Pointer to the raycasting data structure.
+ * @param   x    Column position on the screen to update.
+ * @details 
+ * - Computes horizontal coordinate
+ * - Horizontally flips the texture if ray hit from specific directions (prevent mirroring).
+ * - Calculates vertical stepping (`tex->step`) to map texture rows to screen pixels.
+ * - Computes initial texture Y position (`tex->pos`) based on screen alignment.
+ * - Loops from `ray->start` to `ray->end`, for each screen pixel:
+ *     - Computes corresponding Y coordinate in the texture (`tex->dir.y`).
+ *     - Fetches color from texture using `tex->index`, `tex->dir.y`, and `tex->dir.x`.
+ *     - Applies shadows to NORTH and EAST textures.
+ *     - Writes colour to `game->tex_px[y][x]` if non-zero.
+ */
 void	update_tex_px(t_game *game, t_tex *tex, t_ray *ray, int x)
 {
 	int	y;

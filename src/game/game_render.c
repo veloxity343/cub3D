@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:19:07 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 16:50:52 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:54:27 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ static void	render_frame(t_game *game)
 	mlx_destroy_image(game->mlx, img.img);
 }
 
+/**
+ * @brief Sets the pixel color in the image at the specified coordinates.
+ * @param img Pointer to the image structure.
+ * @param x The x-coordinate of the pixel.
+ * @param y The y-coordinate of the pixel.
+ * @param colour The colour value to set.
+ * @details This function updates the pixel colour in the image buffer at the
+ * specified coordinates. It uses the size of a pixel (1 int = 4 bytes)
+ * to calculate the correct position in the image data array.
+ */
 void	set_img_px(t_img *img, int x, int y, int colour)
 {
 	img->adr[y * (img->size_line / 4) + x] = colour;
@@ -54,7 +64,13 @@ void	render_raycast(t_game *game)
 	raycast(&game->player, game);
 	render_frame(game);
 }
-
+/**
+ * @brief Renders the game image by updating the player's position and performing raycasting.
+ * @param game Pointer to the game structure.
+ * @return 0 on success, otherwise an error code.
+ * @details This function is called to render the game image. It updates the player's
+ * position based on input and performs raycasting to render the scene.
+ */
 int	render_img(t_game *game)
 {
 	game->player.moved += move_player(game);
