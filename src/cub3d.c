@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/22 23:14:47 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:16:09 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,29 @@ static void	print_controls(void)
 
 int	valid_data(t_game *data, char *path)
 {
-	data->cub_file = read_file(path);
-	if (!data->cub_file)
+	char	*file;
+
+	file = read_file(path);
+	if (!file)
 		return (error_msg(0, FILE_INVALID, 1, 0));
-	if (valid_image(data, data->cub_file))
+	data->cub_file = ft_split(file, '\n');
+	if (!data->cub_file || valid_image(data, data->cub_file)
+		|| valid_rgb(data, data->cub_file + 4))
+	{
+		ft_free1(file);
 		return (1);
-	if (valid_rgb(data, data->cub_file + 4))
-		return (1);
+	}
+	if (!data->cub_file[6])
+	{
+		ft_free1(file);
+		return (error_msg(NULL, MAP_MISSING, 1, 0));
+	}
+	if (check_map_double_newline(file))
+	{
+		ft_free1(file);
+		return (error_msg(NULL, MAP_NO_WALLS, 1, 0));
+	}
+	ft_free1(file);
 	return (0);
 }
 
@@ -41,10 +57,7 @@ static int	parse_args(t_game *game, char **argv)
 		return (1);
 	if (valid_data(game, argv[1]))
 		return (1);
-	if (!game->cub_file[6])
-		return (error_msg(NULL, MAP_MISSING, 1, 0));
-	else
-		get_map_details(game, game->cub_file + 6);
+	get_map_details(game, game->cub_file + 6);
 	if (valid_map(game, game->map))
 		return (1);
 	init_player_dir(game);

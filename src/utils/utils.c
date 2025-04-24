@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:51:56 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/23 11:46:29 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:01:14 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 /**
  * @brief Reads the file line by line and returns an array of strings.
  * @param path The path to the file.
- * @return An array of strings containing the file contents.
+ * @return A strings containing the file contents.
  * @details This function opens the file, reads it line by line,
- * and stores each line in a dynamically allocated array of strings.
+ * and stores each line in a strings.
  */
-char	**read_file(char *path)
+char	*read_file(char *path)
 {
 	int		fd;
 	char	*temp;
 	char	*readd;
-	char	**cub_file;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
+	{
 		return (NULL);
+	}
 	temp = get_next_line(fd);
 	readd = ft_calloc(1, 1);
 	while (temp)
@@ -37,11 +38,7 @@ char	**read_file(char *path)
 		ft_free1(temp);
 		temp = get_next_line(fd);
 	}
-	cub_file = ft_split(readd, '\n');
-	if (!cub_file)
-		return (NULL);
-	ft_free1(readd);
-	return (cub_file);
+	return (readd);
 }
 
 void	free_arr(char **arr)

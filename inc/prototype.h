@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 23:22:17 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/20 17:33:00 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:18:27 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		valid_image(t_game *data, char **dir);
 int		valid_rgb(t_game *data, char **rgb);
 
 //utils.c
-char	**read_file(char *path);
+char	*read_file(char *path);
 void	free_arr(char **arr);
 int		ft_arrlen(char **arr);
 char	**ft_arrdup(char **arr);
@@ -98,5 +98,6 @@ char	*ft_strjoin_free(char *s1, char *s2);
 void	get_map_details(t_game *data, char **map);
 int		valid_player_pos(char **map, int x, int y);
 int		get_player_data(t_game *data, int x, int y);
+int		check_map_double_newline(char *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:40:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/24 13:32:40 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:17:08 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,28 @@ int	get_player_data(t_game *data, int x, int y)
 	data->player.dir = data->map[y][x];
 	data->map[y][x] = '0';
 	return (1);
+}
+
+/**
+ * @brief Special check for edge case
+ * @param map
+ * @return 0 if valid, 1 if invalid.
+ */
+int	check_map_double_newline(char *map)
+{
+	char			**arr_map;
+	int				i;
+	unsigned int	target_from;
+
+	if (!map)
+		return (1);
+	arr_map = ft_split(map, '\n');
+	i = -1;
+	target_from = 8;
+	while (++i < 6)
+		target_from += ft_strlen(arr_map[i]);
+	free_arr(arr_map);
+	if (ft_strnstr(map + target_from, "\n\n", ft_strlen(map)))
+		return (1);
+	return (0);
 }
