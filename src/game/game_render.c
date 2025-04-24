@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:19:07 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/23 21:54:27 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:28:19 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ void	render_raycast(t_game *game)
 	raycast(&game->player, game);
 	render_frame(game);
 }
+
 /**
- * @brief Renders the game image by updating the player's position and performing raycasting.
+ * @brief Renders the game image by 
+ * 		updating the player's position and performing raycasting.
  * @param game Pointer to the game structure.
  * @return 0 on success, otherwise an error code.
- * @details This function is called to render the game image. It updates the player's
+ * @details This function is called to render the game image.
+ * 		It updates the player's
  * position based on input and performs raycasting to render the scene.
  */
 int	render_img(t_game *game)

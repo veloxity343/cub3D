@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/23 11:00:59 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:31:13 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	print_error2(int error)
 	else if (error == FILE_NOT_XPM)
 		ft_putstr_fd("\e[31mFile error: Format is not .xpm\n\e[0m", 2);
 	else if (error == FILE_IS_DIR)
-		ft_putstr_fd("\e[31mFile error: Given argument is a directory\n\e[0m", 2);
+		ft_putstr_fd("\e[31mFile error: Given argument is a directory\n\e[0m",
+			2);
 	else if (error == COLOR_FLOOR_CEILING)
 		ft_putstr_fd("\e[31mColour error: Invalid for floor/ceiling\n\e[0m", 2);
 	else if (error == COLOR_FLOOR)

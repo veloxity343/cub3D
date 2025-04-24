@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:19:00 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/23 22:18:25 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:29:44 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,15 @@ void	init_tex_px(t_game *game)
  * @param   x    Column position on the screen to update.
  * @details 
  * - Computes horizontal coordinate
- * - Horizontally flips the texture if ray hit from specific directions (prevent mirroring).
- * - Calculates vertical stepping (`tex->step`) to map texture rows to screen pixels.
+ * - Horizontally flips the texture if 
+ * 		ray hit from specific directions (prevent mirroring).
+ * - Calculates vertical stepping (`tex->step`) to 
+ * 		map texture rows to screen pixels.
  * - Computes initial texture Y position (`tex->pos`) based on screen alignment.
  * - Loops from `ray->start` to `ray->end`, for each screen pixel:
  *     - Computes corresponding Y coordinate in the texture (`tex->dir.y`).
- *     - Fetches color from texture using `tex->index`, `tex->dir.y`, and `tex->dir.x`.
+ *     - Fetches color from texture using 
+ * 		`tex->index`, `tex->dir.y`, and `tex->dir.x`.
  *     - Applies shadows to NORTH and EAST textures.
  *     - Writes colour to `game->tex_px[y][x]` if non-zero.
  */

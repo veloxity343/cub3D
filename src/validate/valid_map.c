@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:56:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/23 11:36:25 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:33:03 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,9 @@ int	check_y(char **map, int x, int y)
  * @param map The map to validate.
  * @return 0 if valid, 1 if invalid.
  * @details This function checks if the map is surrounded by walls,
- * if the player is positioned correctly, and if there are any invalid characters.
- * It also ensures that there is exactly one player on the map.
+ * 		if the player is positioned correctly, 
+ * 		and if there are any invalid characters.
+ * 		It also ensures that there is exactly one player on the map.
  */
 int	valid_map(t_game *data, char **map)
 {

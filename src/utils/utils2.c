@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:40:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/23 11:33:46 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:32:40 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	valid_player_pos(char **map, int x, int y)
  * @param x The x-coordinate of the player.
  * @param y The y-coordinate of the player.
  * @return 1 if successful, INT_MIN if invalid position.
- * @details Updates the player's position and direction based on the given coordinates.
+ * @details Updates the player's position and 
+ * 		direction based on the given coordinates.
  * If the position is valid, it sets the player's position and direction.
  */
 int	get_player_data(t_game *data, int x, int y)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:19:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/23 21:35:35 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:29:24 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
  * @param x The x-coordinate of the pixel.
  * @param ray Pointer to the ray structure to initialise.
  * @param player Pointer to the player structure.
- * @details Sets up the camera position, direction, and other raycasting parameters
+ * @details Sets up the camera position, direction, 
+ * 		and other raycasting parameters
  * for the specified pixel on the screen.
  * - ray->cam_x: Camera x-coordinate in normalised device coordinates
- * - ray->dir: Direction vector based on player direction and camera x-coordinate (FOV)
+ * - ray->dir: Direction vector based on player direction 
+ * 		and camera x-coordinate (FOV)
  * - ray->map: Map coordinates of the ray's starting position
  * - ray->delta_dist: Pythagorean distance to the next grid line
  */
@@ -40,8 +42,10 @@ static void	init_raycast_info(int x, t_ray *ray, t_player *player)
  * @brief Sets up the DDA parameters for raycasting.
  * @param ray Pointer to the ray structure.
  * @param player Pointer to the player structure.
- * @details Determines the step direction and initial side distance based on the ray's direction
- * and the player's position. This is crucial for determining which grid cell the ray will hit first.
+ * @details Determines the step direction and 
+ * 		initial side distance based on the ray's direction
+ * 		and the player's position. This is crucial 
+ * 		for determining which grid cell the ray will hit first.
  * Both axes follow the same logic:
  * left: distance = current pos - current tile
  * right: distance = next tile - current pos
@@ -108,13 +112,15 @@ static void	start_dda(t_game *game, t_ray *ray)
 }
 
 /**
- * @brief Calculates the height of the line to be drawn based on the ray's distance.
+ * @brief Calculates the height of the line 
+ * 		to be drawn based on the ray's distance.
  * @param ray Pointer to the ray structure.
  * @param game Pointer to the game structure.
  * @param player Pointer to the player structure.
  * @details Computes the height of the line to be drawn on the screen based on
  * the distance to the wall hit by the ray. Also calculates the start and end
- * points for drawing the line, and determines the wall's x-coordinate for texture mapping.
+ * 		points for drawing the line, 
+ * 		and determines the wall's x-coordinate for texture mapping.
  */
 static void	calc_line_h(t_ray *ray, t_game *game, t_player *player)
 {

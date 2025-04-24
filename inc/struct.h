@@ -171,7 +171,6 @@ typedef struct s_player
 	int			rotate;
 }	t_player;
 
-
 /**
  * @brief Main game structure containing all subcomponents and game state.
  * @param map_info Information about the map file and dimensions.

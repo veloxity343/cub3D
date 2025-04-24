@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_tiles.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:55 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/23 22:21:51 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/24 13:30:06 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ static void	set_border_img_px(t_framebuffer *m, int colour)
 /**
  * @brief Generates the framebuffer image based on the map.
  * @param m Pointer to the framebuffer structure.
- * @details This function iterates through the map and generates the tile graphics
+ * @details This function iterates through the map and 
+ * 		generates the tile graphics
  * for each tile in the framebuffer.
  */
 static void	gen_framebuffer(t_framebuffer *m)
