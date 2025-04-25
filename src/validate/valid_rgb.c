@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/23 11:37:49 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/25 15:03:30 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned long	get(char *s_rgb)
 {
 	char			**temp;
 	unsigned int	rgb[3];
-
+ 
 	temp = ft_split(s_rgb, ',');
 	rgb[0] = ft_atoi(temp[0]);
 	rgb[1] = ft_atoi(temp[1]);
@@ -24,14 +24,22 @@ unsigned long	get(char *s_rgb)
 	ft_free_strarr(temp);
 	if (rgb[0] < 256 && rgb[1] < 256 && rgb[2] < 256)
 		return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
-	return (0);
+	return (ULONG_MAX);
 }
 
-int	get_rgb(t_tex *ttx, char *floor, char *ceiling)
+int	get_rgb(t_tex *ttx, char *target1, char *target2)
 {
-	ttx->hex_f = get(floor);
-	ttx->hex_c = get(ceiling);
-	if (ttx->hex_f == 0 || ttx->hex_c == 0)
+	if (!ft_strncmp(target1, "F ", 2))
+	{
+		ttx->hex_f = get(target1);
+		ttx->hex_c = get(target2);
+	}
+	else
+	{
+		ttx->hex_c = get(target1);
+		ttx->hex_f = get(target2);
+	}
+	if (ttx->hex_f == ULONG_MAX || ttx->hex_c == ULONG_MAX)
 		return (1);
 	return (0);
 }
@@ -86,7 +94,8 @@ int	valid_rgb(t_game *data, char **rgb)
 	if (!rgb[0] || !rgb[1])
 		return (error_msg(NULL, COLOR_MISSING, 1, 0));
 	if (ft_strncmp(rgb[0], "F ", 2) || ft_strncmp(rgb[1], "C ", 2))
-		return (error_msg(NULL, COLOR_MISSING, 1, 0));
+		if (ft_strncmp(rgb[0], "C ", 2) || ft_strncmp(rgb[1], "F ", 2))
+			return (error_msg(NULL, COLOR_MISSING, 1, 0));
 	if (check_rgb(rgb[0] + 2) || check_rgb(rgb[1] + 2))
 		return (error_msg(NULL, COLOR_FLOOR_CEILING, 1, 0));
 	if (get_rgb(&data->tex_info, rgb[0] + 2, rgb[1] + 2))
