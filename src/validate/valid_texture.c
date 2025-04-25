@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/25 16:07:43 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:23:39 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int	valid_image(t_game *data, char **dir)
 	data->tex_info.west = ft_strdup(dir[1] + 3);
 	data->tex_info.south = ft_strdup(dir[2] + 3);
 	data->tex_info.east = ft_strdup(dir[3] + 3);
-		return (0);
+	return (0);
 }

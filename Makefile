@@ -1,5 +1,5 @@
 # Standard
-NAME		=	cub3d
+NAME		=	cub3D
 
 # Directories
 LIBFT		=	./libft/libft.a
@@ -35,8 +35,8 @@ RM			=	rm -rf
 # Sources & objects
 SRC			=	$(shell find $(SRC_DIR) -type f -name "*.c")
 OBJ			=	$(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
-SRCB		=	$(shell find $(SRCB_DIR) -type f -name "*.c")
-OBJB		=	$(patsubst $(SRCB_DIR)%.c, $(OBJB_DIR)%.o, $(SRCB))
+# SRCB		=	$(shell find $(SRCB_DIR) -type f -name "*.c")
+# OBJB		=	$(patsubst $(SRCB_DIR)%.c, $(OBJB_DIR)%.o, $(SRCB))
 
 # Colors
 RED		=	\033[1;31m
@@ -67,11 +67,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@printf "$(YELLOW)Compiling\t$(RESET)%-33.33s\r" $@
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-bonus:		clean $(OBJ) $(OBJB)
-	@echo "$(BLUE)Linking bonus objects...$(RESET)"
-	@make -C $(dir $(LIBFT))
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(OBJB) $(LIBFT) $(MLX)
-	@echo "$(GREEN)Successfully compiled bonus!$(RESET)"
+# bonus:		clean $(OBJ) $(OBJB)
+# 	@echo "$(BLUE)Linking bonus objects...$(RESET)"
+# 	@make -C $(dir $(LIBFT))
+# 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(OBJB) $(LIBFT) $(MLX)
+# 	@echo "$(GREEN)Successfully compiled bonus!$(RESET)"
 
 $(OBJB_DIR):
 	@mkdir -p $(OBJB_DIR)

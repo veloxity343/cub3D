@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/25 16:17:33 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:23:33 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned long	get(char *s_rgb)
 {
 	char			**temp;
 	unsigned int	rgb[3];
- 
+
 	temp = ft_split(s_rgb, ',');
 	rgb[0] = ft_atoi(temp[0]);
 	rgb[1] = ft_atoi(temp[1]);
