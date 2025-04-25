@@ -3,51 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   valid_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/23 11:38:31 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/25 15:15:43 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
 /**
- * @brief Checks if the direction is valid and sets the texture path.
+ * @brief Sets direction texture path.
  * @param data The game data structure.
  * @param dir The direction string to check.
- * @param flag_n0_w1_s2_e3 The flags for each direction.
- * @return 0 if valid, 1 if invalid.
- * @details This function checks if the direction is valid and
- * sets the corresponding texture path in the game data structure.
+ * @details This function sets the corresponding texture path in 
+ * 		the game data structure.
  */
-int	check_direction(t_game *data, char *dir, int *flag_n0_w1_s2_e3)
+void	get_direction(t_game *data, char *dir)
 {
-	if (!ft_strncmp(dir, "NO ", 3) && !flag_n0_w1_s2_e3[0])
-	{
+	if (!ft_strncmp(dir, "NO ", 3))
 		data->tex_info.north = ft_strdup(dir + 3);
-		flag_n0_w1_s2_e3[0] = 42;
-		return (0);
-	}
-	else if (!ft_strncmp(dir, "WE ", 3) && !flag_n0_w1_s2_e3[1])
-	{
+	else if (!ft_strncmp(dir, "WE ", 3))
 		data->tex_info.west = ft_strdup(dir + 3);
-		flag_n0_w1_s2_e3[1] = 42;
-		return (0);
-	}
-	else if (!ft_strncmp(dir, "SO ", 3) && !flag_n0_w1_s2_e3[2])
-	{
+	else if (!ft_strncmp(dir, "SO ", 3))
 		data->tex_info.south = ft_strdup(dir + 3);
-		flag_n0_w1_s2_e3[2] = 42;
-		return (0);
-	}
-	else if (!ft_strncmp(dir, "EA ", 3) && !flag_n0_w1_s2_e3[3])
-	{
+	else if (!ft_strncmp(dir, "EA ", 3))
 		data->tex_info.east = ft_strdup(dir + 3);
-		flag_n0_w1_s2_e3[3] = 42;
-		return (0);
-	}
-	return (error_msg(NULL, TEX_INVALID, 1, 0));
 }
 
 /**
@@ -62,17 +43,15 @@ int	check_direction(t_game *data, char *dir, int *flag_n0_w1_s2_e3)
 int	valid_image(t_game *data, char **dir)
 {
 	int	i;
-	int	flag_n0_w1_s2_e3[4];
 
 	if (ft_arrlen(dir) < 4)
 		return (error_msg(NULL, TEX_MISSING, 1, 0));
-	flag_n0_w1_s2_e3[0] = 0;
-	flag_n0_w1_s2_e3[1] = 0;
-	flag_n0_w1_s2_e3[2] = 0;
-	flag_n0_w1_s2_e3[3] = 0;
+	if (ft_strncmp(dir[0], "NO ", 3) || ft_strncmp(dir[1], "SO ", 3)
+		|| ft_strncmp(dir[2], "WE ", 3)
+		|| ft_strncmp(dir[3], "EA ", 3))
+		return (error_msg(NULL, TEX_INVALID, 1, 0));
 	i = 0;
 	while (dir[i] && i < 4)
-		if (check_direction(data, dir[i++], flag_n0_w1_s2_e3))
-			return (1);
+		get_direction(data, dir[i++]);
 	return (0);
 }

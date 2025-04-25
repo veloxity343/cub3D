@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:40:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/24 16:17:08 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:50:21 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,21 @@ int	check_map_double_newline(char *map)
 {
 	char			**arr_map;
 	int				i;
-	unsigned int	target_from;
+	char			*found_last_rgb;
 
 	if (!map)
 		return (1);
 	arr_map = ft_split(map, '\n');
-	i = -1;
-	target_from = 8;
-	while (++i < 6)
-		target_from += ft_strlen(arr_map[i]);
-	free_arr(arr_map);
-	if (ft_strnstr(map + target_from, "\n\n", ft_strlen(map)))
+	i = ft_arrlen(arr_map) - 1;
+	while (ft_strncmp(arr_map[i], "F ", 2) && ft_strncmp(arr_map[i], "C ", 2))
+		i--;
+	found_last_rgb = ft_strnstr(map, arr_map[i], ft_strlen(map))
+		+ ft_strlen(arr_map[i]) + 1;
+	ft_free_strarr(arr_map);
+	i = 0;
+	while (found_last_rgb[i] == '\n')
+		i++;
+	if (ft_strnstr(found_last_rgb + i, "\n\n", ft_strlen(found_last_rgb + i)))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/24 15:55:09 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:16:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	print_error1(int error)
 	else if (error == TEX_MISSING)
 		ft_putstr_fd("\e[31mTexture error: Missing texture\n\e[0m", 2);
 	else if (error == TEX_INVALID)
-		ft_putstr_fd("\e[31mTexture error: Invalid texture\n\e[0m", 2);
+		ft_putstr_fd("\e[31mTexture error: Invalid texture or Wrong order\n\e[0m", 2);
 	else
 		print_error2(error);
 }
