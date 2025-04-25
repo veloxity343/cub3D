@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:12 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/23 12:18:28 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:04:52 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	free_tex_info(t_tex *tex)
 {
-	free(tex->north);
-	free(tex->south);
-	free(tex->west);
-	free(tex->east);
-	free(tex->floor);
-	free(tex->ceiling);
+	ft_free1(tex->north);
+	ft_free1(tex->south);
+	ft_free1(tex->west);
+	ft_free1(tex->east);
+	ft_free1(tex->floor);
+	ft_free1(tex->ceiling);
 }
 
 static void	free_map(t_game *game)
@@ -32,7 +32,7 @@ static void	free_map(t_game *game)
 
 char	*ft_free(char **str)
 {
-	free(*str);
+	ft_free1(*str);
 	*str = NULL;
 	return (NULL);
 }
@@ -46,10 +46,10 @@ void	free_tab(void **tab)
 		return ;
 	while (tab[i])
 	{
-		free(tab[i]);
+		ft_free1(tab[i]);
 		i++;
 	}
-	free(tab);
+	ft_free1(tab);
 }
 
 /**
