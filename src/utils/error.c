@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/25 20:41:30 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:17:09 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	print_error1(int error)
 	else if (error == MLX_WIN)
 		ft_putstr_fd("\e[31mMLX error: Cannot create window\n\e[0m", 2);
 	else if (error == MLX_IMG)
-		ft_putstr_fd("\e[31mMLX error: Cannot create image\n\e[0m", 2);
+		ft_putstr_fd("\e[31mMLX error: Cannot create image or image path error\n\e[0m", 2);
 	else if (error == USER_NUM)
 		ft_putstr_fd("\e[31mPlayer error: More than one player on map\n\e[0m",
 			2);

@@ -1,26 +1,26 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   valid_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/25 20:23:21 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:37:46 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-/**
- * @brief Validates the image paths.
- * @param data The game data structure.
- * @param dir The array of image paths.
- * @return 1 if invalid, 0 if valid.
- * @details This function checks if the image paths are valid
- * and if they exist. It also checks if the paths are not empty
- * and if they have the correct extension.
- */
+// /**
+//  * @brief Validates the image paths.
+//  * @param data The game data structure.
+//  * @param dir The array of image paths.
+//  * @return 1 if invalid, 0 if valid.
+//  * @details This function checks if the image paths are valid
+//  * and if they exist. It also checks if the paths are not empty
+//  * and if they have the correct extension.
+//  */
 // int	valid_image(t_game *data, char **dir)
 // {
 // 	if (ft_arrlen(dir) < 4)
@@ -36,46 +36,45 @@
 // 	return (0);
 // }
 
-char	*set_dir(char *dir, int unuse, int *flag)
+static char	*skip_spaces(char *str)
 {
-	char	**temp;
-	char	*texture_dir;
-
-	(void)unuse;
-	temp = ft_split(dir, ' ');
-	if (ft_arrlen(temp) != 2)
-	{
-		ft_free_strarr(temp);
-		*flag = 1;
-		error_msg(NULL, TEX_INVALID, 1, 0);
-		return (NULL);
-	}
-	texture_dir = ft_strdup(temp[1]);
-	ft_free_strarr(temp);
-	return (texture_dir);
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str++;
+	return (str);
 }
 
-int	check_direction(t_game *data, char *dir, int *flag_n0_w1_s2_e3, int flag)
+static int	store_texture(char **target, char *raw)
 {
-	if (!ft_strncmp(dir, "NO ", 3) && !flag_n0_w1_s2_e3[0])
+	char *clean = ft_strdup(skip_spaces(raw));
+	if (!clean)
+		return (error_msg(NULL, TEX_INVALID, 1, 0));
+	*target = clean;
+	return (0);
+}
+
+int	check_direction(t_game *data, char *dir, int *flag)
+{
+	char	*line = skip_spaces(dir);
+
+	if (!ft_strncmp(line, "NO", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[0])
 	{
-		data->tex_info.north = set_dir(dir, flag_n0_w1_s2_e3[0]++, &flag);
-		return (flag);
+		flag[0] = 42;
+		return (store_texture(&data->tex_info.north, line + 2));
 	}
-	else if (!ft_strncmp(dir, "WE ", 3) && !flag_n0_w1_s2_e3[1])
+	if (!ft_strncmp(line, "WE", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[1])
 	{
-		data->tex_info.west = set_dir(dir, flag_n0_w1_s2_e3[1]++, &flag);
-		return (flag);
+		flag[1] = 42;
+		return (store_texture(&data->tex_info.west, line + 2));
 	}
-	else if (!ft_strncmp(dir, "SO ", 3) && !flag_n0_w1_s2_e3[2])
+	if (!ft_strncmp(line, "SO", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[2])
 	{
-		data->tex_info.south = set_dir(dir, flag_n0_w1_s2_e3[2]++, &flag);
-		return (flag);
+		flag[2] = 42;
+		return (store_texture(&data->tex_info.south, line + 2));
 	}
-	else if (!ft_strncmp(dir, "EA ", 3) && !flag_n0_w1_s2_e3[3])
+	if (!ft_strncmp(line, "EA", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[3])
 	{
-		data->tex_info.east = set_dir(dir, flag_n0_w1_s2_e3[3]++, &flag);
-		return (flag);
+		flag[3] = 42;
+		return (store_texture(&data->tex_info.east, line + 2));
 	}
 	return (error_msg(NULL, TEX_INVALID, 1, 0));
 }
@@ -93,7 +92,6 @@ int	valid_image(t_game *data, char **dir)
 {
 	int	i;
 	int	flag_n0_w1_s2_e3[4];
-	int flag;
 
 	if (ft_arrlen(dir) < 4)
 		return (error_msg(NULL, TEX_MISSING, 1, 0));
@@ -101,10 +99,9 @@ int	valid_image(t_game *data, char **dir)
 	flag_n0_w1_s2_e3[1] = 0;
 	flag_n0_w1_s2_e3[2] = 0;
 	flag_n0_w1_s2_e3[3] = 0;
-	flag = 0;
 	i = 0;
 	while (dir[i] && i < 4)
-		if (check_direction(data, dir[i++], flag_n0_w1_s2_e3, flag))
+		if (check_direction(data, dir[i++], flag_n0_w1_s2_e3))
 			return (1);
 	return (0);
 }

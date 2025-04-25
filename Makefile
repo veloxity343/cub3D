@@ -23,7 +23,7 @@ else
 endif
 
 # Compiler & flags
-WFLAGS		=	-Wall -Wextra -Werror
+WFLAGS		=	-Wall -Wextra -Werror #-g3 -fsanitize=address
 IFLAGS		=	-I$(INC)
 DSYM		=	-g3
 FSAN		=	-fsanitize=address $(DSYM)
