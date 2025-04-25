@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/25 16:23:33 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:57:13 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,37 @@ unsigned long	get(char *s_rgb)
 	return (ULONG_MAX);
 }
 
+char *skip(char *rgb)
+{
+	char **temp;
+	char *skiped;
+
+	temp = ft_split(rgb, ' ');
+	skiped = ft_strdup(temp[1]);
+	ft_free_strarr(temp);
+	return (skiped);
+}
+
 int	get_rgb(t_tex *ttx, char *target1, char *target2)
 {
-	if (!ft_strncmp(target1, "F ", 2))
+	char	*temp1;
+	char	*temp2;
+
+	temp1 = skip(target1);
+	temp2 = skip(target2);
+	if (!ft_strchr(target1, 'F'))
 	{
-		ttx->hex_f = get(target1 + 2);
-		ttx->hex_c = get(target2 + 2);
+		ttx->hex_f = get(temp1);
+		ttx->hex_c = get(temp2);
 	}
 	else
 	{
-		ttx->hex_c = get(target1 + 2);
-		ttx->hex_f = get(target2 + 2);
+		ttx->hex_c = get(temp1);
+		ttx->hex_f = get(temp2);
 	}
+	printf("%ld %ld\n", ttx->hex_c, ttx->hex_f);
+	ft_free1(temp1);
+	ft_free1(temp2);
 	if (ttx->hex_f == ULONG_MAX || ttx->hex_c == ULONG_MAX)
 		return (1);
 	return (0);
@@ -91,14 +110,25 @@ int	check_rgb(char *rgb)
  */
 int	valid_rgb(t_game *data, char **rgb)
 {
+	char **temp;
+	char **temp2;
+	int f;
+
+	f = 0;
 	if (!rgb[0] || !rgb[1])
 		return (error_msg(NULL, COLOR_MISSING, 1, 0));
-	if (ft_strncmp(rgb[0], "F ", 2) || ft_strncmp(rgb[1], "C ", 2))
-		if (ft_strncmp(rgb[0], "C ", 2) || ft_strncmp(rgb[1], "F ", 2))
-			return (error_msg(NULL, COLOR_MISSING, 1, 0));
-	if (check_rgb(rgb[0] + 2) || check_rgb(rgb[1] + 2))
-		return (error_msg(NULL, COLOR_FLOOR_CEILING, 1, 0));
-	if (get_rgb(&data->tex_info, rgb[0], rgb[1]))
-		return (error_msg(NULL, COLOR_FLOOR_CEILING, 1, 0));
-	return (0);
+	temp = ft_split(rgb[0], ' ');
+	temp2 = ft_split(rgb[1], ' ');
+	if (ft_strncmp(temp[0], "F", 1) || ft_strncmp(temp2[0], "C", 1))
+		if (ft_strncmp(temp[0], "C", 1) || ft_strncmp(temp2[0], "F", 1))
+			(error_msg(NULL, COLOR_MISSING, 1, f++));
+	if (f != 1 && (ft_arrlen(temp) != 2 || ft_arrlen(temp2) != 2))
+		(error_msg(NULL, COLOR_FLOOR_CEILING, 1, f++));
+	if (f != 1 && (check_rgb(temp[1]) || check_rgb(temp2[1])))
+		error_msg(NULL, COLOR_FLOOR_CEILING, 1, f++);
+	if (f != 1 && get_rgb(&data->tex_info, rgb[0], rgb[1]))
+		error_msg(NULL, COLOR_FLOOR_CEILING, 1, f++);
+	ft_free_strarr(temp);
+	ft_free_strarr(temp2);
+	return (f);
 }
