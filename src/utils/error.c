@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/25 16:22:50 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:46:27 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	error_msg(char *info, int error, int code, int custom)
 	else if (error == TEX_INVALID)
 	{
 		ft_putstr_fd("\e[31mTexture error: Invalid ", 2);
-		ft_putstr_fd("textureor Wrong order\n\e[0m", 2);
+		ft_putstr_fd("texture or Wrong order\n\e[0m", 2);
 	}
 	else
 		print_error1(error);

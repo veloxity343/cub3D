@@ -1,14 +1,7 @@
-NO                     tex/blue_stone.xpm
-SO                                      tex/red_brick.xpm
-WE              tex/grey_stone.xpm
-
-
-
-
-
-
-
-        EA tex/purple_stone.xpm
+NO tex/blue_stone.xpm
+SO tex/red_brick.xpm
+WE tex/grey_stone.xpm
+EA tex/purple_stone.xpm
 
 F 196,88,36
 C 135,206,235
