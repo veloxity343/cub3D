@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/25 15:03:30 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:17:33 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	get_rgb(t_tex *ttx, char *target1, char *target2)
 {
 	if (!ft_strncmp(target1, "F ", 2))
 	{
-		ttx->hex_f = get(target1);
-		ttx->hex_c = get(target2);
+		ttx->hex_f = get(target1 + 2);
+		ttx->hex_c = get(target2 + 2);
 	}
 	else
 	{
-		ttx->hex_c = get(target1);
-		ttx->hex_f = get(target2);
+		ttx->hex_c = get(target1 + 2);
+		ttx->hex_f = get(target2 + 2);
 	}
 	if (ttx->hex_f == ULONG_MAX || ttx->hex_c == ULONG_MAX)
 		return (1);
@@ -98,7 +98,7 @@ int	valid_rgb(t_game *data, char **rgb)
 			return (error_msg(NULL, COLOR_MISSING, 1, 0));
 	if (check_rgb(rgb[0] + 2) || check_rgb(rgb[1] + 2))
 		return (error_msg(NULL, COLOR_FLOOR_CEILING, 1, 0));
-	if (get_rgb(&data->tex_info, rgb[0] + 2, rgb[1] + 2))
+	if (get_rgb(&data->tex_info, rgb[0], rgb[1]))
 		return (error_msg(NULL, COLOR_FLOOR_CEILING, 1, 0));
 	return (0);
 }
