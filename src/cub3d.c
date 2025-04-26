@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/25 15:53:30 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:39:00 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	print_controls(void)
-{
-	ft_putendl_fd("\n\e[35mGAME CONTROLS:\e[0m", 1);
-	ft_putendl_fd("\t\e[35mW:\e[0m Move forward", 1);
-	ft_putendl_fd("\t\e[35mA:\e[0m Move left", 1);
-	ft_putendl_fd("\t\e[35mS:\e[0m Move backward", 1);
-	ft_putendl_fd("\t\e[35mD:\e[0m Move right", 1);
-	ft_putendl_fd("\t\e[35m←:\e[0m Rotate left", 1);
-	ft_putendl_fd("\t\e[35m→:\e[0m Rotate right", 1);
-}
 
 int	valid_data(t_game *data, char *path)
 {
@@ -68,7 +57,6 @@ int	main(int argc, char **argv)
 		clean(&game, FAILURE);
 	init_mlx(&game);
 	init_pattern(&game);
-	print_controls();
 	render_raycast(&game);
 	get_input(&game);
 	mlx_loop_hook(game.mlx, render_img, &game);

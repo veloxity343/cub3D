@@ -70,9 +70,6 @@ int		render_img(t_game *game);
 
 //game_texture.c
 void	init_tex_px(t_game *game);
-
-//game_tiles.c
-void	render_tiles(t_game *game, t_framebuffer *m);
 void	update_tex_px(t_game *game, t_tex *tex, t_ray *ray, int x);
 
 //valid_args.c

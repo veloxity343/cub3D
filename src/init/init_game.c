@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:49 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 20:53:04 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:40:51 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ void	init_game(t_game *game)
 	init_player(&game->player);
 	init_tex(&game->tex_info);
 	init_map(&game->map_info);
-	init_img_clean(&game->framebuffer);
+	init_img_clean(&game->img);
 }

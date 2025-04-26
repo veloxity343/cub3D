@@ -80,25 +80,6 @@ typedef struct s_tex
 }	t_tex;
 
 /**
- * @brief A structure representing a framebuffer used for rendering.
- * @param img Pointer to the image buffer.
- * @param offset Offset applied to rendering position.
- * @param view_dist Viewing distance in pixels.
- * @param tile_size Size of a single tile in pixels.
- * @param size Overall framebuffer size.
- * @param map Pointer to the map data used for rendering.
- */
-typedef struct s_framebuffer
-{
-	t_img		*img;
-	t_dir_int	offset;
-	int			view_dist;
-	int			tile_size;
-	int			size;
-	char		**map;
-}	t_framebuffer;
-
-/**
  * @brief A structure representing map file data and dimensions.
  * @param eom End-of-map flag.
  * @param line Current line index in map parsing.
@@ -192,7 +173,7 @@ typedef struct s_game
 {
 	t_map			map_info;
 	t_tex			tex_info;
-	t_img			framebuffer;
+	t_img			img;
 	t_player		player;
 	t_ray			ray;
 	double			time;
