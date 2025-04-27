@@ -12,44 +12,35 @@
 
 #include "cub3d.h"
 
-/*
-for macos using
+# ifdef __linux__
 void	clean(t_game *game, int code)
 {
 	if (game)
 	{
 		if (game->win && game->mlx)
 			mlx_destroy_window(game->mlx, game->win);
-#ifdef __linux__
 		if (game->mlx)
 		{
 			mlx_destroy_display(game->mlx);
 			mlx_loop_end(game->mlx);
 			free(game->mlx);
 		}
-#endif
 		free_game(game);
 	}
 	exit(code);
 }
-*/
-
+# else
 void	clean(t_game *game, int code)
 {
 	if (game)
 	{
 		if (game->win && game->mlx)
 			mlx_destroy_window(game->mlx, game->win);
-		// if (game->mlx)
-		// {
-		// 	mlx_destroy_display(game->mlx);
-		// 	mlx_loop_end(game->mlx);
-		// 	free(game->mlx);
-		// }
 		free_game(game);
 	}
 	exit(code);
 }
+# endif
 
 /**
  * @brief Cleans up the game resources and exits the program.
