@@ -115,8 +115,8 @@ valgrind:	$(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map/valid/maze.cub
 
 test:		$(NAME)
-	./$(NAME) map/valid/maze.cub; else \
 	@echo "$(YELLOW)Running tests...$(RESET)"
+	./$(NAME) map/valid/maze.cub;
 
 norm:
 	norminette $(SRC_DIR) $(INC)
