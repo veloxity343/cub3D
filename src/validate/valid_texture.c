@@ -12,15 +12,6 @@
 
 #include "../../inc/cub3d.h"
 
-// /**
-//  * @brief Validates the image paths.
-//  * @param data The game data structure.
-//  * @param dir The array of image paths.
-//  * @return 1 if invalid, 0 if valid.
-//  * @details This function checks if the image paths are valid
-//  * and if they exist. It also checks if the paths are not empty
-//  * and if they have the correct extension.
-//  */
 // int	valid_image(t_game *data, char **dir)
 // {
 // 	if (ft_arrlen(dir) < 4)

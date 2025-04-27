@@ -37,10 +37,10 @@ static void	rotate_vector(double *x, double *y, double angle)
  */
 int	rotate_player(t_game *game, double rotate_dir)
 {
-	double	speed;
+	double	angle;
 
-	speed = S_ROTATE * rotate_dir;
-	rotate_vector(&game->player.dir_t.x, &game->player.dir_t.y, speed);
-	rotate_vector(&game->player.plane.x, &game->player.plane.y, speed);
+	angle = S_ROTATE * rotate_dir;
+	rotate_vector(&game->player.dir_t.x, &game->player.dir_t.y, angle);
+	rotate_vector(&game->player.plane.x, &game->player.plane.y, angle);
 	return (1);
 }

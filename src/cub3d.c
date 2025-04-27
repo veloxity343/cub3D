@@ -57,7 +57,6 @@ int	main(int argc, char **argv)
 		clean(&game, FAILURE);
 	init_mlx(&game);
 	init_pattern(&game);
-	render_raycast(&game);
 	get_input(&game);
 	mlx_loop_hook(game.mlx, render_img, &game);
 	mlx_loop(game.mlx);

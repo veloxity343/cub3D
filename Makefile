@@ -6,8 +6,8 @@ LIBFT		=	./libft/libft.a
 INC			=	inc/
 SRC_DIR		=	src
 OBJ_DIR		=	obj
-SRCB_DIR	=	srcb
-OBJB_DIR	=	objb
+# SRCB_DIR	=	srcb
+# OBJB_DIR	=	objb
 
 # MLX
 UNAME_S		:= $(shell uname -s)
@@ -73,13 +73,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 # 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(OBJB) $(LIBFT) $(MLX)
 # 	@echo "$(GREEN)Successfully compiled bonus!$(RESET)"
 
-$(OBJB_DIR):
-	@mkdir -p $(OBJB_DIR)
+# $(OBJB_DIR):
+# 	@mkdir -p $(OBJB_DIR)
 
-$(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c | $(OBJB_DIR)
-	@mkdir -p $(dir $@)
-	@printf "$(YELLOW)Compiling\t$(RESET)%-33.33s\r" $@
-	@$(CC) $(CFLAGS) -c $< -o $@
+# $(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c | $(OBJB_DIR)
+# 	@mkdir -p $(dir $@)
+# 	@printf "$(YELLOW)Compiling\t$(RESET)%-33.33s\r" $@
+# 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Scruba dub dub
 clean:
@@ -112,15 +112,15 @@ asan:
 
 valgrind:	$(NAME)
 	@echo "$(YELLOW)Running with Valgrind...$(RESET)"
-	valgrind --leak-check=full --track-origins=yes ./$(NAME) map/valid/maze.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map/valid/maze.cub
 
 test:		re
 	@echo "$(YELLOW)Running tests...$(RESET)"
 	@./$(NAME) map/valid/maze.cub
 
 norm:
-	@norminette $(SRC_DIR) $(INC) --color
-	@norminette $(SRC_DIR) $(INC) --color | grep -iE 'error|warning'
+	norminette $(SRC_DIR) $(INC)
+	norminette $(SRC_DIR) $(INC) --color | grep -iE 'error|warning'
 	@echo  "$(GREEN)Norminette check complete!$(RESET)"
 
 .PHONY:	all bonus clean fclean re asan valgrind test norm

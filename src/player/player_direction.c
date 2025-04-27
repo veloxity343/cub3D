@@ -34,8 +34,11 @@ void	set_player_dir(t_player *player, char dir, t_dir_d dir_t, t_dir_d plane)
  */
 void	init_player_dir(t_game *game)
 {
-	set_player_dir(&game->player, 'N', (t_dir_d){0, -1}, (t_dir_d){0.66, 0});
-	set_player_dir(&game->player, 'S', (t_dir_d){0, 1}, (t_dir_d){-0.66, 0});
-	set_player_dir(&game->player, 'E', (t_dir_d){1, 0}, (t_dir_d){0, 0.66});
-	set_player_dir(&game->player, 'W', (t_dir_d){-1, 0}, (t_dir_d){0, -0.66});
+	double	plane_size;
+
+	plane_size = tan((FOV) * M_PI / 360.0);
+	set_player_dir(&game->player, 'N', (t_dir_d){0, -1}, (t_dir_d){plane_size, 0});
+	set_player_dir(&game->player, 'S', (t_dir_d){0, 1}, (t_dir_d){-plane_size, 0});
+	set_player_dir(&game->player, 'E', (t_dir_d){1, 0}, (t_dir_d){0, plane_size});
+	set_player_dir(&game->player, 'W', (t_dir_d){-1, 0}, (t_dir_d){0, -plane_size});
 }

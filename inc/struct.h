@@ -159,7 +159,6 @@ typedef struct s_player
  * @param framebuffer Image buffer used for rendering.
  * @param player Player position and movement data.
  * @param ray Raycasting data used for rendering.
- * @param time Frame timing value.
  * @param win_h Window height in pixels.
  * @param win_w Window width in pixels.
  * @param map Pointer to the processed map array.
@@ -176,7 +175,6 @@ typedef struct s_game
 	t_img			img;
 	t_player		player;
 	t_ray			ray;
-	double			time;
 	int				win_h;
 	int				win_w;
 	char			**map;
