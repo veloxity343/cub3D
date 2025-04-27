@@ -114,17 +114,12 @@ valgrind:	$(NAME)
 	@echo "$(YELLOW)Running with Valgrind...$(RESET)"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map/valid/maze.cub
 
-test:
-	@if [ -f "$(NAME)" ]; then \
+test:		$(NAME)
 	./$(NAME) map/valid/maze.cub; else \
-	make; \
-	./$(NAME) map/valid/maze.cub; \
-	fi;
 	@echo "$(YELLOW)Running tests...$(RESET)"
 
 norm:
 	norminette $(SRC_DIR) $(INC)
-	norminette $(SRC_DIR) $(INC) --color | grep -iE 'error|warning'
 	@echo  "$(GREEN)Norminette check complete!$(RESET)"
 
 .PHONY:	all bonus clean fclean re asan valgrind test norm
