@@ -68,15 +68,6 @@ void    start_dda(t_game *game, t_ray *ray);
 void    calc_wall_height(t_ray *ray, t_game *game, t_player *player);
 void    engine_loop(t_game *game, t_tex *tex, t_ray *ray, int x);
 
-//game_render.c
-// void	set_img_px(t_img *img, int x, int y, int colour);
-// void	render_raycast(t_game *game);
-// int		render_img(t_game *game);
-
-//game_texture.c
-// void	init_tex_px(t_game *game);
-// void	update_tex_px(t_game *game, t_tex *tex, t_ray *ray, int x);
-
 //valid_args.c
 int		validate_file(char *arg, int cub);
 

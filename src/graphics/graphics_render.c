@@ -9,7 +9,7 @@ int	render_img(t_game *game)
 {
 	if (game->player.moved == 0)
 		render_raycast(game);
-	game->player.moved += move_player(game);
+	game->player.moved += move_player (game);
 	if (game->player.moved == 0)
 		return (0);
 	render_raycast(game);

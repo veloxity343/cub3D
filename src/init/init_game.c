@@ -6,11 +6,56 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:49 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/26 13:40:51 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/27 18:02:24 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	init_map(t_map *map_info);
+
+
+void	init_game(t_game *game)
+{
+	game->win_h = WIN_H;
+	game->win_w = WIN_W;
+	game->win = NULL;
+	game->mlx = NULL;
+	game->map = NULL;
+	game->cub_file = NULL;
+	game->tex_px = NULL;
+	game->tex = NULL;
+	init_player(&game->player);
+	init_tex(&game->tex_info);
+	init_map(&game->map_info);
+	init_img_clean(&game->img);
+}
+
+static void	init_map(t_map *map_info)
+{
+	map_info->path = NULL;
+	map_info->file = NULL;
+	map_info->fd = 0;
+	map_info->line = 0;
+	map_info->h = 0;
+	map_info->w = 0;
+	map_info->eom = 0;
+}
+
+static void	init_player(t_player *player)
+{
+	player->dir = '\0';
+	player->pos.x = 0.0;
+	player->pos.y = 0.0;
+	player->dir_t.x = 0.0;
+	player->dir_t.y = 0.0;
+	player->plane.x = 0.0;
+	player->plane.y = 0.0;
+	player->moved = 0;
+	player->move.x = 0;
+	player->move.y = 0;
+	player->rotate = 0;
+}
 
 void	init_img_clean(t_img *img)
 {
@@ -40,46 +85,4 @@ void	init_ray(t_ray *ray)
 	ray->line_h = 0;
 	ray->start = 0;
 	ray->end = 0;
-}
-
-static void	init_map(t_map *map_info)
-{
-	map_info->path = NULL;
-	map_info->file = NULL;
-	map_info->fd = 0;
-	map_info->line = 0;
-	map_info->h = 0;
-	map_info->w = 0;
-	map_info->eom = 0;
-}
-
-static void	init_player(t_player *player)
-{
-	player->dir = '\0';
-	player->pos.x = 0.0;
-	player->pos.y = 0.0;
-	player->dir_t.x = 0.0;
-	player->dir_t.y = 0.0;
-	player->plane.x = 0.0;
-	player->plane.y = 0.0;
-	player->moved = 0;
-	player->move.x = 0;
-	player->move.y = 0;
-	player->rotate = 0;
-}
-
-void	init_game(t_game *game)
-{
-	game->win_h = WIN_H;
-	game->win_w = WIN_W;
-	game->win = NULL;
-	game->mlx = NULL;
-	game->map = NULL;
-	game->cub_file = NULL;
-	game->tex_px = NULL;
-	game->tex = NULL;
-	init_player(&game->player);
-	init_tex(&game->tex_info);
-	init_map(&game->map_info);
-	init_img_clean(&game->img);
 }
