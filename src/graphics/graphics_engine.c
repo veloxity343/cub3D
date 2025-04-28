@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void get_tex_index(t_game *game, t_ray *ray);
+static void	get_tex_index(t_game *game, t_ray *ray);
 static void handle_tex_dir(t_ray *ray, t_tex *tex);
 static void init_tex_step_pos(t_ray *ray, t_tex *tex, t_game *game);
 static void process_wall_slice(t_game *game, t_tex *tex, int x, int y);

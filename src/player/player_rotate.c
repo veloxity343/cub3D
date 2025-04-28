@@ -6,25 +6,13 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:36 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/23 21:16:30 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/28 20:23:50 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/**
- * @brief Rotation vector is calculated using the formula:
- * x' = x * cos(angle) - y * sin(angle)
- * y' = x * sin(angle) + y * cos(angle)
- */
-static void	rotate_vector(double *x, double *y, double angle)
-{
-	double	tmp_x;
-
-	tmp_x = *x;
-	*x = *x * cos(angle) - *y * sin(angle);
-	*y = tmp_x * sin(angle) + *y * cos(angle);
-}
+static void	rotate_vector(double *x, double *y, double angle);
 
 /**
  * @brief Rotates the player's direction and plane.
@@ -43,4 +31,18 @@ int	rotate_player(t_game *game, double rotate_dir)
 	rotate_vector(&game->player.dir_t.x, &game->player.dir_t.y, angle);
 	rotate_vector(&game->player.plane.x, &game->player.plane.y, angle);
 	return (1);
+}
+
+/**
+ * @brief Rotation vector is calculated using the formula:
+ * x' = x * cos(angle) - y * sin(angle)
+ * y' = x * sin(angle) + y * cos(angle)
+ */
+static void	rotate_vector(double *x, double *y, double angle)
+{
+	double	tmp_x;
+
+	tmp_x = *x;
+	*x = *x * cos(angle) - *y * sin(angle);
+	*y = tmp_x * sin(angle) + *y * cos(angle);
 }
