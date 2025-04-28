@@ -116,7 +116,7 @@ valgrind:	$(NAME)
 
 test:		$(NAME)
 	@echo "$(YELLOW)Running tests...$(RESET)"
-	./$(NAME) map/valid/maze.cub;
+	./$(NAME) map/valid/maze.cub
 
 norm:
 	norminette $(SRC_DIR) $(INC)
