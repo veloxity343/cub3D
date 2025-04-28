@@ -6,11 +6,44 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/27 14:58:32 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:22:36 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	parse_args(t_game *game, char **argv);
+int	valid_data(t_game *data, char *path);
+
+int	main(int argc, char **argv)
+{
+	t_game	game;
+
+	if (argc != 2)
+		return (error_msg(NULL, USAGE, 1, 0));
+	init_game(&game);
+	if (parse_args(&game, argv) != 0)
+		clean(&game, FAILURE);
+	init_mlx(&game);
+	init_pattern(&game);
+	get_input(&game);
+	mlx_loop_hook(game.mlx, render_img, &game);
+	mlx_loop(game.mlx);
+	return (0);
+}
+
+static int	parse_args(t_game *game, char **argv)
+{
+	if (validate_file(argv[1], 1) == FAILURE)
+		return (1);
+	if (valid_data(game, argv[1]))
+		return (1);
+	get_map_details(game, game->cub_file + 6);
+	if (valid_map(game, game->map))
+		return (1);
+	init_player_dir(game);
+	return (0);
+}
 
 int	valid_data(t_game *data, char *path)
 {
@@ -31,34 +64,4 @@ int	valid_data(t_game *data, char *path)
 		error_msg(NULL, MAP_NO_WALLS, 1, flag++);
 	ft_free1(file);
 	return (flag);
-}
-
-static int	parse_args(t_game *game, char **argv)
-{
-	if (validate_file(argv[1], 1) == FAILURE)
-		return (1);
-	if (valid_data(game, argv[1]))
-		return (1);
-	get_map_details(game, game->cub_file + 6);
-	if (valid_map(game, game->map))
-		return (1);
-	init_player_dir(game);
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	t_game	game;
-
-	if (argc != 2)
-		return (error_msg(NULL, USAGE, 1, 0));
-	init_game(&game);
-	if (parse_args(&game, argv) != 0)
-		clean(&game, FAILURE);
-	init_mlx(&game);
-	init_pattern(&game);
-	get_input(&game);
-	mlx_loop_hook(game.mlx, render_img, &game);
-	mlx_loop(game.mlx);
-	return (0);
 }

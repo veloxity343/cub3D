@@ -1,7 +1,7 @@
 #include "cub3d.h"
 
 static void process_dda_step(t_ray *ray);
-static int is_wall_hit(t_ray *ray, t_game *game);
+static int 	is_wall_hit(t_ray *ray, t_game *game);
 
 void set_dda(t_ray *ray, t_player *player)
 {

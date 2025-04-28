@@ -6,14 +6,15 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:49 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/27 18:02:24 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/28 09:59:26 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	init_map(t_map *map_info);
-
+static void	init_player(t_player *player);
+void	init_img_clean(t_img *img);
 
 void	init_game(t_game *game)
 {
@@ -31,17 +32,6 @@ void	init_game(t_game *game)
 	init_img_clean(&game->img);
 }
 
-static void	init_map(t_map *map_info)
-{
-	map_info->path = NULL;
-	map_info->file = NULL;
-	map_info->fd = 0;
-	map_info->line = 0;
-	map_info->h = 0;
-	map_info->w = 0;
-	map_info->eom = 0;
-}
-
 static void	init_player(t_player *player)
 {
 	player->dir = '\0';
@@ -55,6 +45,17 @@ static void	init_player(t_player *player)
 	player->move.x = 0;
 	player->move.y = 0;
 	player->rotate = 0;
+}
+
+static void	init_map(t_map *map_info)
+{
+	map_info->path = NULL;
+	map_info->file = NULL;
+	map_info->fd = 0;
+	map_info->line = 0;
+	map_info->h = 0;
+	map_info->w = 0;
+	map_info->eom = 0;
 }
 
 void	init_img_clean(t_img *img)

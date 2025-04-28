@@ -1,7 +1,7 @@
 #include "cub3d.h"
 
 static void render_raycast(t_game *game);
-void init_tex_px(t_game *game);
+static void init_tex_px(t_game *game);
 static void render_frame(t_game *game);
 static void set_frame_img_px(t_game *game, t_img *img, int x, int y);
 
@@ -24,7 +24,7 @@ static void render_raycast(t_game *game)
 	render_frame(game);
 }
 
-void init_tex_px(t_game *game)
+static void init_tex_px(t_game *game)
 {
 	int i;
 
@@ -66,6 +66,7 @@ static void set_frame_img_px(t_game *game, t_img *img, int x, int y)
 {
 	int colour;
 
+	colour = 0;
 	if (game->tex_px[y][x] > 0)
 		colour = game->tex_px[y][x];
 	else if (y < game->win_h / 2)
