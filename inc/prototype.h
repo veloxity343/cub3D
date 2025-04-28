@@ -20,6 +20,7 @@ void	init_ray(t_ray *ray);
 
 //init_img.c
 void	init_pattern(t_game *game);
+void    init_tex_px(t_game *game);
 void	init_tex(t_tex *tex);
 
 //init_mlx.c

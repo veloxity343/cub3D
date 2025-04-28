@@ -6,14 +6,14 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/28 10:22:36 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:28:32 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	parse_args(t_game *game, char **argv);
-int	valid_data(t_game *data, char *path);
+static int	valid_data(t_game *data, char *path);
 
 int	main(int argc, char **argv)
 {
@@ -45,7 +45,7 @@ static int	parse_args(t_game *game, char **argv)
 	return (0);
 }
 
-int	valid_data(t_game *data, char *path)
+static int	valid_data(t_game *data, char *path)
 {
 	char	*file;
 	int		flag;

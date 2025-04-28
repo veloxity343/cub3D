@@ -6,14 +6,13 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:44 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/28 10:20:48 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:32:57 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	*img_from_xpm(t_game *game, char *path);
-
 
 void	init_pattern(t_game *game)
 {
@@ -39,6 +38,24 @@ static int	*img_from_xpm(t_game *game, char *path)
 		game->tex_info.size * game->tex_info.size * sizeof * buff);
 	mlx_destroy_image(game->mlx, tmp.img);
 	return (buff);
+}
+
+void init_tex_px(t_game *game)
+{
+	int i;
+
+	i = 0;
+	free_tab((void **)game->tex_px);
+	game->tex_px = ft_calloc(game->win_h + 1, sizeof(*game->tex_px));
+	if (!game->tex_px)
+		clean(game, error_msg("tex: init_tex_px", MALLOC, 1, 0));
+	while (i < game->win_h)
+	{
+		game->tex_px[i] = ft_calloc(game->win_w + 1, sizeof(*game->tex_px));
+		if (!game->tex_px[i])
+			clean(game, error_msg("tex: init_tex_px", MALLOC, 1, 0));
+		i++;
+	}
 }
 
 void	init_tex(t_tex *tex)

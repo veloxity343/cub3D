@@ -1,7 +1,6 @@
 #include "cub3d.h"
 
 static void render_raycast(t_game *game);
-static void init_tex_px(t_game *game);
 static void render_frame(t_game *game);
 static void set_frame_img_px(t_game *game, t_img *img, int x, int y);
 
@@ -22,24 +21,6 @@ static void render_raycast(t_game *game)
 	init_ray(&game->ray);
 	raycast(&game->player, game);
 	render_frame(game);
-}
-
-static void init_tex_px(t_game *game)
-{
-	int i;
-
-	i = 0;
-	free_tab((void **)game->tex_px);
-	game->tex_px = ft_calloc(game->win_h + 1, sizeof(*game->tex_px));
-	if (!game->tex_px)
-		clean(game, error_msg("tex: init_tex_px", MALLOC, 1, 0));
-	while (i < game->win_h)
-	{
-		game->tex_px[i] = ft_calloc(game->win_w + 1, sizeof(*game->tex_px));
-		if (!game->tex_px[i])
-			clean(game, error_msg("tex: init_tex_px", MALLOC, 1, 0));
-		i++;
-	}
 }
 
 static void render_frame(t_game *game)
