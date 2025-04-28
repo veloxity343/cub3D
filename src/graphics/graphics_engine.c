@@ -41,7 +41,7 @@ static void get_tex_index(t_game *game, t_ray *ray)
 
 static void handle_tex_dir(t_ray *ray, t_tex *tex)
 {
-    tex->dir.x = (int)(ray->wall_x * tex->size);
+    tex->dir.x = (int)(ray->tex_coord * tex->size);
 	if ((ray->side == 0 && ray->dir.x < 0) || (ray->side == 1 && ray->dir.y > 0))
 		tex->dir.x = tex->size - tex->dir.x - 1;
 }

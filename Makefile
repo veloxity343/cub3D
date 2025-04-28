@@ -114,7 +114,7 @@ valgrind:	$(NAME)
 	@echo "$(YELLOW)Running with Valgrind...$(RESET)"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map/valid/maze.cub
 
-test:		$(NAME)
+test:		re
 	@echo "$(YELLOW)Running tests...$(RESET)"
 	./$(NAME) map/valid/maze.cub
 

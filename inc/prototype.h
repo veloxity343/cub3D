@@ -64,8 +64,8 @@ int		free_game(t_game *game);
 //game_raycast.c
 int     render_img(t_game *game);
 int		raycast(t_player *player, t_game *game);
-void    set_dda(t_ray *ray, t_player *player);
-void    start_dda(t_game *game, t_ray *ray);
+void    setup_dda(t_ray *ray, t_player *player);
+void    do_dda(t_game *game, t_ray *ray);
 void    calc_wall_height(t_ray *ray, t_game *game, t_player *player);
 void    engine_loop(t_game *game, t_tex *tex, t_ray *ray, int x);
 

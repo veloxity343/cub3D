@@ -6,7 +6,7 @@
 /*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:49 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/28 09:59:26 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/28 16:43:57 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	init_ray(t_ray *ray)
 	ray->delta_dist.x = 0;
 	ray->delta_dist.y = 0;
 	ray->wall_dist = 0;
-	ray->wall_x = 0;
+	ray->tex_coord = 0;
 	ray->side = 0;
 	ray->line_h = 0;
 	ray->start = 0;

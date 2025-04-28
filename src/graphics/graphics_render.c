@@ -43,6 +43,13 @@ static void render_frame(t_game *game)
 	mlx_destroy_image(game->mlx, img.img);
 }
 
+/**
+ * @brief Sets colours in order:
+ * 1. Wall colour
+ * 2. Floor colour
+ * 3. Ceiling colour
+ * @param adr Sets the pixel colour in the image buffer, bits per pixel.
+ */
 static void set_frame_img_px(t_game *game, t_img *img, int x, int y)
 {
 	int colour;

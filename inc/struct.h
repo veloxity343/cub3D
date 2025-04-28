@@ -123,7 +123,7 @@ typedef struct s_ray
 	t_dir_d		side_dist;
 	t_dir_d		delta_dist;
 	double		cam_x;
-	double		wall_x;
+	double		tex_coord;
 	double		wall_dist;
 	int			side;
 	int			line_h;
