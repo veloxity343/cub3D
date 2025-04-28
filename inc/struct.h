@@ -105,10 +105,10 @@ typedef struct s_map
  * @param map Current grid position of the ray.
  * @param step Step direction for grid traversal.
  * @param dir Direction of the ray.
- * @param side_dist Distance to the next x/y side.
- * @param delta_dist Distance between sides along ray direction.
+ * @param side_dist Actual distance to the next grid line.
+ * @param delta_dist Distance between grid lines by traversing along axes.
  * @param cam_x X position on the camera plane.
- * @param wall_x Exact x-position where the wall was hit.
+ * @param tex_coord Exact x-position where the wall was hit.
  * @param wall_dist Distance from the player to the wall.
  * @param side Side of the wall that was hit (0: x-side, 1: y-side).
  * @param line_h Height of the wall line to draw.

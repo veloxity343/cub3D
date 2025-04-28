@@ -88,10 +88,10 @@ clean:
 	echo "$(RED)Deleting$(RESET)\t"$(OBJ_DIR); else \
 	echo "$(BLUE)No $(NAME) objects to remove.$(RESET)"; \
 	fi;
-	@if [ -d $(OBJB_DIR) ]; then \
-	$(RM) -rf $(OBJB_DIR); \
-	echo "$(RED)Deleting$(RESET)\t$(OBJB_DIR)"; \
-	fi;
+# @if [ -d $(OBJB_DIR) ]; then \
+# $(RM) -rf $(OBJB_DIR); \
+# echo "$(RED)Deleting$(RESET)\t$(OBJB_DIR)"; \
+# fi;
 	@make -C $(MLX_DIR) clean
 
 fclean:	clean

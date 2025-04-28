@@ -62,7 +62,7 @@ static void calc_map_coords(t_ray *ray, t_player *player)
 
 /**
  * @brief Calculate the distance for a ray to traverse in x/y grid units.
- * @param delta_dist Grid traversal of ray using direction vector.
+ * @param delta_dist Equate sqrt(Δx² + Δy²)
  */
 static void calc_delta_dist(t_ray *ray)
 {
