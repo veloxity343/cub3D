@@ -1,8 +1,8 @@
 #include "cub3d.h"
 
-static void render_raycast(t_game *game);
-static void render_frame(t_game *game);
-static void set_frame_img_px(t_game *game, t_img *img, int x, int y);
+static void	render_raycast(t_game *game);
+static void	render_frame(t_game *game);
+static void	set_frame_img_px(t_game *game, t_img *img, int x, int y);
 
 int	render_img(t_game *game)
 {
@@ -15,7 +15,7 @@ int	render_img(t_game *game)
 	return (0);
 }
 
-static void render_raycast(t_game *game)
+static void	render_raycast(t_game *game)
 {
 	init_tex_px(game);
 	init_ray(&game->ray);
@@ -23,11 +23,11 @@ static void render_raycast(t_game *game)
 	render_frame(game);
 }
 
-static void render_frame(t_game *game)
+static void	render_frame(t_game *game)
 {
-	t_img img;
-	int x;
-	int y;
+	t_img	img;
+	int		x;
+	int		y;
 
 	y = 0;
 	img.img = NULL;
@@ -50,9 +50,9 @@ static void render_frame(t_game *game)
  * 3. Ceiling colour
  * @param adr Sets the pixel colour in the image buffer, bits per pixel.
  */
-static void set_frame_img_px(t_game *game, t_img *img, int x, int y)
+static void	set_frame_img_px(t_game *game, t_img *img, int x, int y)
 {
-	int colour;
+	int	colour;
 
 	colour = 0;
 	if (game->tex_px[y][x] > 0)

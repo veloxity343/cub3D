@@ -1,12 +1,13 @@
 #include "cub3d.h"
 
-static int 	is_wall_hit(t_ray *ray, t_game *game);
+static int	is_wall_hit(t_ray *ray, t_game *game);
 
 /**
  * @brief DDA setup
- * @param side_dist Distance of player from edge * distance for one full grid unit.
+ * @param side_dist Distance of player from
+ *	edge * distance for one full grid unit.
  */
-void setup_dda(t_ray *ray, t_player *player)
+void	setup_dda(t_ray *ray, t_player *player)
 {
 	if (ray->dir.x < 0)
 	{
@@ -16,9 +17,9 @@ void setup_dda(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step.x = 1;
-		ray->side_dist.x = ((ray->map.x + 1.0) - player->pos.x) * ray->delta_dist.x;
+		ray->side_dist.x = ((ray->map.x + 1.0) - player->pos.x)
+			* ray->delta_dist.x;
 	}
-
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -1;
@@ -27,7 +28,8 @@ void setup_dda(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step.y = 1;
-		ray->side_dist.y = ((ray->map.y + 1.0) - player->pos.y) * ray->delta_dist.y;
+		ray->side_dist.y = ((ray->map.y + 1.0) - player->pos.y)
+			* ray->delta_dist.y;
 	}
 }
 
@@ -35,7 +37,7 @@ void setup_dda(t_ray *ray, t_player *player)
  * @brief Loops and processes DDA steps
  * per side distance until a wall/boundary is hit.
  */
-void do_dda(t_game *game, t_ray *ray)
+void	do_dda(t_game *game, t_ray *ray)
 {
 	while (1)
 	{
@@ -59,11 +61,11 @@ void do_dda(t_game *game, t_ray *ray)
 /**
  * @brief Ensure ray does not cast beyond map boundaries or walls.
  */
-static int is_wall_hit(t_ray *ray, t_game *game)
+static int	is_wall_hit(t_ray *ray, t_game *game)
 {
-	return (ray->map.y < 0.0 ||
-			ray->map.y >= game->map_info.h ||
-			ray->map.x < 0.0 ||
-			ray->map.x >= game->map_info.w ||
-			game->map[ray->map.y][ray->map.x] != '0');
+	return (ray->map.y < 0.0
+		|| ray->map.y >= game->map_info.h
+		|| ray->map.x < 0.0
+		|| ray->map.x >= game->map_info.w
+		|| game->map[ray->map.y][ray->map.x] != '0');
 }

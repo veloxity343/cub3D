@@ -47,6 +47,7 @@
 # define S_MOVE			0.12
 # define S_ROTATE		0.12
 # define FOV_DEGREES	60.0
-# define FOV_RADIANS    (FOV_DEGREES * M_PI / 360.0)
+# define FOV_RADIANS    0.523599
+// # define FOV_RADIANS    (FOV_DEGREES * M_PI / 360.0)
 
 #endif

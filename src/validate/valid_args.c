@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:05 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/29 18:09:05 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:18:28 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	validate_file(char *arg, int cub)
 		return (error_msg(arg, errno, FAILURE, 1));
 	close(fd);
 	if (cub && !has_ext(arg, ".cub"))
-			return (error_msg(arg, FILE_NOT_CUB, FAILURE, 0));
+		return (error_msg(arg, FILE_NOT_CUB, FAILURE, 0));
 	return (SUCCESS);
 }
 

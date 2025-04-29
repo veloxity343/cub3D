@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:44 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/28 10:32:57 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/29 19:18:07 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	*img_from_xpm(t_game *game, char *path)
 	return (buff);
 }
 
-void init_tex_px(t_game *game)
+void	init_tex_px(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	free_tab((void **)game->tex_px);

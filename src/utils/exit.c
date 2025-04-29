@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:20 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/25 20:22:27 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/29 19:21:43 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#ifdef __linux__
 
-# ifdef __linux__
 void	clean(t_game *game, int code)
 {
 	if (game)
@@ -29,7 +29,8 @@ void	clean(t_game *game, int code)
 	}
 	exit(code);
 }
-# else
+#else
+
 void	clean(t_game *game, int code)
 {
 	if (game)
@@ -40,7 +41,7 @@ void	clean(t_game *game, int code)
 	}
 	exit(code);
 }
-# endif
+#endif
 
 /**
  * @brief Cleans up the game resources and exits the program.
