@@ -36,19 +36,18 @@
 #  define ESC           53
 # endif
 
-# define MOUSE_WRAP		15
-# define S_MOVE			0.12
-# define S_ROTATE		0.12
-# define S_ANIMATE		0.15
-# define MM_DIST		8
-# define MM_PX			128
-# define COL_USR		0x00FF00
-# define COL_WALL		0x808080
-# define COL_FLOOR		0xE6E6E6
-# define COL_SPACE		0x404040
-
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY	00200000
 # endif
+
+# ifndef M_PI
+#  define M_PI			3.14159265358979323846
+# endif
+
+# define S_MOVE			0.12
+# define S_ROTATE		0.12
+# define FOV_DEGREES	60.0
+# define FOV_RADIANS    0.523599
+// # define FOV_RADIANS    (FOV_DEGREES * M_PI / 360.0)
 
 #endif

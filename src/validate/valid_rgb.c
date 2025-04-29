@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 19:28:50 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/26 12:17:45 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/29 18:36:22 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@ unsigned long	get(char *s_rgb)
 	return (ULONG_MAX);
 }
 
-char	*skip(char *rgb)
+static char	*skip(char *rgb)
 {
-	char	**temp;
-	char	*skiped;
-
-	temp = ft_split(rgb, ' ');
-	skiped = ft_strdup(temp[1]);
-	ft_free_strarr(temp);
-	return (skiped);
+	while (++rgb)
+		if (ft_isdigit(*rgb))
+			break ;
+	return (rgb);
 }
 
 int	get_rgb(t_tex *ttx, char *target1, char *target2)
@@ -45,18 +42,16 @@ int	get_rgb(t_tex *ttx, char *target1, char *target2)
 
 	temp1 = skip(target1);
 	temp2 = skip(target2);
-	if (!ft_strchr(target1, 'F'))
+	if (target1[0] == 'F')
 	{
-		ttx->hex_f = get(temp2);
-		ttx->hex_c = get(temp1);
+		ttx->hex_f = get(temp1);
+		ttx->hex_c = get(temp2);
 	}
 	else
 	{
-		ttx->hex_c = get(temp2);
-		ttx->hex_f = get(temp1);
+		ttx->hex_c = get(temp1);
+		ttx->hex_f = get(temp2);
 	}
-	ft_free1(temp1);
-	ft_free1(temp2);
 	if (ttx->hex_f == ULONG_MAX || ttx->hex_c == ULONG_MAX)
 		return (1);
 	return (0);
@@ -77,8 +72,6 @@ int	check_rgb(char *rgb)
 	i = -1;
 	nbr0_cm1[0] = 0;
 	nbr0_cm1[1] = 0;
-	if (ft_strchr(rgb, ' '))
-		return (1);
 	while (rgb[++i])
 	{
 		if (ft_isdigit(rgb[i]))

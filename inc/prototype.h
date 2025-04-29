@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 23:22:17 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/24 16:18:27 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/29 18:57:05 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_ray(t_ray *ray);
 
 //init_img.c
 void	init_pattern(t_game *game);
+void	init_tex_px(t_game *game);
 void	init_tex(t_tex *tex);
 
 //init_mlx.c
@@ -60,20 +61,13 @@ char	*ft_free(char **str);
 void	free_tab(void **tab);
 int		free_game(t_game *game);
 
-//game_raycasy.c
-int		raycast(t_player *player, t_game *game);
-
-//game_render.c
-void	set_img_px(t_img *img, int x, int y, int colour);
-void	render_raycast(t_game *game);
+//game_raycast.c
 int		render_img(t_game *game);
-
-//game_texture.c
-void	init_tex_px(t_game *game);
-
-//game_tiles.c
-void	render_tiles(t_game *game, t_framebuffer *m);
-void	update_tex_px(t_game *game, t_tex *tex, t_ray *ray, int x);
+int		raycast(t_player *player, t_game *game);
+void	setup_dda(t_ray *ray, t_player *player);
+void	do_dda(t_game *game, t_ray *ray);
+void	calc_wall_height(t_ray *ray, t_game *game, t_player *player);
+void	engine_loop(t_game *game, t_tex *tex, t_ray *ray, int x);
 
 //valid_args.c
 int		validate_file(char *arg, int cub);

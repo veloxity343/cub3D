@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:38 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 17:50:49 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:17:45 by rcheong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	get_info(t_game *game, char **file, int i);
+static int	count_lines(t_game *game, char **file, int i);
+static int	fill_tab(t_map *map_info, char **map_tab, int index);
+static void	create_wall(t_game *game);
+
+int	create_map(t_game *game, char **file, int i)
+{
+	if (get_info(game, file, i) == FAILURE)
+		return (FAILURE);
+	create_wall(game);
+	return (SUCCESS);
+}
+
+static int	get_info(t_game *game, char **file, int i)
+{
+	game->map_info.h = count_lines(game, file, i);
+	game->map = malloc(sizeof(char *) * (game->map_info.h + 1));
+	if (!game->map)
+		return (error_msg("map: get_info", MALLOC, FAILURE, 0));
+	return (fill_tab(&game->map_info, game->map, i));
+}
 
 static int	count_lines(t_game *game, char **file, int i)
 {
@@ -49,15 +71,6 @@ static int	fill_tab(t_map *map_info, char **map_tab, int index)
 	return (SUCCESS);
 }
 
-static int	get_info(t_game *game, char **file, int i)
-{
-	game->map_info.h = count_lines(game, file, i);
-	game->map = malloc(sizeof(char *) * (game->map_info.h + 1));
-	if (!game->map)
-		return (error_msg("map: get_info", MALLOC, FAILURE, 0));
-	return (fill_tab(&game->map_info, game->map, i));
-}
-
 static void	create_wall(t_game *game)
 {
 	int	i;
@@ -74,12 +87,4 @@ static void	create_wall(t_game *game)
 				game->map[i][j] = '1';
 		i++;
 	}
-}
-
-int	create_map(t_game *game, char **file, int i)
-{
-	if (get_info(game, file, i) == FAILURE)
-		return (FAILURE);
-	create_wall(game);
-	return (SUCCESS);
 }

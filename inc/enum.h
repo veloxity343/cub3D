@@ -47,7 +47,8 @@ enum e_err
 	MALLOC,
 	USAGE,
 	TEX_MISSING,
-	TEX_INVALID
+	TEX_INVALID,
+	EMPTY_FILE
 };
 
 enum e_tex

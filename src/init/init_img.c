@@ -6,11 +6,24 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:18:44 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/21 17:06:47 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:18:07 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	*img_from_xpm(t_game *game, char *path);
+
+void	init_pattern(t_game *game)
+{
+	game->tex = ft_calloc(5, sizeof * game->tex);
+	if (!game->tex)
+		clean(game, error_msg("img: init_pattern", MALLOC, FAILURE, 0));
+	game->tex[NORTH] = img_from_xpm(game, game->tex_info.north);
+	game->tex[SOUTH] = img_from_xpm(game, game->tex_info.south);
+	game->tex[EAST] = img_from_xpm(game, game->tex_info.east);
+	game->tex[WEST] = img_from_xpm(game, game->tex_info.west);
+}
 
 static int	*img_from_xpm(t_game *game, char *path)
 {
@@ -27,15 +40,22 @@ static int	*img_from_xpm(t_game *game, char *path)
 	return (buff);
 }
 
-void	init_pattern(t_game *game)
+void	init_tex_px(t_game *game)
 {
-	game->tex = ft_calloc(5, sizeof * game->tex);
-	if (!game->tex)
-		clean(game, error_msg("img: init_pattern", MALLOC, FAILURE, 0));
-	game->tex[NORTH] = img_from_xpm(game, game->tex_info.north);
-	game->tex[SOUTH] = img_from_xpm(game, game->tex_info.south);
-	game->tex[EAST] = img_from_xpm(game, game->tex_info.east);
-	game->tex[WEST] = img_from_xpm(game, game->tex_info.west);
+	int	i;
+
+	i = 0;
+	free_tab((void **)game->tex_px);
+	game->tex_px = ft_calloc(game->win_h + 1, sizeof(*game->tex_px));
+	if (!game->tex_px)
+		clean(game, error_msg("tex: init_tex_px", MALLOC, 1, 0));
+	while (i < game->win_h)
+	{
+		game->tex_px[i] = ft_calloc(game->win_w + 1, sizeof(*game->tex_px));
+		if (!game->tex_px[i])
+			clean(game, error_msg("tex: init_tex_px", MALLOC, 1, 0));
+		i++;
+	}
 }
 
 void	init_tex(t_tex *tex)

@@ -6,42 +6,30 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/25 20:50:42 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:15:42 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	print_controls(void)
-{
-	ft_putendl_fd("\n\e[35mGAME CONTROLS:\e[0m", 1);
-	ft_putendl_fd("\t\e[35mW:\e[0m Move forward", 1);
-	ft_putendl_fd("\t\e[35mA:\e[0m Move left", 1);
-	ft_putendl_fd("\t\e[35mS:\e[0m Move backward", 1);
-	ft_putendl_fd("\t\e[35mD:\e[0m Move right", 1);
-	ft_putendl_fd("\t\e[35m←:\e[0m Rotate left", 1);
-	ft_putendl_fd("\t\e[35m→:\e[0m Rotate right", 1);
-}
+static int	parse_args(t_game *game, char **argv);
+static int	valid_data(t_game *data, char *path);
 
-int	valid_data(t_game *data, char *path)
+int	main(int argc, char **argv)
 {
-	char	*file;
-	int		flag;
+	t_game	game;
 
-	flag = 0;
-	file = read_file(path);
-	if (!file)
-		return (error_msg(0, FILE_INVALID, 1, 0));
-	data->cub_file = ft_split(file, '\n');
-	if (!data->cub_file || valid_image(data, data->cub_file)
-		|| valid_rgb(data, data->cub_file + 4))
-		flag = 1;
-	if (flag != 1 && !data->cub_file[6])
-		error_msg(NULL, MAP_MISSING, 1, flag++);
-	if (flag != 1 && check_map_double_newline(file))
-		error_msg(NULL, MAP_NO_WALLS, 1, flag++);
-	ft_free1(file);
-	return (flag);
+	if (argc != 2)
+		return (error_msg(NULL, USAGE, 1, 0));
+	init_game(&game);
+	if (parse_args(&game, argv) != 0)
+		clean(&game, FAILURE);
+	init_mlx(&game);
+	init_pattern(&game);
+	get_input(&game);
+	mlx_loop_hook(game.mlx, render_img, &game);
+	mlx_loop(game.mlx);
+	return (0);
 }
 
 static int	parse_args(t_game *game, char **argv)
@@ -57,21 +45,23 @@ static int	parse_args(t_game *game, char **argv)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+static int	valid_data(t_game *data, char *path)
 {
-	t_game	game;
+	char	*file;
+	int		flag;
 
-	if (argc != 2)
-		return (error_msg(NULL, USAGE, 1, 0));
-	init_game(&game);
-	if (parse_args(&game, argv) != 0)
-		clean(&game, FAILURE);
-	init_mlx(&game);
-	init_pattern(&game);
-	print_controls();
-	render_raycast(&game);
-	get_input(&game);
-	mlx_loop_hook(game.mlx, render_img, &game);
-	mlx_loop(game.mlx);
-	return (0);
+	flag = 0;
+	file = read_file(path);
+	if (!file)
+		return (error_msg(0, FILE_INVALID, 1, 0));
+	data->cub_file = ft_split(file, '\n');
+	if (valid_image(data, data->cub_file)
+		|| valid_rgb(data, data->cub_file + 4))
+		flag = 1;
+	if (flag != 1 && !data->cub_file[6])
+		error_msg(NULL, MAP_MISSING, 1, flag++);
+	if (flag != 1 && check_map_double_newline(file))
+		error_msg(NULL, MAP_NO_WALLS, 1, flag++);
+	ft_free1(file);
+	return (flag);
 }

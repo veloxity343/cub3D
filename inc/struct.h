@@ -80,25 +80,6 @@ typedef struct s_tex
 }	t_tex;
 
 /**
- * @brief A structure representing a framebuffer used for rendering.
- * @param img Pointer to the image buffer.
- * @param offset Offset applied to rendering position.
- * @param view_dist Viewing distance in pixels.
- * @param tile_size Size of a single tile in pixels.
- * @param size Overall framebuffer size.
- * @param map Pointer to the map data used for rendering.
- */
-typedef struct s_framebuffer
-{
-	t_img		*img;
-	t_dir_int	offset;
-	int			view_dist;
-	int			tile_size;
-	int			size;
-	char		**map;
-}	t_framebuffer;
-
-/**
  * @brief A structure representing map file data and dimensions.
  * @param eom End-of-map flag.
  * @param line Current line index in map parsing.
@@ -124,10 +105,10 @@ typedef struct s_map
  * @param map Current grid position of the ray.
  * @param step Step direction for grid traversal.
  * @param dir Direction of the ray.
- * @param side_dist Distance to the next x/y side.
- * @param delta_dist Distance between sides along ray direction.
+ * @param side_dist Actual distance to the next grid line.
+ * @param delta_dist Distance between grid lines by traversing along axes.
  * @param cam_x X position on the camera plane.
- * @param wall_x Exact x-position where the wall was hit.
+ * @param tex_coord Exact x-position where the wall was hit.
  * @param wall_dist Distance from the player to the wall.
  * @param side Side of the wall that was hit (0: x-side, 1: y-side).
  * @param line_h Height of the wall line to draw.
@@ -142,7 +123,7 @@ typedef struct s_ray
 	t_dir_d		side_dist;
 	t_dir_d		delta_dist;
 	double		cam_x;
-	double		wall_x;
+	double		tex_coord;
 	double		wall_dist;
 	int			side;
 	int			line_h;
@@ -178,7 +159,6 @@ typedef struct s_player
  * @param framebuffer Image buffer used for rendering.
  * @param player Player position and movement data.
  * @param ray Raycasting data used for rendering.
- * @param time Frame timing value.
  * @param win_h Window height in pixels.
  * @param win_w Window width in pixels.
  * @param map Pointer to the processed map array.
@@ -192,10 +172,9 @@ typedef struct s_game
 {
 	t_map			map_info;
 	t_tex			tex_info;
-	t_img			framebuffer;
+	t_img			img;
 	t_player		player;
 	t_ray			ray;
-	double			time;
 	int				win_h;
 	int				win_w;
 	char			**map;
