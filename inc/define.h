@@ -44,7 +44,7 @@
 #  define M_PI			3.14159265358979323846
 # endif
 
-# define S_MOVE			0.10
+# define S_MOVE			0.12
 # define S_ROTATE		0.08
 # define FOV_DEGREES	60.0
 # define FOV_RADIANS    (FOV_DEGREES * M_PI / 360.0)
