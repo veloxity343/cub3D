@@ -3,71 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   valid_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:42:29 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/25 20:37:46 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:17:59 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-// int	valid_image(t_game *data, char **dir)
-// {
-// 	if (ft_arrlen(dir) < 4)
-// 		return (error_msg(NULL, TEX_MISSING, 1, 0));
-// 	if (ft_strncmp(dir[0], "NO ", 3) || ft_strncmp(dir[1], "SO ", 3)
-// 		|| ft_strncmp(dir[2], "WE ", 3)
-// 		|| ft_strncmp(dir[3], "EA ", 3))
-// 		return (error_msg(NULL, TEX_INVALID, 1, 0));
-// 	data->tex_info.north = ft_strdup(dir[0] + 3);
-// 	data->tex_info.west = ft_strdup(dir[1] + 3);
-// 	data->tex_info.south = ft_strdup(dir[2] + 3);
-// 	data->tex_info.east = ft_strdup(dir[3] + 3);
-// 	return (0);
-// }
-
-static char	*skip_spaces(char *str)
+int	get_dir(t_game *data, char **dir, int *flag)
 {
-	while (*str == ' ' || *str == '\t' || *str == '\n')
-		str++;
-	return (str);
-}
+	int	return_status;
 
-static int	store_texture(char **target, char *raw)
-{
-	char *clean = ft_strdup(skip_spaces(raw));
-	if (!clean)
-		return (error_msg(NULL, TEX_INVALID, 1, 0));
-	*target = clean;
-	return (0);
+	return_status = 1;
+	if (!ft_strncmp(dir[0], "NO", 2) && !flag[0])
+	{
+		flag[0] = 42 + return_status--;
+		data->tex_info.north = ft_strdup(dir[1]);
+	}
+	else if (!ft_strncmp(dir[0], "WE", 2) && !flag[1])
+	{
+		flag[1] = 42 + return_status--;
+		data->tex_info.west = ft_strdup(dir[1]);
+	}
+	else if (!ft_strncmp(dir[0], "SO", 2) && !flag[2])
+	{
+		flag[2] = 42 + return_status--;
+		data->tex_info.south = ft_strdup(dir[1]);
+	}
+	else if (!ft_strncmp(dir[0], "EA", 2) && !flag[3])
+	{
+		flag[3] = 42 + return_status--;
+		data->tex_info.east = ft_strdup(dir[1]);
+	}
+	return (return_status);
 }
 
 int	check_direction(t_game *data, char *dir, int *flag)
 {
-	char	*line = skip_spaces(dir);
+	char	**split_dir;
+	int		return_status;
 
-	if (!ft_strncmp(line, "NO", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[0])
-	{
-		flag[0] = 42;
-		return (store_texture(&data->tex_info.north, line + 2));
-	}
-	if (!ft_strncmp(line, "WE", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[1])
-	{
-		flag[1] = 42;
-		return (store_texture(&data->tex_info.west, line + 2));
-	}
-	if (!ft_strncmp(line, "SO", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[2])
-	{
-		flag[2] = 42;
-		return (store_texture(&data->tex_info.south, line + 2));
-	}
-	if (!ft_strncmp(line, "EA", 2) && (line[2] == ' ' || line[2] == '\t') && !flag[3])
-	{
-		flag[3] = 42;
-		return (store_texture(&data->tex_info.east, line + 2));
-	}
-	return (error_msg(NULL, TEX_INVALID, 1, 0));
+	return_status = 0;
+	split_dir = ft_split(dir, ' ');
+	if (ft_arrlen(split_dir) != 2)
+		error_msg(NULL, TEX_INVALID, 1, return_status++);
+	else if (get_dir(data, split_dir, flag))
+		error_msg(NULL, TEX_INVALID, 1, return_status++);
+	ft_free_strarr(split_dir);
+	return (return_status);
 }
 
 /**
@@ -84,6 +69,8 @@ int	valid_image(t_game *data, char **dir)
 	int	i;
 	int	flag_n0_w1_s2_e3[4];
 
+	if (!dir[0])
+		return (error_msg(NULL, EMPTY_FILE, 1, 0));
 	if (ft_arrlen(dir) < 4)
 		return (error_msg(NULL, TEX_MISSING, 1, 0));
 	flag_n0_w1_s2_e3[0] = 0;

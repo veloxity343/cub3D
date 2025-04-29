@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:40:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/25 15:50:21 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:45:11 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	check_map_double_newline(char *map)
 		return (1);
 	arr_map = ft_split(map, '\n');
 	i = ft_arrlen(arr_map) - 1;
-	while (ft_strncmp(arr_map[i], "F ", 2) && ft_strncmp(arr_map[i], "C ", 2))
+	while (!ft_strnstr(arr_map[i], "F ", ft_strlen(arr_map[i]))
+		&& !ft_strnstr(arr_map[i], "C ", ft_strlen(arr_map[i])))
 		i--;
 	found_last_rgb = ft_strnstr(map, arr_map[i], ft_strlen(map))
 		+ ft_strlen(arr_map[i]) + 1;

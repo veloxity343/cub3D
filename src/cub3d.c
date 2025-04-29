@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:30:28 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/28 10:28:32 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:18:16 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	valid_data(t_game *data, char *path)
 	if (!file)
 		return (error_msg(0, FILE_INVALID, 1, 0));
 	data->cub_file = ft_split(file, '\n');
-	if (!data->cub_file || valid_image(data, data->cub_file)
+	if (valid_image(data, data->cub_file)
 		|| valid_rgb(data, data->cub_file + 4))
 		flag = 1;
 	if (flag != 1 && !data->cub_file[6])

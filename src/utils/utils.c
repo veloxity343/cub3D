@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:51:56 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/04/24 16:01:14 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/04/29 18:10:36 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ char	*read_file(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-	{
 		return (NULL);
-	}
 	temp = get_next_line(fd);
 	readd = ft_calloc(1, 1);
 	while (temp)
@@ -38,6 +36,7 @@ char	*read_file(char *path)
 		ft_free1(temp);
 		temp = get_next_line(fd);
 	}
+	close(fd);
 	return (readd);
 }
 

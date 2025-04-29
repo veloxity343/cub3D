@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcheong <rcheong@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:17:27 by rcheong           #+#    #+#             */
-/*   Updated: 2025/04/25 20:46:27 by rcheong          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:19:24 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	print_error2(int error)
 {
 	if (error == FILE_NOT_CUB)
 		ft_putstr_fd("\e[31mFile error: Format is not .cub\n\e[0m", 2);
-	else if (error == FILE_NOT_XPM)
-		ft_putstr_fd("\e[31mFile error: Format is not .xpm\n\e[0m", 2);
 	else if (error == FILE_IS_DIR)
 		ft_putstr_fd("\e[31mFile error: Given argument is a directory\n\e[0m",
 			2);
+	else if (error == EMPTY_FILE)
+		ft_putstr_fd("\e[31mFile error: Empty file\n\e[0m", 2);
 	else if (error == COLOR_FLOOR_CEILING)
 		ft_putstr_fd("\e[31mColour error: Invalid for floor/ceiling\n\e[0m", 2);
 	else if (error == COLOR_FLOOR)
@@ -91,10 +91,7 @@ int	error_msg(char *info, int error, int code, int custom)
 	else if (error == FILE_INVALID_CHAR)
 		ft_putstr_fd("\e[31mMap error: Invalid character in map\n\e[0m", 2);
 	else if (error == TEX_INVALID)
-	{
-		ft_putstr_fd("\e[31mTexture error: Invalid ", 2);
-		ft_putstr_fd("texture or Wrong order\n\e[0m", 2);
-	}
+		ft_putstr_fd("\e[31mTexture error: Invalid or duplicate\n\e[0m", 2);
 	else
 		print_error1(error);
 	if (info)
