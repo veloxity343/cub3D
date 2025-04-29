@@ -1,6 +1,9 @@
 NO tex/blue_stone.xpm
-SO tex/blue_stone.xpm
-WE tex/blue_stone.xpm
+SO           tex/blue_stone.xpm
+
+
+
+         WE tex/blue_stone.xpm
 EA tex/blue_stone.xpm
 
 F 97,97,97
